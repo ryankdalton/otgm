@@ -1,0 +1,8 @@
+Flask>=0.10.1
+MarkupSafe
+Flask-SQLAlchemy>=1.0
+Flask-Mail
+gevent==1.1
+gunicorn
+PyGreSQL
+json

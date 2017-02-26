@@ -1,0 +1,43 @@
+Use leaflet detect a "touch" browser
+http://leafletjs.com/reference.html#browser
+
+	if( (L.Browser.touch() ){
+		//load the local leaflet-draw library with touch support from
+		//'static/dist/leaflet.draw.js'
+	}else{
+		//load a hosted library without touch support from
+		//'https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.js'
+	}
+
+
+I tried a couple of approaches as noted in S.O., but couldn't get them to work.  I hope it is just JS semantics I am getting wrong.	
+	
+http://stackoverflow.com/questions/4609573/javascript-if-else-to-call-another-js-script
+answer by Wolph
+    <script type="text/javascript">
+        var script = document.createElement('script');
+        if( (L.Browser.touch() ){
+            script.src = 'static/dist/leaflet.draw.js';
+        }else{
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.js';
+        }
+        document.body.appendChild(script);
+    </script>
+
+	
+
+http://stackoverflow.com/questions/4609573/javascript-if-else-to-call-another-js-script
+answer by Ryan McGrath
+    <script>
+        //Check the browser to determine if touch support for leaflet-draw is needed
+        if ( L.Browser.touch() ) {
+            <!-- load the leaflet.draw library for drawing custom shapes, with touch support -->
+            document.write('<link rel="stylesheet" href="static/dist/leaflet.draw.css" \/>');
+            document.write('<script type="text/javascript" src="static/dist/leaflet.draw.js"><\/script>');
+            }
+        else:{
+            <!-- load the leaflet.draw library for drawing custom shapes, with touch support -->
+            document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.css" \/>');
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.js"><\/script>');
+            }
+    </script>

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Off The Grid Maps</title>
+
+
+	<!-- load the leaflet library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+
+	<!-- load the leaflet.sidebar-v2 library for fancy panes and tabs -->
+	<link rel="stylesheet" href="static/dist/css/leaflet-sidebar.css" />
+	<script type="text/javascript" src="static/dist/js/leaflet-sidebar.js"></script>
+
+	<!-- load the local leaflet.draw library --> 
+	<link rel="stylesheet" href="static/dist/leaflet.draw/leaflet.draw.css" />
+	<script type="text/javascript" src="static/dist/leaflet.draw/leaflet.draw.js"></script>
+
+	<!-- load the leaflet-providers library for basemaps -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.1.14/leaflet-providers.js"></script>
+
+	<!-- load the leaflet.locate library for finding user locations -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.52.0/L.Control.Locate.mapbox.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.52.0/L.Control.Locate.min.css" />
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.52.0/L.Control.Locate.min.js"></script>
+
+	<!-- load the leaflet.boxzoom library for magnifier zoom -->
+	<link rel="stylesheet" href="static/dist/leaflet-control-boxzoom.css" />
+	<script type="text/javascript" src="static/dist/leaflet-control-boxzoom.js"></script>
+
+	<!-- load the leaflet.default library for zoom home -->
+	<link rel="stylesheet" href="static/dist/leaflet.defaultextent.css" />	
+	<script type="text/javascript" src="static/dist/leaflet.defaultextent.js"></script>
+
+	<!-- load the leaflet.geosearch library for searching for locations -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet.geosearch/0.1/css/l.geosearch.css" />
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/leaflet.geosearch/0.1/js/l.control.geosearch.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/leaflet.geosearch/0.1/js/l.geosearch.provider.openstreetmap.js"></script>
+	<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/leaflet.geosearch/0.1/js/l.geosearch.provider.google.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/leaflet.geosearch/0.1/js/l.geosearch.provider.esri.js"></script>
+	-->
+
+	<!-- load the leaflet-omnivore library universal format translator to be used with leaflet-fileloader -->
+	<script type="text/javascript" src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>	
+	
+	<!-- load the leaflet-fileloader library for loading GPX and KML -->
+	<script type="text/javascript" src="static/dist/leaflet.filelayer.js"></script>
+	
+	<!-- load the leaflet.command library for custom save button -->
+	<link rel="stylesheet" href="static/dist/leaflet.command.css" />
+	<script type="text/javascript" src="static/dist/leaflet.command.js"></script>
+
+
+
+	<!-- load the jQuery library -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	
+	<!-- load the jQuery-ui library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.css" />
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+	
+	<!-- load the font-awesome library for cool icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
+
+	<style type="text/css">
+		body {
+			padding: 0;
+			margin: 0;
+		}
+		html, body, #map {
+			height: 100%;
+		}
+		.sidebar {
+			height: 95%;
+		}
+		.lorem {
+            font-style: italic;
+            color: #AAA;
+        }
+		.sidebar-text, .dataentry {
+			font-family: verdana;
+			font-size: 1.05em;
+            color: black;
+        }
+		.image-caption {
+			font-family: verdana;
+			font-size: 1em;
+			font-style: italic;
+            color: #AAA;
+        }
+		.sidebar-header {
+			font-family: verdana;
+			font-size: 1.5em;
+            color: white;
+		}
+		.leaflet-popup-content {
+			font-family: verdana;
+			font-size: 1.25em;
+            color: black;
+        }
+		.hidden{
+			display:none;
+		}
+	</style>
+</head>
+<body>
+
+
+    <div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#welcome" role="tab"><i class="fa fa-bars"></i></a></li>
+				<li><a href="#help" role="tab"><i class="fa fa-info-circle"></i></a></li>
+				<li><a href="#samples" role="tab"><i class="fa fa-globe"></i></a></li>
+                <li><a href="#popular" role="tab"><i class="fa fa-star"></i></a></li>
+                <li class="hidden order"><a href="#order" role="tab"><i class="fa fa-shopping-cart"></i></a></li>
+				<li class="hidden download"><a href="#download" role="tab"><i class="fa fa-cloud-download"></i></a></li>
+				<li class="hidden customer"><a href="#customer" role="tab"><i class="fa fa-cloud-download"></i></a></li>
+				<!-- 
+				<li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+				<li class="disabled"><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
+				-->
+				</ul>
+
+            <ul role="tablist">
+				<li><a href="#about" role="tab"><i class="fa fa-eye"></i></a></li>
+				<li><a href="#faq" role="tab"><i class="fa fa-question-circle"></i></a></li>
+				<li><a href="#acknowledgements" role="tab"><i class="fa fa-book"></i></a></li>
+				<li><a href="#bugreports" role="tab"><i class="fa fa-bug"></i></a></li>
+				<li><a href="#legal" role="tab"><i class="fa fa-exclamation-triangle"></i></a></li>
+				<li class="disabled"><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="welcome">
+                <h1 class="sidebar-header">OffTheGridMaps.com<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+				
+                <h3 class="sidebar-text">Who are you?</h3>
+                <p class="sidebar-text">You live or play in Montana.  Where you go hunting, fishing, or hiking, you're off the grid.... no cell towers, no internet.</p>
+				
+				<h3 class="sidebar-text">Good maps are hard to find</h3>
+                <p class="sidebar-text">When you are off the grid, you need a map.  You're probably carrying either an <i>expensive GPS or tattered old paper map</i> where the area you are interested in is the size of a postage stamp.  There's got to be something better, right?</p>
+				
+				<h3 class="sidebar-text">Make your own maps!</h3>
+                <p class="sidebar-text">Now you can order <a href="javascript:void(0);" onclick="sidebar.open('help');">custom maps</a> that are focused on the area you want!  Just zoom in on the map, draw a box around where you want to go, and place your order.</p>
+
+				<h3 class="sidebar-text">Printable PDF maps</h3>
+                <p class="sidebar-text">Once your order is processed, you'll get a <a href="javascript:void(0);" onclick="sidebar.open('samples');">detailed, high-resolution PDF map</a> that is custom-fit to the area you want.  Just print your map and head to the field...</p>
+				
+				<h3 class="sidebar-text">Maps that "know their place"</h3>
+				<p class="sidebar-text">Our maps are GPS enabled, too!  Just load them into the free <a href="http://www.avenza.com/pdf-maps" target="_blank">Avenza PDFMaps</a> app and see your position right on your phone, even <i><u>without cell coverage</u></i>.</p>
+				
+				<h3 class="sidebar-text">Order your <a href="javascript:void(0);" onclick="sidebar.open('help');">custom map</a> today!</h3>
+            </div>
+
+			
+			
+			<div class="sidebar-pane" id="faq">
+                <h1 class="sidebar-header">Questions<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+
+				<h3 class="sidebar-text">Will my map look like my screen?</h3>
+				<p class="sidebar-text">No, our <i>high-resolution, recreation-based maps</i> have far too much detail to show on-screen.  The interactive map you are looking at is a fast, responsive guide to help you choose the area you want your map to be centered on.</p>
+				
+				<h3 class="sidebar-text">How long does it take to get a map?</h3>
+				<p class="sidebar-text"><a href="javascript:void(0);" onclick="sidebar.open('help');">Custom map orders</a> typically take about 24 hours to process and deliver.  However, if you want to download your map instantly, check out our "<a href="javascript:void(0);" onclick="sidebar.open('popular');">Quick Pick</a>" maps, which are available as soon as you place your order.</p>
+
+				<h3 class="sidebar-text">Can I use my map on a phone?</h3>
+                <p class="sidebar-text">Just download and install the free <a href="http://www.avenza.com/pdf-maps" target="_blank">Avenza PDFMaps</a> app for Android, iPhone, or Windows phone.  Then just open your new map in PDFMaps and pow!  Zoom in, zoom out, drag... it's all at your fingertips.</p>
+				
+				<p class="sidebar-text"><a href="http://www.avenza.com/pdf-maps/features" target="_blank">Avenza PDFMaps also features</a> the ability to trace your footsteps, drop pins, and show your friends where you went on your last trip.  All of this capability works with the map you just purchased.</p>
+								
+				<h3 class="sidebar-text">What page size is best for printing?</h3>
+				<p class="sidebar-text">Our maps are optimized for printing on an 11"x17" page size, but you can print them on any size paper.</p>
+
+				<h3 class="sidebar-text">How much disk space will my map use?</h3>
+				<p class="sidebar-text">Our PDF maps are usually less than 5MB, about the size of a single song that is on your phone or MP3 player.</p>
+
+				<h3 class="sidebar-text">Can I get a map outside of Montana?</h3>
+				<p class="sidebar-text">No, our maps are currently only available in the state of Montana.</p>
+
+				<h3 class="sidebar-text">Can I share my map with friends?</h3>
+				<p class="sidebar-text">Our maps are meant for <a href="javascript:void(0);" onclick="sidebar.open('legal');">personal use</a> only.  However, you are permitted to share it with a few friends if you want to show them how awesome our maps are.</p>
+
+				<h3 class="sidebar-text">Can I resell or redistribute my map?</h3>
+				<p class="sidebar-text">Our maps may not be resold or redistributed for retail or commerical use.  If you are interested in retail/commercial distribution, please read our <a href="javascript:void(0);" onclick="sidebar.open('legal');">Licensing</a> page for commercial use options.</p>
+			</div>
+			
+			
+			<div class="sidebar-pane" id="help">
+                <h1 class="sidebar-header">Getting Started<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+
+				<p class="sidebar-text">Ordering your own custom map is easy:</p>
+					<ol>
+						<li class="sidebar-text">Use the <b>show me where I am</b> (pin) tool to show your current location.</li><br>
+						<li class="sidebar-text">Choose a different background style with the <b>stacked paper</b> tool.</li><br>
+						<li class="sidebar-text">Click the <b>zoom to default extent</b> (home) tool to zoom back to the state of Montana.</li><br>
+						<li class="sidebar-text">Use the <b>box zoom</b> (magnifying glass) tool to click and drag a box to set the area you want to zoom in on (not available on mobile devices).</li><br>
+						<li class="sidebar-text">Click the <b>zoom in/zoom out</b> (+/-) tools to zoom in one level at a time (not available on mobile devices).</li><br>
+						<li class="sidebar-text">Use the <b>draw a map boundary</b> (square) tool to craete your custom map boundary.</li><br>
+						<li class="sidebar-text">Use the <b>edit layers</b> (pencil) or <b>delete layers</b> (trash can) tools to modify your map boundary.  Be sure to press the <i>save or cancel</i> options next to the tool to complete your change.</li><br>
+						<!--<li class="sidebar-text">Upload a GPS track onto your map with the <b>Load local file</b> (file folder) tool.</li><br>-->
+						<li class="sidebar-text">Click the <b>save</b> tool to place your order.</li><br>
+					</ol>
+
+
+				<p class="sidebar-text">Custom map orders take about 24 hours to process.  If you need a map right away, take a look at our <a href="javascript:void(0);" onclick="sidebar.open('popular');">Quick Picks</a> to see if a map is already available for your next adventure!</p>
+            </div>
+
+			
+
+            <div class="sidebar-pane" id="samples">
+                <h1 class="sidebar-header">Map Samples<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+
+				<h3 class="sidebar-text">What will my map look like?</h3>
+				<p class="sidebar-text">Our map of the <a href="static/img/North Fork Flathead River.pdf" target="_blank">North Fork Flathead River</a> is an excellent example of the quality and detail you will find in our maps.  Please download this full-resolution map and use it to see what our maps look like when printed, or test-drive the GPS-enabled functionality available within the free <a href="http://www.avenza.com/pdf-maps" target="_blank">Avenza PDFMaps</a> mobile app.</p>
+
+				<h3 class="sidebar-text">Standard map types</h3>
+				<p class="sidebar-text">Below are thumbnails that will help you choose the right type of <a href="javascript:void(0);" onclick="sidebar.open('help');">custom map</a> you want to make for your next adventure!</p>
+
+				<h3 class="sidebar-text"><i>Bird Hunting</i></h3>
+				<p class="image-caption">Highlights: Upland Game Bird Program areas (UGBP), Block Management Areas (BMA), Waterfowl Production Areas (WPA), Wetland Management Areas (WMA), large private landowner names.</p>
+				<img src="static/img/FladstolFarmsSmall.png" alt="Fladstol Farms BMA" width="350">
+
+				<h3 class="sidebar-text"><i>Fishing/Boating</i></h3>
+				<p class="image-caption">Highlights: River/stream labels, river mile markers, camping areas.</p>
+				<img src="static/img/RockCreekSmall.png" alt="Smith River" width="350">
+				
+				<h3 class="sidebar-text"><i>Hiking/Mountain Biking</i></h3>
+				<p class="image-caption">Highlights: Scenic areas, public land ownership, trailheads, trail names, trail mileage.</p>
+				<img src="static/img/JewelBasinSmall.png" alt="Jewel Basin" width="350">
+
+				<h3 class="sidebar-text"><i>Camping/Day Use</i></h3>
+				<p class="image-caption">Highlights: Campgrounds, Forest Service cabins, fire lookouts, boat launches, day use areas.</p>
+				<img src="static/img/HungryHorseSmall.png" alt="Hungry Horse Reservoir" width="350">
+				
+				<p class="sidebar-text"><br>Create your own <a href="javascript:void(0);" onclick="sidebar.open('help');">custom map</a> or choose from our  popular "<a href="javascript:void(0);" onclick="sidebar.open('popular');">Quick Pick</a>" maps that are available on-demand.</p>
+				
+            </div>
+
+			
+            <div class="sidebar-pane" id="popular">
+                <h1 class="sidebar-header">Quick Picks<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+				
+				<p class="sidebar-text">We have a number of popular maps that are available on-demand... no waiting!  Just choose from the list of pre-made maps below and get it as soon as you place your order.</p>
+				
+				<p class="sidebar-text">If you want a map for a specific area you are interested in, you can also order a <a href="javascript:void(0);" onclick="sidebar.open('help');">custom map</a> and get it in about 24 hours.</p>
+				
+				<h3 class="sidebar-text">"Quick Pick" categories</h3>
+				<select>
+					<option value="favorites">OffTheGrid.com Favorites</option>
+					<option value="q24k">USGS 7.5 minute Quads (approx 60 sq miles)</option>
+					<option value="q100k">USGS 30 minute Quads (approx 2000 sq miles)</option>
+				</select>
+				
+				<h3 class="sidebar-text">Choose your map</h3>
+				<p class="lorem">The list below will dynamically change based upon the chosen Quick Pick category.</p>
+				<select>
+					<option value="1">Map 1</option>
+					<option value="2">Map 2</option>
+					<option value="3">Map 3</option>
+				</select>
+
+				<p></p>
+				
+				<input type="submit" value="Order">
+  
+  
+  
+
+<!--
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					<input type="hidden" name="cmd" value="_s-xclick" />
+					<input type="hidden" name="hosted_button_id" value="NV3NELUFEN4V6" />
+					<table>
+					<tr><td><input type="hidden" name="on0" value= "Map name">Map name</td></tr><tr><td><select name="os0">
+						<option value="Flathead River- Main Stem">Flathead River- Main Stem</option>
+						<option value="Flathead River- Middle Fork">Flathead River- Middle Fork</option>
+						<option value="Flathead River- North Fork">Flathead River- North Fork</option>
+						<option value="Flathead River- South Fork">Flathead River- South Fork</option>
+						<option value="Missouri River- Holter Dam to Craig">Missouri River- Holter Dam to Craig</option>
+						<option value="Rock Creek (Missoula)">Rock Creek (Missoula)</option>
+						<option value="Thompson River">Thompson River</option>
+						<option value="Hungry Horse Reservoir">Hungry Horse Reservoir</option>
+						<option value="Jewel Basin">Jewel Basin</option>
+						<option value="Pig Farm (Kalispell/Whitefish)">Pig Farm (Kalispell/Whitefish)</option>
+					</select></td></tr>
+					</table>
+					<input type="hidden" name="currency_code" value="null" />
+					<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Buy Now" />
+					<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+				</form>	
+-->
+			</div>
+
+		
+            <div class="sidebar-pane" id="order">
+                <h1 class="sidebar-header">Order Your Map<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+				<p class="sidebar-text">Fantastic, you're ready to place your order!</p>
+
+				<!--
+				<h3 class="sidebar-text">Choose your own price</h3>
+				<p class="sidebar-text">Yep, you read that right... We're so convinced that you'll love our maps, we trust you to pay a fair price based on the value you get from using our maps.  Just use the slider to set your own price.</p>
+				-->
+				
+				<h3 class="sidebar-text">Lucky you... Free maps!</h3>
+				<p class="sidebar-text">Yep, you read that right... We're looking for field testers to give feedback about our maps, so for a limited time, we're giving a way free maps!  In return we just ask that you provide some feedback about how our maps look and work for you with the <a href="http://www.avenza.com/pdf-maps" target="_blank">Avenza PDFMaps</a> mobile app.</p>
+				
+				
+				<h3 class="sidebar-text">Order Form</h3>
+				<p class="sidebar-text">Please fill out the order form below and we'll start working on your map right away.</p>
+				<!-- Create the order form.  
+				See http://stackoverflow.com/questions/10004723/html5-input-type-range-show-range-value -->
+				<form method="post">
+					<div class="row requiredRow">
+						<label for="Email">Email Address *</label>
+						<input id="Email" name="Email" type="email" class="required" title="Email Address is a required field">
+					</div>
+					<div class="row requiredRow">
+						<label for="mapName">Map Name (Title) *</label>
+						<input id="mapName" name="mapName" type="text" class="required" title="Map Name is a required field">
+					</div>
+					<div class="row requiredRow">
+						<label for="mapType">Map Type *</label>
+						<select id="mapType" name="mapType" class="required" title="Map Type is a required field">
+							<option value="Hunting">Hunting</option>
+							<option value="Fishing">Fishing</option>
+							<option value="Boating/Rafting">Boating/Rafting</option>
+							<option value="Hiking/Biking">Hiking/Biking</option>
+							<option value="Camping">Camping</option>
+						</select>
+					</div>
+					<div class="row">
+						<label for="fileUpload">Optional Logo</label>
+						<br>
+						<input id="fileUpload" name="fileUpload" type="file" title="Upload an optional logo for your map (JPG,PNG,TIF)">
+					</div>
+					<div class="row requiredRow">
+						<label for="amountRange">Your Chosen Price</label>
+						<br>
+						<input type="range" name="amountRange" min="1" max="10" value="3" oninput="this.form.amountInput.value=this.value" />
+						<input type="number" name="amountInput" min="1" max="10" value="3" oninput="this.form.amountRange.value=this.value" />
+					</div>
+					<br>
+					<div class="row">
+						<input type="submit" value="Order">
+					</div>
+				</form>
+
+
+<!--
+				<h3 class="sidebar-text">Place your order</h3>
+				<div style="padding:20px; width:350px; background-color:#B5B5B5">  
+				
+				<div style="clear:both;" class="sidebar-text"><i>Optional logo</i></div>
+				<form action="demo_form.asp" class="dataentry", name="order">
+					<input type="file" name="pic" accept="image/*">
+					<input type="submit">
+				</form>
+				
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					
+						<input type="hidden" name="cmd" value="_xclick">
+						<input type="hidden" name="business" value="QECXAQM5RZ5FC">
+						<input type="hidden" name="lc" value="US">
+						<input type="hidden" name="item_name" value="Custom Map">
+						
+						<input type="hidden" name="amount" id="finalamount">
+						<input type="hidden" name="currency_code" value="USD">
+						<input type="hidden" name="button_subtype" value="services">
+						<input type="hidden" name="no_note" value="0">
+						<input type="hidden" name="cn" value="Add special instructions to the seller:">
+						<input type="hidden" name="no_shipping" value="1">
+						<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+						<table>
+							<tr><td><input type="hidden" name="on1" class="sidebar-text" value="Map Title">Map Name (Title)</td></tr>
+							<tr><td><input type="text" name="os1" maxlength="200"></td></tr>
+							
+							<tr><td><input type="hidden" name="on0" class="sidebar-text" value="Map Type">Map Type</td></tr><tr><td><select name="os0">
+								<option value="Hunting">Hunting </option>
+								<option value="Fishing">Fishing </option>
+								<option value="Boating/Rafting">Boating</option>
+								<option value="Hiking">Hiking</option>
+								<option value="Mountain Biking">Mountain Biking</option>
+								<option value="Camping">Camping</option>
+								<option value="Backpacking">Backpacking</option>
+								</select> </td></tr>
+
+						</table>
+						
+						<div style="clear:both; font-weight:bold;" class="sidebar-text">Your price per map is:</div>
+						<div style="clear:both;">&nbsp;</div>						
+						
+						 <div style="position:relative;line-height:15px;">
+							<div style="float:left;">[Min: $1] &nbsp;</div>
+							<div style="float:left; width:150px; " id="slider-range-min"></div>
+							<div style="float:left;">&nbsp; [Max: $10]</div>
+						 </div>
+
+						 <div style="clear:both;">&nbsp;</div>
+						 
+						 <div style=" font-size:16px; line-height:18px;">
+							<div style="float:left;">Price you choose to pay (US$):&nbsp;</div>
+							<div id="slideramount" style=" float:left; font-weight:bold; font-size:18px; padding-left:5px; padding-right:5px; border-radius:3px;">3</div>
+						 </div>
+
+						 <div style="clear:both;">&nbsp;</div>
+					
+						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+						<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+
+					</div>
+
+					<script>  
+					  $(function() {
+						 $("#slider-range-min").slider({
+							range: "min",
+							value: 3,
+							min: 1,
+							max: 10,
+							slide: function(event, ui) {
+							   $("#slideramount").text(ui.value).stop().css({'background-color':'transparent'}).effect("highlight", {}, 1000);
+							   $("#set_amount").val(ui.value);
+							   $("#finalamount").val(ui.value);
+							}
+						 });
+					  });
+					</script>  
+
+				</form>
+-->
+			
+			</div>
+
+			
+            <div class="sidebar-pane" id="profile">
+                <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+				<p class="lorem">User profiles coming soon.</p>
+<!--
+				<form class="dataentry" name="loginform">
+					<table>
+						<tr><td><label for="txtUserid">Username:</label>
+						<td><input type="text" name="userid" id="userid" size="20" >
+						
+						<tr><td><label for="txtUserid">Password:</label>
+						<td><input type="password" name="pwd" id="pwd" size="20" >
+					</table>
+				
+					<input type="button" onclick="check(this.form)" value="Login"/>
+					<input type="reset" value="Cancel"/>
+				</form>
+				<script language="javascript">
+					function check(form) { /*function to check userid & password*/
+						/*the following code checkes whether the entered userid and password are matching*/
+						if(form.userid.value == "myuserid" && form.pswrd.value == "mypswrd") {
+							window.open('target.html')/*opens the target page while Id & password matches*/
+						}
+						else {
+							alert("Error Password or Username")/*displays error message*/
+						}
+					}
+				</script>
+-->
+            </div>
+
+            <div class="sidebar-pane" id="messages">
+                <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+				<p class="lorem">User messaging coming soon.</p>
+            </div>
+
+			<div class="sidebar-pane" id="customer">
+                <h1 class="sidebar-header">{% if customer %} {{ customer.name }} {% else %} Customer {% endif %} Maps<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+				
+				<p class="sidebar-text">OffTheGridMaps.com is proud to {%if customer%} partner with <b><a href={{customer.url}} target="_blank">{{customer.name}}</a></b> to {%endif%} provide you the finest {%if customer%} {{customer.maptype}} {%else%} recreation-based {%endif%} maps available in Montana.</p>
+				
+				
+				{%if customerMaps%}
+					<p class="sidebar-text">The following map(s) are available for you to download, free of charge, courtesy of <a href={{customer.url}} target="_blank">{{customer.name}}</a></p>
+				
+					<p class="sidebar-text">
+						<ul>
+							{%for f in customerMaps%}
+								<li class="sidebar-text"><a href={{f.url}} target="_blank">{{f.mapname}}</a></li>
+							{%endfor%}
+						</ul>
+					</p>
+
+					<p class="sidebar-text">Whether you want to print a copy to take with you, or make your map GPS-enabled with the free <a href="http://www.avenza.com/pdf-maps" target="_blank">Avenza PDFMaps</a> app, we've got you covered.</p>
+				
+				{%else%}
+					<p class="lorem">Bummer!  We don't have any maps available for download right now, but we'll work on making some available soon.</p>
+				{%endif%}
+				
+
+			</div>
+
+
+			<div class="sidebar-pane" id="download">
+                <h1 class="sidebar-header">Map Downloads<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+
+				<p class="sidebar-text">Your map is available for download:</p>
+				<p class="sidebar-text">{% if download %} <a href={{ download.url }} target="_blank"> {{ download.filename}}</a> {% endif %}</p>
+
+			</div>
+
+			
+			
+            <div class="sidebar-pane" id="bugreports">
+                <h1 class="sidebar-header">Bug Reports<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+				<p class="sidebar-text">The information on this map is derived from numerous sources, and no warranty is provided for the map or its features to be spatially or temporally accurate.  However, every effort is made to ensure this map is free of errors, and notification of any errors or omissions is appreciated.</p>
+				
+				<h3 class="sidebar-text">Contribute to OpenStreetMap</h3>
+				<p class="sidebar-text">Please consider contributing your changes to the <a href="https://www.openstreetmap.org/#map=7/46.415/-111.962" target="_blank">OpenStreetMap</a> community.  <i>"OpenStreetMap is a map of the world, created by people like you and free to use under an open license."</i></p>
+				
+				<p class="sidebar-text">To learn how to contribute, please read the <a href="http://wiki.openstreetmap.org/wiki/Beginners%27_guide" target="_blank">Beginners Guide</a> for contributing to OSM.</p>
+				
+				<h3 class="sidebar-text">Or contact us</h3>
+				<p class="sidebar-text">If you aren't ready to start contibuting to OSM, please feel free to <a href="javascript:void(0);" onclick="sidebar.open('about');">contact us</a> to report any bugs in the data or application, and we'll try to make the changes as soon as possible.</p>
+            </div>
+
+
+			
+            <div class="sidebar-pane" id="legal">
+                <h1 class="sidebar-header">Legal Information<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+
+				<h3 class="sidebar-text">Disclaimer</h3>
+				<p class="sidebar-text">This map is for information only and may not be used for legal purposes.  Distances are approximate and may not be suitable for navigation.</p>
+				<p class="sidebar-text">The information on this map is derived from numerous sources, and <i>no warranty is provided for the map or its features to be spatially or temporally accurate</i>.  However, every effort is made to ensure this map is free of errors, and <a href="javascript:void(0);" onclick="sidebar.open('bugreports');">notification</a> of any errors or omissions is appreciated.</p>
+				
+				<h3 class="sidebar-text">Personal Use Licensing</h3>
+				<p class="sidebar-text">Your maps are licensed for personal use only. They may not be resold or redistributed (e.g. posted to the internet) for commercial or charitable purposes.  However, if you think our maps are awesome, please feel free to send a sample to a few friends and family.</p>
+				
+				<h3 class="sidebar-text">Commercial Licensing</h3>
+				<p class="sidebar-text">Commercial entities may not resell or redistribute maps purchased through our online service.  However, if you would like like volume pricing for larger distribution, please <a href="javascript:void(0);" onclick="sidebar.open('about');">contact us</a> and we would love to discuss our pricing options with you.</p>
+            </div>
+			
+
+            <div class="sidebar-pane" id="acknowledgements">
+                <h1 class="sidebar-header">Acknowledgements<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+
+				<h3 class="sidebar-text">Data Sources</h3>
+				<p class="sidebar-text">The data used to produce our maps have been collected or derived from a variety of sources, including:</p>
+				<ul class="sidebar-text">
+					<li>Montana Fish and Wildlife Protection</li>
+					<li>Forest Fire Lookout Association</li>
+					<li>GLIMS (Global Land Ice Measurements from Space)</li>
+					<li>Montana National Heritage Program</li>
+					<li>Montana Spatial Data Infrastructure (MSDI)</li>
+					<li>Montana State Library</li>
+					<li>OpenstreetMap</li>
+					<li>US Forest Service, USA</li>
+					<li>US Forest Service, Montana</li>
+					<li>US Forest Service, Libby Ofice</li>
+					<li>US Fish and Wildlife Service</li>
+					<li>US Geologic Survey</li>
+				</ul>
+				
+				<h3 class="sidebar-text">Software</h3>
+				<p class="sidebar-text">A huge thanks out to all of the past, present, and future contributors to the amazing, open-source GIS software products that we use to deliver our maps to you.  These include:</p>
+				<ul class="sidebar-text">
+					<li>QGIS</li>
+					<li>PostGIS</li>
+					<li>Leaflet.js</li>	
+				</ul>
+            </div>
+
+
+			<div class="sidebar-pane" id="about">
+                <h1 class="sidebar-header">About<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+
+				<h3 class="sidebar-text">Contact Us</h3>
+				<p class="sidebar-text">We hope you love using our maps.  If you have any comments or feedback you would like to pass along, we'd love to hear from you.  Please contact us through any of the following methods:</p>
+				<ul class="sidebar-text">
+					<li><a href="https://www.linkedin.com/in/ryankdalton" target="_blank">LinkedIn</a></li>
+					<li><a href="https://twitter.com/ryankdalton" target="_blank">Twitter</a></li>
+					<li><a href="mailto:info@offthegridmaps.com?Subject=Information Request" target="_top">Email</a></li>
+				</ul>
+				
+
+
+				<h3 class="sidebar-text">Who's behind OffTheGridMaps.com</h3>
+				<p class="sidebar-text">OffTheGridMaps.com was started by <a href="https://www.linkedin.com/in/ryankdalton" target="_blank">Ryan Dalton</a>, a professional cartographer and location-based (GIS) analyst. Ryan's expertise is in geospatial analysis and data visualization, as well as workflow and process automation using the Python language.</p> 
+				
+				<h3 class="sidebar-text">How did you come up with the idea?</h3>
+				<p class="sidebar-text">OffTheGridMaps.com started out as a personal project to make upland bird hunting maps that were easy-to-use, GPS-enabled, worked offline, and were better than what I could find online.</p>
+				<p class="sidebar-text">When friends started asking for <a href="javascript:void(0);" onclick="sidebar.open('help');">custom maps</a> to use on their own hunting, fishing, hiking, biking, and camping trips, I realized there wasn't an easy way to get maps focused on a user-defined location.</p>
+				<p class="sidebar-text">Suggestions for new content quickly came pouring in and we realized that people really wanted recreation-based maps that were zoomed in on their own, hand-drawn map boundaries.  And so began <a href="javascript:void(0);" onclick="sidebar.open('welcome');">OffTheGridMaps.com</a>.</p>
+            </div>
+			
+			
+			<div class="sidebar-pane" id="settings">
+                <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-chevron-circle-left"></i></span></h1>
+				<p class="lorem">User settings coming soon.</p>
+            </div>
+
+			
+		</div>
+    </div>
+
+	<!-- set a variable for existing of the customer variable -->
+	<script>
+	{% if customer %}
+		var customerExists = true
+	{% else %}
+		var customerExists = false
+	{% endif %}
+	</script>
+	
+	
+    <div id="map" class="sidebar-map"></div>	
+	<script>
+
+		//give the web page time to load all neede libraries, especially leaflet-draw
+		function loadLibraries() {
+			//do something
+		}
+		
+		window.setTimeout(loadLibraries, 10000)
+		
+
+ 
+	//$(document).ready(function () {
+		//Create the map
+		//var map = L.map('map').setView([42.35, -71.06], 12);
+		//var mapCenter = [47.160,-110.325];
+		//var bounds = new L.LatLngBounds(new L.LatLng(49.00,-104.03), new L.LatLng(44.35,-116.05));
+
+		//Force the map to be focused only on Montana
+		var bounds = new L.LatLngBounds(new L.LatLng(50, -95), new L.LatLng(43, -125));
+		var map = L.map('map', {
+			center: bounds.getCenter(),
+			maxBounds: bounds,
+			zoom: 7,
+			minZoom: 5,
+			zoomControl: false
+		});
+
+
+		//Add the sidebar to the map
+		var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+		//Search for parameters to determine what page to open
+		if (window.location.search){
+			console.log(window.location.search);
+			var endPos = window.location.search.indexOf("=")
+			var paramType = window.location.search.substring(1,endPos)
+			console.log(paramType)
+
+			if (paramType == "download"){
+				$('.download').removeClass('hidden');
+				sidebar.open("download");
+			}
+			else if (paramType == "customer"){
+				$('.customer').removeClass('hidden');
+				sidebar.open("customer");
+			}
+		}
+		else if (customerExists){
+			$('.customer').removeClass('hidden');
+			sidebar.open("customer");
+		}
+		else {
+			//initially open the sidebar to welcome tab
+			sidebar.open("welcome");
+		}
+
+		//Add locator control
+		L.control.locate({ position: 'topleft' }).addTo(map);
+
+
+		//load tile layers
+		var thunderOutdoors = L.tileLayer.provider('Thunderforest.Outdoors');
+		var stamenTerrain = L.tileLayer.provider('Stamen.Terrain');
+		//var mapboxTerrain = L.tileLayer.provider('MapBox', {id: 'mapbox.streets', accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw'});
+		var esriWorldTopo = L.tileLayer.provider('Esri.WorldTopoMap');
+		var esriWorldImagery = L.tileLayer.provider('Esri.WorldImagery');
+		//var hereHybridDay = L.tileLayer.provider('HERE.hybridDay');
+
+
+		//load initial tiles
+		esriWorldTopo.addTo(map);
+
+		//Add the layers control 
+		var baseLayers = {"World Topography by ESRI": esriWorldTopo, "World Imagery by ESRI": esriWorldImagery, "Terrain by Stamen Design": stamenTerrain, "Outdoors by Thunderforest": thunderOutdoors};
+
+		//Add the selected base layers to the control and onto the map
+		L.control.layers(baseLayers, null, {position: 'topleft'}).addTo(map);
+
+
+		//Add home button (zoom)
+		L.control.defaultExtent({ position: 'topleft' }).addTo(map);
+
+		
+		//disable zoom control for mobile browsers
+		if (!(L.Browser.mobile)){
+			//Add the boxzoom control
+			L.Control.boxzoom({
+				position: 'topleft'
+			}).addTo(map);
+
+			//add zoom control back in with position options
+			L.control.zoom({
+				position: 'topleft'
+			}).addTo(map);
+		}
+
+
+		// Initialise the FeatureGroup to store editable draw layers
+		var drawnItems = new L.FeatureGroup();
+
+		//Add a message to the polygon
+		drawnItems.bindPopup('<p>This is your custom map boundary.</p><p>Please read the <a href="javascript:void(0);" onclick="sidebar.open(\'help\');">Getting Started<\/a> tab for details on how to modify or delete your map boundary.</p><p>If you are happy with this area, you can <a href="javascript:void(0);" onclick="sidebar.open(\'order\');">place your order<\/a> now.</p>', {maxWidth: 200}).openPopup();
+
+		//add the box to the map
+		map.addLayer(drawnItems);
+
+		// Initialise the draw control and pass it the FeatureGroup of editable layers
+		var drawControl = new L.Control.Draw({
+			edit: {
+				featureGroup: drawnItems
+			},
+			draw: {
+				polyline: false,
+				polygon: false,
+				rectangle: true,
+				circle: false,
+				marker: false
+			},
+			position: 'topleft'
+		});
+
+		//Add new features to the map
+		map.on('draw:created', function (e) {
+			var type = e.layerType,
+				layer = e.layer;
+
+			// Do whatever else you need to. (save to db, add to map etc)
+
+
+			//Add the newly drawn item to the map
+			drawnItems.addLayer(layer);
+
+			//Limit the number of drawn features to 1
+			//http://stackoverflow.com/questions/17563840/is-it-possible-to-place-size-and-number-limitations-in-leaflet-draw
+			if (drawnItems && drawnItems.getLayers().length > 1) {
+				var r = confirm("Oops!  You can only have one map boundary at a time.  Do you want to use this as your new map boundary?");
+				if (r === true) {
+					//remove the old feature
+					drawnItems.clearLayers();
+					//Add the new feature
+					drawnItems.addLayer(layer);
+				} else {
+					//remove the new featurte
+					drawnItems.removeLayer(layer);
+				}
+			}
+
+			//Zoom to the extents of the drawn feature
+			map.fitBounds(drawnItems.getBounds(), {padding: [50, 50]});
+
+			//prepare the shape for insert into the database
+			var shape = layer.toGeoJSON();
+			//var shape = omnivore.geojson(layer);
+			var shape_for_db = JSON.stringify(shape);
+
+/*
+			//We need to save the GeoJson to the DB, or place it in the corect "Plan and Order" box
+			function copyToClipboard(text) {
+				window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+			}
+			copyToClipboard(shape_for_db);
+*/
+
+		});
+
+
+		// Set the button title text for the polygon button
+		L.drawLocal.draw.toolbar.buttons.rectangle = 'Draw a new map boundary';
+
+		// Set the tooltip start text for the rectangle
+		L.drawLocal.draw.handlers.rectangle.tooltip.start = 'Click and drag to create your map boundary';
+
+		//Add the control to the map
+		map.addControl(drawControl);
+
+/*
+		//Add the file layer load tool to allow user to upload GPX or KML files onscreen
+        var style = {color: 'red', opacity: 1.0, fillOpacity: 1.0, weight: 2, clickable: false};
+        L.Control.FileLayerLoad.LABEL = '<i class="fa fa-folder-open"><\/i>';
+        L.Control.fileLayerLoad({
+			position: 'topleft',
+            fitBounds: true,
+            layerOptions: {style: style,
+				pointToLayer: function (data, latlng) {
+					return L.circleMarker(latlng, {style: style});
+				}
+				}
+        }).addTo(map);
+*/
+
+
+		//Add a custom "Save" button that redirects to the "Order" page
+		//http://www.coffeegnome.net/control-button-leaflet/
+
+		var customControl = L.Control.extend({
+			options: {
+				position: 'topleft'
+				//control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+			},
+
+			onAdd: function (map) {
+				var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+				container.title = 'Place your order';
+				//container.image = 'dist/save.png';
+				container.href = '#order';
+
+				container.style.backgroundColor = 'white';
+				container.style.backgroundImage = 'url(static/dist/save30px.png)';
+				container.style.backgroundSize = "30px 30px";
+				container.style.width = '30px';
+				container.style.height = '30px';
+
+				container.onclick = function () {
+					//console.log('buttonClicked');
+					//console.log(drawnItems.getLayers().length);
+
+					if (drawnItems.getLayers().length !== 1) {
+						var r = confirm("Hold on!  Before placing a custom map order, your must draw your map boundary.");
+						if (r === true) {
+							//do nothing
+						}
+					}
+					else {
+						//open the sidebar to place an order form
+						//$('.order').removeClass('hidden');
+						sidebar.open("order");
+						}
+				};
+				return container;
+			}
+		});
+
+		//Add the control to the map
+		map.addControl(new customControl());
+
+
+		//Find the location of the user, is possible
+		function onLocationFound(e) {
+			var radius = e.accuracy / 2;
+
+			L.marker(e.latlng).addTo(map)
+				.bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+			L.circle(e.latlng, radius).addTo(map);
+		}
+
+		function onLocationError(e) {
+			alert(e.message);
+		}
+
+		map.on('locationfound', onLocationFound);
+		map.on('locationerror', onLocationError);
+
+		//Enable geolocation of user
+		//map.locate({setView: true, maxZoom: 10});
+
+
+		//Add a geosearch tool
+		new L.Control.GeoSearch({
+			provider: new L.GeoSearch.Provider.OpenStreetMap(),
+			position: 'topcenter',
+			showMarker: true,
+			retainZoomLevel: false
+		}).addTo(map);
+
+
+//	});
+		</script>
+	</body>
+</html>
