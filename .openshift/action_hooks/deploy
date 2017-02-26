@@ -2,3 +2,4 @@
 pushd $OPENSHIFT_REPO_DIR
 python bootstrap.py
 popd
+ln -sf $OPENSHIFT_DATA_DIR/maps $OPENSHIFT_REPO_DIR/static/download
