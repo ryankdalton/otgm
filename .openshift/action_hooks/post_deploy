@@ -1,3 +1,2 @@
 #!/bin/bash
-echo "Creating symlink folder of downloads"
-ln -svf ${OPENSHIFT_DATA_DIR}/maps ${OPENSHIFT_REPO_DIR}/static/download
+ln -sf $OPENSHIFT_DATA_DIR/maps $OPENSHIFT_REPO_DIR/static/download
