@@ -67,9 +67,9 @@ def getMapProjects(emailaddress, mapproject=None):
         partner = dbPartnerDetails.dictresult()[0]
 
         if mapproject == None or mapproject == '':
-            dbPublishedMaps = db.query("SELECT mapname, filename, 'static/download/' || filename || '.pdf' as url FROM webapp.vw_maporders where emailaddress like $$%{0}%$$ AND publish='1' AND processeddate IS NOT NULL order by filename".format(emailaddress))
+            dbPublishedMaps = db.query("SELECT mapname, filename, 'static/download/' || filename || '.pdf' as url FROM webapp.vw_maporders where emailaddress like $$%{0}%$$ AND publish=1 AND processeddate IS NOT NULL order by filename".format(emailaddress))
         else:
-            dbPublishedMaps = db.query("SELECT mapname, filename, 'static/download/' || filename || '.pdf' as url FROM webapp.vw_maporders where emailaddress like $$%{0}%$$ AND publish='1' AND processeddate IS NOT NULL AND mapproject = $${1}$$ order by filename".format(emailaddress, mapproject))
+            dbPublishedMaps = db.query("SELECT mapname, filename, 'static/download/' || filename || '.pdf' as url FROM webapp.vw_maporders where emailaddress like $$%{0}%$$ AND publish=1 AND processeddate IS NOT NULL AND mapproject = $${1}$$ order by filename".format(emailaddress, mapproject))
 
         partnerMaps = dbPublishedMaps.dictresult()
         return partner, partnerMaps
@@ -304,47 +304,6 @@ def index():
 
     except:
         return render_template('404.html')
-
-
-##@app.route('/static/<path:resource>')
-##def serveStaticResource(resource):
-##    return send_from_directory('static/', resource)
-##
-##@app.route ('/redirect')
-##def redirect():
-##    return redirect('?customer=lakestream', code=302)
-
-
-@app.route('/gps', methods=['GET'])
-def gps():
-
-    try:
-        tab = {'name': 'gps'}
-        return render_template('index.html')
-    except:
-        return render_template('404.html')
-
-
-
-@app.errorhandler(404)
-def pageNotFound(error):
-    try:
-        return render_template('404.html')
-    except:
-        return "ERROR: Could not find correct page"
-
-
-@app.route('/status', methods=['GET'])
-def status():
-    status = '200 OK'
-    print status
-    return status
-
-
-##@app.route ('/feedback')
-##def feedback():
-##    feedback = {'feedback': 'true'}
-##    return redirect('index.html', feedback=feedback)
 
 
 
@@ -672,19 +631,7 @@ def pgrecsites():
 
 
 
-#return record count of pending orders:
-##@app.route("/orders/pending")
-##def pendingorders():
-##
-####    try:
-##        tablename = "webapp.vw_pendingorders"
-##        pending = db.query("SELECT ordercount from {0}".format(tablename))
-##        print pending
-##        return "Pending orders:\n{0}".format(pending)
-##
-##    except:
-##        return render_template('404.html')
-
+# ---------------- Application pages --------------
 
 ##@app.route('/login', methods=['GET', 'POST'])
 ##def login():
@@ -698,22 +645,90 @@ def pgrecsites():
 ##                           form=form)
 
 
-@app.route('/test', methods=['GET', 'POST'])
-def test():
+##@app.route('/test', methods=['GET', 'POST'])
+##def test():
+##
+##    try:
+##        if request.method == 'POST':
+##            orderstatus = postOrder(request)
+##            return orderstatus
+##
+##        else:
+##            emailaddress = 'info@offthegridmaps.com'
+##            partner, partnerMaps = getMapProjects(emailaddress)
+##            return partner, partnerMaps
+##
+##    except:
+##        return render_template('404.html')
 
+
+
+##@app.route('/static/<path:resource>')
+##def serveStaticResource(resource):
+##    return send_from_directory('static/', resource)
+##
+##@app.route ('/redirect')
+##def redirect():
+##    return redirect('?customer=lakestream', code=302)
+
+
+##@app.route('/gps', methods=['GET'])
+##def gps():
+##
+##    try:
+##        tab = {'name': 'gps'}
+##        return render_template('index.html')
+##    except:
+##        return render_template('404.html')
+
+
+
+@app.errorhandler(404)
+def pageNotFound(error):
     try:
-        if request.method == 'POST':
-            orderstatus = postOrder(request)
-            return orderstatus
+        return render_template('404.html')
+    except:
+        return "ERROR: Could not find correct page"
 
+
+@app.route('/status', methods=['GET'])
+def status():
+    try:
+        statusMessage = '<strong>Status = 200 OK</strong>'
+        print statusMessage
+        return statusMessage
+    except:
+        return render_template('404.html')
+
+
+
+#return record count of pending orders:
+@app.route("/pending", methods=['GET'])
+def pending():
+    try:
+        tablename = "webapp.vw_pendingorders"
+        pendingOrders = db.query("SELECT emailaddress, ordercount FROM {0};".format(tablename)).getresult()
+        pendingCount = len(pendingOrders)
+
+        if pendingCount > 0:
+            pendingMessage = "<strong>Pending orders = {0}</strong><br>".format(pendingCount)
+            for orderDetails in pendingOrders:
+                pendingMessage += "<i>{0}</i><br>".format(orderDetails[0])
+            print "Pending orders = {0}".format(pendingCount)
+            return pendingMessage
         else:
-            emailaddress = 'info@offthegridmaps.com'
-            partner, partnerMaps = getMapProjects(emailaddress)
-            return partner, partnerMaps
+            pendingMessage = "<strong>Pending orders = {0}</strong>".format(pendingCount)
+            print "Pending orders = {0}".format(pendingCount)
+            return pendingMessage
 
     except:
         return render_template('404.html')
 
+
+##@app.route ('/feedback')
+##def feedback():
+##    feedback = {'feedback': 'true'}
+##    return redirect('index.html', feedback=feedback)
 
 
 if __name__ == '__main__':
