@@ -1,2 +1,2 @@
 #!/bin/bash
-ln -sf $OPENSHIFT_DATA_DIR/maps $OPENSHIFT_REPO_DIR/static/download
+ln -sf ${OPENSHIFT_DATA_DIR}/customers ${OPENSHIFT_REPO_DIR}/static/download
