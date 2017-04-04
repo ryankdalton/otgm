@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<meta name="description" content="Custom recreation-based maps for anywhere in Montana. GPS-enabled. Designed by you.">
+	<meta name="description" content="Custom recreation-based maps for anywhere in Montana. Custom GPS-enabled Maps. Designed by you!">
 	<meta name="keywords" content="Montana, maps, GPS, GIS, custom, fishing, hunting, upland bird hunting, hiking, mountain biking, camping, recreation">
 	<meta name="author" content="Ryan Dalton">
 
@@ -20,7 +20,7 @@
 		ga('send', 'pageview');
 	</script>
 	
-	<title>OffTheGridMaps.com - Create Custom Maps. Designed By You!</title>
+	<title>OffTheGridMaps.com - Custom Maps. Designed By You!</title>
 
 
 	<!-- load the jQuery library -->
@@ -53,13 +53,6 @@
 	<link rel="stylesheet" href="static/dist/Leaflet.markercluster/MarkerClusterDefault.css" />
 	<script type="text/javascript" src="static/dist/Leaflet.markercluster/leaflet.markercluster-src.js"></script>
 	-->
-
-	
-	<!--load the leaflet.locate library for finding user locations
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.52.0/L.Control.Locate.mapbox.min.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.52.0/L.Control.Locate.min.css" />
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.52.0/L.Control.Locate.min.js"></script>
-	 -->
 
 	<!-- 
 	load the leaflet.geosearch library for searching for locations -->
@@ -96,11 +89,13 @@
 	<script type="text/javascript" src="https://cdn-geoweb.s3.amazonaws.com/terraformer/1.0.6/terraformer.min.js"></script>
 	<script type="text/javascript" src="https://cdn-geoweb.s3.amazonaws.com/terraformer-wkt-parser/1.1.1/terraformer-wkt-parser.min.js"></script>
 	
-	<!-- 
-	load the leaflet.ScaleFactor library 
-	<link rel="stylesheet" href="static/dist/leaflet.ScaleFactor/leaflet.scalefactor.css" />
-	-->
-	
+	<!-- load the leaflet-fullHash library -->
+	<script type="text/javascript" src="static/dist/leaflet-fullHash/leaflet-fullHash.js"></script>
+
+	<!-- load the leaflet-fullHash library
+	<script type="text/javascript" src="static/dist/leaflet-hash/leaflet-hash.js"></script>
+	 -->
+
 	<!-- load the font-awesome library for cool icons -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
 
@@ -229,14 +224,18 @@
 				<h3 class="sidebar-text"><i>Putting <u>you</u> in control of <u>your</u> map!</i></h3>
 				<p class="sidebar-text">OffTheGridMaps lets <a href="javascript:void(0);" onclick="sidebar.open('help');">you design</a> custom recreation maps for outdoor activities like hiking, fishing, hunting, and more.</p>
 
+				
+				<h3 class="sidebar-text">How does it work?</h3>
+				<!--<h3 class="sidebar-text">How it works:</h3>-->
+				<p class="sidebar-text">It's easy! In 4 simple steps you can <a href="javascript:void(0);" onclick="sidebar.open('help');">design your own</a> custom map.</p>
+					<ol class="sidebar-text">
+						<li>Zoom to the area you are interested in.</li>
+						<li>Draw a box around your map boundary.</li>
+						<li>Choose your activity type.</li>
+						<li>Place your order. For a limited time, non-commercial orders are <a href="javascript:void(0);" onclick="sidebar.open('faq');">FREE</a>!</li>
+					</ol>
 
-				<h3 class="sidebar-text">Why choose OffTheGridMaps?</h3>
-				<ul class="sidebar-text">
-					<li>Paper maps are outdated and don't show <i>enough detail</i>.</li>
-					<li>Monthly subscriptions or GPS units are <i>too darn expensive</i>!</li>
-					<li>You want <i>more control</i> over how your maps look.</li>
-				</ul>
-					
+
 <!--				
 				<ul class="sidebar-text">
 					<li>Do your outdoor adventures take you where there's <i>no cell service</i>?</li>
@@ -265,16 +264,13 @@
 				<p class="sidebar-text">For <a href="javascript:void(0);" onclick="sidebar.open('faq');">less than $10</a>, you can have a personalized map that is focused on the area you want to see!</p> 
 				-->
 
-				
-				<h3 class="sidebar-text">How does it work?</h3>
-				<!--<h3 class="sidebar-text">How it works:</h3>-->
-				<p class="sidebar-text">It's easy! In 4 simple steps you can <a href="javascript:void(0);" onclick="sidebar.open('help');">design your own</a> custom map.  And for a limited time, non-commercial orders are <a href="javascript:void(0);" onclick="sidebar.open('faq');">FREE</a>!</p>
-					<ol class="sidebar-text">
-						<li>Zoom to the area you are interested in.</li>
-						<li>Draw a box around your map boundary.</li>
-						<li>Choose your activity type.</li>
-						<li>Place your order.</li>
-					</ol>
+				<h3 class="sidebar-text">Why choose OffTheGridMaps?</h3>
+				<ul class="sidebar-text">
+					<li>Paper maps are outdated and don't show <i>enough detail</i>.</li>
+					<li>Monthly subscriptions or GPS units are <i>too darn expensive</i>!</li>
+					<li>You want <i>more control</i> over how your maps look.</li>
+				</ul>
+									
 
 <!--
 				<h3 class="sidebar-text">How much does it cost?</h3>
@@ -285,8 +281,8 @@
 				</ul>
 -->
 					
-				<h3 class="sidebar-text">Make <i>your map</i> today!</h3>
-				<p class="sidebar-text">Follow our <a href="javascript:void(0);" onclick="sidebar.open('help');">simple tutorial</a> to design a custom map in <i>under 5 minutes</i>, anywhere in Montana.</p>
+				<h3 class="sidebar-text">Design <i>your first map</i> today!</h3>
+				<p class="sidebar-text">Follow our <a href="javascript:void(0);" onclick="sidebar.open('help');">simple tutorial</a> to design a custom map anywhere in Montana, <i>in under 5 minutes</i>!</p>
 			</div>
 
 
@@ -440,9 +436,9 @@
 				
 				<p class="sidebar-text"><br><br>You can also contact us directly through any of the following methods:</p>
 				<ul class="sidebar-text">
-					<li><a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a></li>
-					<li><a href="https://twitter.com/offthegridmaps" target="_blank">Twitter</a></li>
-					<li><a href="mailto:info@offthegridmaps.com?Subject=Information Request" target="_top">Email</a></li>
+					<li>Follow us on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a></li>
+					<li>Follow us on <a href="https://twitter.com/offthegridmaps" target="_blank">Twitter</a></li>
+					<li>Send us a direct message through <a href="mailto:info@offthegridmaps.com?Subject=Information Request" target="_top">Email</a></li>
 				</ul>
 
             </div>	
@@ -758,11 +754,9 @@
 				
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a></p>
 				
-				<p class="sidebar-text">Thank you for your order!</p>
+				<p class="sidebar-text">Thank you! We've received your order and will begin processing it right away. You should receive your personalized map in about 1-2 business days.</p>
 				
-				<p class="sidebar-text">We'll start making your new map right away.  You should receive your personalized map in 1-2 business days (usually within 24 hours).</p>
-				
-				<p class="sidebar-text">If you would like to start another order, you can <a href="javascript:void(0);" onclick="sidebar.open('help');">get started</a> right away.</p>
+				<p class="sidebar-text">If you would like to place another order, you can <a href="javascript:void(0);" onclick="sidebar.open('help');">get started</a> immediately.</p>
 				
 				<!--
 				<p class="sidebar-text">{% if customer %} If you have ordered maps with us before, you can download them from <a href="https://www.offthegridmaps.com?customer={{ customer.name }}">this link</a>. If this is your first order, you will be able to download your map from this link as soon as your order has been completed.{% endif %}</p>
@@ -819,7 +813,9 @@
 				
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a></p>
 				
-				<p class="sidebar-text">OffTheGridMaps.com is proud to provide high quality recreation maps for Montana. These maps are <b>GPS-enabled</b> as soon as you load them into the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.<p>
+				<p class="sidebar-text">OffTheGridMaps.com is proud to provide high quality recreation maps for Montana.</p>
+
+				<p class="sidebar-text">These maps are optimized for print on 11x17 paper, or are <b>GPS-enabled</b> for your smartphone when loaded into the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.<p>
 
 				{%if customerMaps%}
 
@@ -839,11 +835,11 @@
 					<p class="lorem">Bummer!  We don't have any maps ready for you to download right now, but we'll work on making some available soon.</p>
 				{%endif%}
 
-				<p class="sidebar-text">If you're ready to <a href="javascript:void(0);" onclick="sidebar.open('help');">design a new map</a>, you can start any time!</p>
+				<p class="sidebar-text"><br>If you're ready to <a href="javascript:void(0);" onclick="sidebar.open('help');">design a new map</a>, you can start any time!</p>
 
-				<p class="sidebar-text"><br>Please <a href="https://www.facebook.com/offthegridmaps/" target="_blank">like us on Facebook</a>, and share with your friends!</p>
-
-				<p class="sidebar-text"><i>To help us improve our products and service, please <b><a href="https://www.surveymonkey.com/r/G7MWV6D" target="_blank">answer a few short questions</a></b>.</i></p>
+				<p class="sidebar-text"><b>How are we doing?</b></p>
+				<p class="sidebar-text"><i>To help us improve our products and service, please answer a few short <a href="https://www.surveymonkey.com/r/G7MWV6D" target="_blank">questions</a>.</i></p>
+				<p class="sidebar-text">Please follow us on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> and share with friends to hear about our latest maps!</p>
 
 			</div>
 
@@ -853,7 +849,9 @@
 				
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a></p>
 				
-				<p class="sidebar-text">OffTheGridMaps.com is proud {% if partner and partner.name != "OffTheGridMaps.com" %} to partner with <b><a href={{partner.url}} target="_blank">{{partner.name}}</a></b> {%endif%} to provide high quality {% if partner %} {{partner.maptype}} {%else%} recreation-based {%endif%} maps for Montana. These maps are <b>GPS-enabled</b> as soon as you load them into the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.</p>
+				<p class="sidebar-text">OffTheGridMaps.com is proud {% if partner and partner.name != "OffTheGridMaps.com" %} to partner with <b><a href={{partner.url}} target="_blank">{{partner.name}}</a></b> {%endif%} to provide high quality {% if partner %} {{partner.maptype}} {%else%} recreation-based {%endif%} maps for Montana.<p>
+
+				<p class="sidebar-text">These maps are optimized for print on 11x17 paper, or are <b>GPS-enabled</b> for your smartphone when loaded into the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.<p>
 
 				{%if partnerMaps%}
 					
@@ -874,11 +872,11 @@
 					<p class="lorem">Bummer!  We don't have any maps available for download right now, but we'll work on making some available soon.</p>
 				{%endif%}
 
-				<p class="sidebar-text">If you're ready to <a href="javascript:void(0);" onclick="sidebar.open('help');">design your own map</a>, you can start any time!</p>
-				
-				<p class="sidebar-text"><br>Please <a href="https://www.facebook.com/offthegridmaps/" target="_blank">like us on Facebook</a>, and share with your friends!</p>
+				<p class="sidebar-text"><br>Follow our simple tutorial to <a href="javascript:void(0);" onclick="sidebar.open('help');">design your own map</a> in under 5 minutes!</p>
 
-				<p class="sidebar-text"><i>To help us improve our products and service, please <b><a href="https://www.surveymonkey.com/r/G7MWV6D" target="_blank">answer a few short questions</a></b>.</i></p>
+				<p class="sidebar-text"><b>How are we doing?</b></p>
+				<p class="sidebar-text"><i>To help us improve our products and service, please answer a few short <a href="https://www.surveymonkey.com/r/G7MWV6D" target="_blank">questions</a>.</i></p>
+				<p class="sidebar-text">Please follow us on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> and share with friends to hear about our latest maps!</p>
 				
 			</div>
 			
@@ -1211,14 +1209,14 @@
 		}
 */
 
-		//load tile layers
+		//load tile layers from TileProvider
 		var esriWorldStreetMap = L.tileLayer.provider('Esri.WorldStreetMap');
 		var esriWorldTopo = L.tileLayer.provider('Esri.WorldTopoMap');
 		var esriWorldImagery = L.tileLayer.provider('Esri.WorldImagery');
 		
-		//var thunderOutdoors = L.tileLayer.provider('Thunderforest.Outdoors');
 		//var stamenTerrain = L.tileLayer.provider('Stamen.Terrain');
 		//var mapboxTerrain = L.tileLayer.provider('MapBox', {id: 'mapbox.streets', accessToken: 'pk.eyJ1IjoicnlhbmtkYWx0b24iLCJhIjoiLUdza0ZmMCJ9.kEO21Vls8v1NpHYGkPktlA'});
+		//var thunderOutdoors = L.tileLayer.provider('Thunderforest.Outdoors');
 		//var openMapSurferRoads = L.tileLayer.provider('OpenMapSurfer.Roads');
 		//var openTopoMap = L.tileLayer.provider('OpenTopoMap');
 		//var hereNormalDay = L.tileLayer.provider('HERE.normalDay');
@@ -1226,6 +1224,8 @@
 		//Add OpenWeatherMap tile overlay
 		//var owmPrecip = L.tileLayer.provider('OpenWeatherMap.Precipitation');
 
+		//Load non-standard tile layers		
+		
 		//Add ski trails tiles from OpenSnowMap
 		var openSnowMap = L.tileLayer('http://www.opensnowmap.org/opensnowmap-overlay/{z}/{x}/{y}.png', {
 			attribution: '&copy; <a href="http://opensnowmap.org">OpenStreetMap/OpenSnowMap</a> contributors'
@@ -1274,7 +1274,7 @@
 		//Refresh layer data on move
 		map.on('moveend', function() {
 			//refreshLayer(pgRecsites, "/data/pgrecsites", 10);
-			var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbma", zoom: 8};
+			var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbma", zoom: 10};
 			refreshLayer2(bmaLayer);
 		});
 		
@@ -1598,7 +1598,15 @@
 			}).addTo(map);
 		}
 
+		
+		// Assuming your map instance is in a variable called map
+		//var hash = new L.Hash(map);
 
+		// Assuming your map instance is in a variable called map
+		//var allMapLayers = {'layerName1': layerObject1, 
+							//'layerName2': layerObject2};
+		//var hash = new L.Hash(map, allMapLayers);
+		
 		
 		// Initialise the FeatureGroup to store editable draw layers
 		var drawnItems = new L.FeatureGroup();
@@ -1773,20 +1781,6 @@
 
 		//Add the control to the map
 		map.addControl(new CustomControl());
-
-
-			
-/*
-		// Get the label
-		var metres = scale._getRoundNum(map.containerPointToLatLng([0, map.getSize().y / 2 ]).distanceTo( map.containerPointToLatLng([scale.options.maxWidth,map.getSize().y / 2 ])))
-		
-		//Calculate scale
-		label = metres < 1000 ? metres + ' m' : (metres / 1000) + ' km';
-		console.log(label);
-*/
-
-		//Add the scalefactor control to the map
-		//L.control.scalefactor().addTo(map);
 
 		</script>
 

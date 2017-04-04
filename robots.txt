@@ -2,4 +2,3 @@ User-agent: *
 Disallow: /backup/
 Disallow: /data/
 Disallow: /static/
-Disallow: /templates/404.html

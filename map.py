@@ -696,7 +696,25 @@ def status():
     try:
         statusMessage = '<strong>Status = 200 OK</strong>'
         print statusMessage
+
+        pendingCount = 0
+        tablename = "webapp.vw_pendingorders"
+        pendingOrders = db.query("SELECT emailaddress, ordercount FROM {0};".format(tablename)).getresult()
+
+        if len(pendingOrders) > 0:
+            pendingMessage = ""
+            for orderDetails in pendingOrders:
+                pendingMessage += "<i>{0} ({1})</i><br>".format(orderDetails[0],orderDetails[1])
+                pendingCount += orderDetails[1]
+            ##print "Pending orders = {0}".format(pendingCount)
+            pendingMessage = "<strong>Pending orders = {0}</strong><br>{1}".format(pendingCount, pendingMessage)
+            return pendingMessage
+        else:
+            pendingMessage = "<strong>Pending orders = {0}</strong>".format(pendingCount)
+            ##print "Pending orders = {0}".format(pendingCount)
+
         return statusMessage
+
     except:
         return render_template('404.html')
 
@@ -706,19 +724,21 @@ def status():
 @app.route("/pending", methods=['GET'])
 def pending():
     try:
+        pendingCount = 0
         tablename = "webapp.vw_pendingorders"
         pendingOrders = db.query("SELECT emailaddress, ordercount FROM {0};".format(tablename)).getresult()
-        pendingCount = len(pendingOrders)
 
-        if pendingCount > 0:
-            pendingMessage = "<strong>Pending orders = {0}</strong><br>".format(pendingCount)
+        if len(pendingOrders) > 0:
+            pendingMessage = ""
             for orderDetails in pendingOrders:
-                pendingMessage += "<i>{0}</i><br>".format(orderDetails[0])
-            print "Pending orders = {0}".format(pendingCount)
+                pendingMessage += "<i>{0} ({1})</i><br>".format(orderDetails[0],orderDetails[1])
+                pendingCount += orderDetails[1]
+            ##print "Pending orders = {0}".format(pendingCount)
+            pendingMessage = "<strong>Pending orders = {0}</strong><br>{1}".format(pendingCount, pendingMessage)
             return pendingMessage
         else:
             pendingMessage = "<strong>Pending orders = {0}</strong>".format(pendingCount)
-            print "Pending orders = {0}".format(pendingCount)
+            ##print "Pending orders = {0}".format(pendingCount)
             return pendingMessage
 
     except:
