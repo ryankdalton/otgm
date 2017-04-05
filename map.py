@@ -398,6 +398,23 @@ def sleddogracing():
         return render_template('404.html')
 
 
+@app.route('/glaciergundogclub', methods=['GET', 'POST'])
+def glaciergundogclub():
+
+    try:
+        if request.method == 'POST':
+            orderstatus = postOrder(request)
+            return render_template('index.html', orderstatus=orderstatus)
+
+        else:
+            emailaddress = 'info@offthegridmaps.com'
+            mapproject = 'glaciergundogclub'
+            partner, partnerMaps = getMapProjects(emailaddress,mapproject)
+            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
+
+    except:
+        return render_template('404.html')
+
 
 # ---------------- Sample map URLS --------------
 
