@@ -515,26 +515,30 @@ def pgbma():
     except:
         return "ERROR: Could not return valid bma.geojson"
 
+
 #return all FWP Upland Bird Game Enhancement Program:
 @app.route("/data/pgugbep")
 def pgugbep():
 
     try:
+        bboxString = str( request.args.get('bbox') )
         tablename = "webdata.fwp_ugbep"
         fields = "labelname, permission"
-        return pgToGeoJSON(tablename, fields)
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
 
     except:
         return "ERROR: Could not return valid ugbep.geojson"
+
 
 #return all FWP Wildlife Management Areas:
 @app.route("/data/pgwma")
 def pgwma():
 
     try:
+        bboxString = str( request.args.get('bbox') )
         tablename = "webdata.fwp_wma"
         fields = "name, region, web_page"
-        return pgToGeoJSON(tablename, fields)
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
 
     except:
         return "ERROR: Could not return valid wma.geojson"

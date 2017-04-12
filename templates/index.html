@@ -5,11 +5,12 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-	<meta name="description" content="Custom recreation-based maps for anywhere in Montana. Custom GPS-enabled Maps. Designed by you!">
+	<meta name="description" content="OffTheGridMaps.com lets you design custom recreation maps for your smartphone. Our maps are GPS-enabled, work without cell service, and are available anywhere in Montana!">
 	<meta name="keywords" content="Montana, maps, GPS, GIS, custom, fishing, hunting, upland bird hunting, hiking, mountain biking, camping, recreation">
 	<meta name="author" content="Ryan Dalton">
 
+	<title>OffTheGridMaps.com - Custom Maps. Designed By You!</title>
+	
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -19,10 +20,13 @@
 		ga('create', 'UA-85333527-1', 'auto');
 		ga('send', 'pageview');
 	</script>
+
+	<!---
+	<link rel="icon" href ="/favicon.ico" type="image/x-icon" /> <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120-precomposed.png" /> <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152-precomposed.png" />
+	--->
 	
-	<title>OffTheGridMaps.com - Custom Maps. Designed By You!</title>
-
-
+	
 	<!-- load the jQuery library -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	
@@ -1270,67 +1274,8 @@
 		});
 
 
-		//Add FWP Wildlife Management Areas
-		var fwpWMA = new L.GeoJSON.AJAX("/data/pgwma", {
-			style: {
-				"color": "#33a02c",
-				"weight": 2,
-				"opacity": 0.65
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>FWP Wildlife Management Areas</u><br>Name: ' + feature.properties.name + '<br>Region: ' + feature.properties.region + '<br><a href=' + feature.properties.web_page + ' target="_blank">Site Detail</a> ');
-			}
-		});
-		
-		
-		//Add FWP Upland Game Bird Enhancement Program
-		var fwpUGBEP = new L.GeoJSON.AJAX("/data/pgugbep", {
-			style: {
-				"color": "#9d25c5",
-				"weight": 2,
-				"opacity": 0.65
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>FWP Upland Game Bird Enhancement</u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/accessGuide.html" target="_blank">Access Guide</a>');
-			}
-		});
-
-
-		//Add FWP block management areas
-		var fwpBMA = new L.GeoJSON.AJAX(null, {
-			style: {
-				"color": "#ff7800",
-				"weight": 2,
-				"opacity": 0.65
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>FWP Block Management Areas</u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">FWP Access Info</a>');
-			}
-		});
-
-		//Refresh layer data on move
-		map.on('moveend', function() {
-			//refreshLayer(pgRecsites, "/data/pgrecsites", 10);
-			var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbma", zoom: 9};
-			refreshLayer2(bmaLayer);
-		});
-		
 		
 		// ------------- Add dynamically loaded layers ----------------
-
-		//Add license providers from PostGIS; Min zoom setting = 9
-		var fwpLicenseProviders = new L.GeoJSON.AJAX(null, {
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>License Providers</u><br>' + feature.properties.business + '<br><a href="tel:' + feature.properties.phone + '">' + feature.properties.phone + '</a>' + '<br>' + feature.properties.address + '<br>' + feature.properties.city + ', ' + feature.properties.state + ' ' + feature.properties.zipcode);
-			}
-		});
-
-		//Refresh License Providers on move
-		map.on('moveend', function() {
-			//refreshLayer(fwpLicenseProviders, "/data/pglicense", 9);
-			var licenseLayer = {name: "fwpLicenseProviders", object: fwpLicenseProviders, source: "/data/pglicense", zoom: 9};
-			refreshLayer2(licenseLayer);
-		});
 		
 
 		//Create custom icons for RecSites
@@ -1350,7 +1295,6 @@
 
 		//Refresh layer data on move
 		map.on('moveend', function() {
-			//refreshLayer(pgRecsites, "/data/pgrecsites", 10);
 			var recsitesLayer = {name: "pgRecsites", object: pgRecsites, source: "/data/pgrecsites", zoom: 10};
 			refreshLayer2(recsitesLayer);
 		});
@@ -1372,12 +1316,10 @@
 		//refresh the trails based on zoom level
 		map.on('moveend', function() {
 			if (map.getZoom() < 13) {
-				//refreshLayer(pgWinterTrails, "/data/pgtrails", 10, "season='Winter'");
 				var wintertrailsLayer = {name: "pgWinterTrails", object: pgWinterTrails, source: "/data/pgtrails", zoom: 10, whereClause: "season='Winter'"};
 				refreshLayer2(wintertrailsLayer);
 			}
 			else if (map.getZoom() >= 13){
-				//refreshLayer(pgWinterTrails, "/data/pgtrailshd", 13, "season='Winter'");
 				var wintertrailsLayer = {name: "pgWinterTrails", object: pgWinterTrails, source: "/data/pgtrailshd", zoom: 13, whereClause: "season='Winter'"};
 				refreshLayer2(wintertrailsLayer);
 			}
@@ -1400,142 +1342,19 @@
 		//refresh the trails based on zoom level
 		map.on('moveend', function() {
 			if (map.getZoom() < 13) {
-				//refreshLayer(pgSummerTrails, "/data/pgtrails", 10, "season='Summer'");
 				var summertrailsLayer = {name: "pgSummerTrails", object: pgSummerTrails, source: "/data/pgtrails", zoom: 10, whereClause: "season='Summer'"};
 				refreshLayer2(summertrailsLayer);
 			}
 			else if (map.getZoom() >= 13){
-				//refreshLayer(pgSummerTrails, "/data/pgtrailshd", 13, "season='Summer'");
 				var summertrailsLayer = {name: "pgSummerTrails", object: pgSummerTrails, source: "/data/pgtrailshd", zoom: 13, whereClause: "season='Summer'"};
 				refreshLayer2(summertrailsLayer);
 			}
 		});
 
 		
-		//Add FWP Upland Game Bird Enhancement Program
-		var fwpUGBEP = new L.GeoJSON.AJAX("/data/pgugbep", {
-			style: {
-				"color": "#9d25c5",
-				"weight": 2,
-				"opacity": 0.65
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>FWP Upland Game Bird Enhancement</u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/accessGuide.html" target="_blank">Access Guide</a>');
-			}
-		});
-
-		
-		//Create the Turkey Habitat layer
-		var fwpTurkeyHabitat = new L.GeoJSON.AJAX(null, {
-			style: {
-				"color": "#9d25c5",
-				"weight": 2,
-				"opacity": 0.15
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>Turkey Habitat</u><br>Region: ' + feature.properties.region + '<br>Species: ' + feature.properties.species + '<br>Habitat: ' + feature.properties.habqual);
-			}
-		});
-
-		//refresh the Turkey Habitat based on zoom level
-		map.on('moveend', function() {
-			//refreshLayer(pgRecsites, "/data/pgrecsites", 10);
-			var turkeyHabitatLayer = {name: "fwpTurkeyHabitat", object: fwpTurkeyHabitat, source: "/data/pgturkeyhabitat", zoom: 8};
-			refreshLayer2(turkeyHabitatLayer);
-		});
-		
-		
-
-		//Create the Spring Turkey districts layer
-		var fwpTurkeySpring = new L.GeoJSON.AJAX(null, {
-			style: {
-				"color": "#0000ff",
-				"weight": 4,
-				"fill-opacity": 0.05,
-				"stroke-opacity": 0.15,
-				"opacity": 0.10
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>Spring Turkey Districts</u><br>Harvest Type: ' + feature.properties.harvtype_s + '<br>Region: ' + feature.properties.reg + '<br>Name: ' + feature.properties.name + '<br><a href="' + feature.properties.webpage + '" target="_blank">FWP Turkey Hunting Guide</a>');
-			}
-		});
-
-		//refresh the Turkey Habitat based on zoom level
-		map.on('moveend', function() {
-			//refreshLayer(pgRecsites, "/data/pgrecsites", 10);
-			var turkeySpringLayer = {name: "fwpTurkeySpring", object: fwpTurkeySpring, source: "/data/pgturkeyspring", zoom: 7};
-			refreshLayer2(turkeySpringLayer);
-		});
-
-
 		
 		//Get Wildfire data from GeoMAC
 		//var geomacFires = new L.geoJson.ajax("https://wildfire.cr.usgs.gov/ArcGIS/rest/services/geomac_dyn/MapServer/7?f=pjson", {dataType:"jsonp"});
-
-
-		//Add hunting district layers
-/*
-		var fwpBlackBearDistricts = new L.GeoJSON.AJAX("http://data.mtfwp.opendata.arcgis.com/datasets/36c34df6f02249169bad33f2e4e54b56_0.geojson", {
-			filter: function(feature, layer) {
-				return (feature.properties.REG !== null);
-			},
-			style: {
-				"color": "#0000ff",
-				"weight": 2,
-				"opacity": 0.65
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>FWP Black Bear Districts</u><br>Region: ' + feature.properties.REG + '<br>District: ' + feature.properties.DISTRICT + '<br>Name: ' + feature.properties.NAME);
-			}
-		});
-*/
-
-
-/*
-		var fwpUplandBirdRegions = new L.GeoJSON.AJAX("http://data.mtfwp.opendata.arcgis.com/datasets/b9396b4302ca458ba7207c5c6913c6db_0.geojson", {
-			style: {
-				"color": "#0000ff",
-				"weight": 2,
-				"opacity": 0.65
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>FWP Upland Bird Districts</u><br>Region: ' + feature.properties.REG + '<br>Name: ' + feature.properties.NAME + '<br>Harvest Type: ' + feature.properties.HARVTYPE);
-			}
-		});
-*/
-
-/*
-		// Add FWP Deer & Elk districts -- "http://data.mtfwp.opendata.arcgis.com/datasets/24ce083cfd6b47988523576fbc0219f6_0.geojson"
-		var fwpDeerElkDistricts = new L.GeoJSON.AJAX("/data/pgdeerelk", {
-			filter: function(feature, layer) {
-				return (feature.properties.REG !== null);
-			},
-			style: {
-				"color": "#0000ff",
-				"weight": 2,
-				"opacity": 0.65
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>FWP Deer and Elk Districts</u><br>Region: ' + feature.properties.REG + '<br>District: ' + feature.properties.DISTRICT + '<br>Name: ' + feature.properties.EMU_NAME);
-			}
-		});
-*/
-		
-/*
-		var fwpMooseDistricts = new L.GeoJSON.AJAX("http://data.mtfwp.opendata.arcgis.com/datasets/8a0803c2bd694d0b9188ac8649291819_0.geojson", {
-			filter: function(feature, layer) {
-				return (feature.properties.REG !== null);
-			},
-			style: {
-				"color": "#0000ff",
-				"weight": 2,
-				"opacity": 0.65
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>FWP Moose Districts</u><br>Region: ' + feature.properties.REG + '<br>District: ' + feature.properties.DISTRICT + '<br>Name: ' + feature.properties.NAME);
-			}
-		});
-*/
 
 
 
@@ -1574,17 +1393,13 @@
 		
 		//Refresh layer data on move
 		map.on('moveend', function() {
-			//refreshLayer(pgPubLands, "/data/pgpublands", 10);
 			var publandsLayer = {name: "pgPubLands", object: pgPubLands, source: "/data/pgpublands", zoom: 10};
 			refreshLayer2(publandsLayer);
 		});		
 
 		
 		//Set layer ordering
-		fwpLicenseProviders.setZIndex(1);
-		pgPubLands.setZIndex(2);
-		fwpBMA.setZIndex(3);
-		fwpUGBEP.setZIndex(4);
+		pgPubLands.setZIndex(1);
 
 
 		var baseOverlays = {
@@ -1599,9 +1414,177 @@
 		//Add the selected baselayers and vector layers to the control and onto the map
 		var baseLayersControl = L.control.layers(baseLayers, baseOverlays, {position: 'topleft'}).addTo(map);
 
-		//Add public lands layer to the map
-		//pgPubLands.addTo(map);
 
+
+		//Add hunting district layers
+
+		//Add license providers from PostGIS; Min zoom setting = 9
+		var fwpLicenseProviders = new L.GeoJSON.AJAX(null, {
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>License Providers</u><br>' + feature.properties.business + '<br><a href="tel:' + feature.properties.phone + '">' + feature.properties.phone + '</a>' + '<br>' + feature.properties.address + '<br>' + feature.properties.city + ', ' + feature.properties.state + ' ' + feature.properties.zipcode);
+			}
+		});
+
+		//Refresh License Providers on move
+		map.on('moveend', function() {
+			var licenseLayer = {name: "fwpLicenseProviders", object: fwpLicenseProviders, source: "/data/pglicense", zoom: 9};
+			refreshLayer2(licenseLayer);
+		});
+
+		
+		//Add FWP Wildlife Management Areas
+		var fwpWMA = new L.GeoJSON.AJAX(null, {
+			style: {
+				"color": "#33a02c",
+				"weight": 2,
+				"opacity": 0.65
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>FWP Wildlife Management Areas</u><br>Name: ' + feature.properties.name + '<br>Region: ' + feature.properties.region + '<br><a href=' + feature.properties.web_page + ' target="_blank">Site Detail</a> ');
+			}
+		});
+
+		//Refresh layer data on move
+		map.on('moveend', function() {
+			var wmaLayer = {name: "fwpWMA", object: fwpWMA, source: "/data/pgwma", zoom: 8};
+			refreshLayer2(wmaLayer);
+		});
+		
+		
+		//Add FWP Upland Game Bird Enhancement Program
+		var fwpUGBEP = new L.GeoJSON.AJAX(null, {
+			style: {
+				"color": "#9d25c5",
+				"weight": 2,
+				"opacity": 0.65
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>FWP Upland Game Bird Enhancement</u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/accessGuide.html" target="_blank">Access Guide</a>');
+			}
+		});
+
+		//Refresh layer data on move
+		map.on('moveend', function() {
+			var ugbepLayer = {name: "fwpUGBEP", object: fwpUGBEP, source: "/data/pgugbep", zoom: 8};
+			refreshLayer2(ugbepLayer);
+		});
+		
+
+		//Add FWP block management areas
+		var fwpBMA = new L.GeoJSON.AJAX(null, {
+			style: {
+				"color": "#ff7800",
+				"weight": 2,
+				"opacity": 0.65
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>FWP Block Management Areas</u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">FWP Access Info</a>');
+			}
+		});
+
+		//Refresh layer data on move
+		map.on('moveend', function() {
+			var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbma", zoom: 9};
+			refreshLayer2(bmaLayer);
+		});
+		
+
+		
+		//Create the Turkey Habitat layer
+		var fwpTurkeyHabitat = new L.GeoJSON.AJAX(null, {
+			style: {
+				"color": "#9d25c5",
+				"weight": 2,
+				"opacity": 0.15
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>Turkey Habitat</u><br>Region: ' + feature.properties.region + '<br>Species: ' + feature.properties.species + '<br>Habitat: ' + feature.properties.habqual);
+			}
+		});
+
+		//refresh the Turkey Habitat based on zoom level
+		map.on('moveend', function() {
+			var turkeyHabitatLayer = {name: "fwpTurkeyHabitat", object: fwpTurkeyHabitat, source: "/data/pgturkeyhabitat", zoom: 8};
+			refreshLayer2(turkeyHabitatLayer);
+		});
+		
+		
+
+		//Create the Spring Turkey districts layer
+		var fwpTurkeySpring = new L.GeoJSON.AJAX(null, {
+			style: {
+				"color": "#0000ff",
+				"weight": 4,
+				"fill-opacity": 0.05,
+				"stroke-opacity": 0.15,
+				"opacity": 0.10
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>Spring Turkey Districts</u><br>Harvest Type: ' + feature.properties.harvtype_s + '<br>Region: ' + feature.properties.reg + '<br>Name: ' + feature.properties.name + '<br><a href="' + feature.properties.webpage + '" target="_blank">FWP Turkey Hunting Guide</a>');
+			}
+		});
+
+		//refresh the Turkey Habitat based on zoom level
+		map.on('moveend', function() {
+			var turkeySpringLayer = {name: "fwpTurkeySpring", object: fwpTurkeySpring, source: "/data/pgturkeyspring", zoom: 7};
+			refreshLayer2(turkeySpringLayer);
+		});
+
+		
+/*
+		var fwpBlackBearDistricts = new L.GeoJSON.AJAX("http://data.mtfwp.opendata.arcgis.com/datasets/36c34df6f02249169bad33f2e4e54b56_0.geojson", {
+			filter: function(feature, layer) {
+				return (feature.properties.REG !== null);
+			},
+			style: {
+				"color": "#0000ff",
+				"weight": 2,
+				"opacity": 0.65
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>FWP Black Bear Districts</u><br>Region: ' + feature.properties.REG + '<br>District: ' + feature.properties.DISTRICT + '<br>Name: ' + feature.properties.NAME);
+			}
+		});
+*/
+
+
+/*
+		// Add FWP Deer & Elk districts -- "http://data.mtfwp.opendata.arcgis.com/datasets/24ce083cfd6b47988523576fbc0219f6_0.geojson"
+		var fwpDeerElkDistricts = new L.GeoJSON.AJAX("/data/pgdeerelk", {
+			filter: function(feature, layer) {
+				return (feature.properties.REG !== null);
+			},
+			style: {
+				"color": "#0000ff",
+				"weight": 2,
+				"opacity": 0.65
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>FWP Deer and Elk Districts</u><br>Region: ' + feature.properties.REG + '<br>District: ' + feature.properties.DISTRICT + '<br>Name: ' + feature.properties.EMU_NAME);
+			}
+		});
+*/
+		
+/*
+		var fwpMooseDistricts = new L.GeoJSON.AJAX("http://data.mtfwp.opendata.arcgis.com/datasets/8a0803c2bd694d0b9188ac8649291819_0.geojson", {
+			filter: function(feature, layer) {
+				return (feature.properties.REG !== null);
+			},
+			style: {
+				"color": "#0000ff",
+				"weight": 2,
+				"opacity": 0.65
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>FWP Moose Districts</u><br>Region: ' + feature.properties.REG + '<br>District: ' + feature.properties.DISTRICT + '<br>Name: ' + feature.properties.NAME);
+			}
+		});
+*/
+
+
+		fwpLicenseProviders.setZIndex(2);
+		fwpBMA.setZIndex(3);
+		fwpUGBEP.setZIndex(4);
 
 
 		//Add hunting district boundaries
@@ -1612,8 +1595,8 @@
 
 		var huntLayers = {
 			"<span id='fwpLicenseProviders' name='FWP License Providers'><i>FWP License Providers (zoom in)</i></span>": fwpLicenseProviders,
-			"<span id='fwpWMA' name='FWP Wildlife Management Areas'>FWP Wildlife Management Areas</span>": fwpWMA,
-			"<span id='fwpUGBEP' name='FWP Upland Game Bird Enhancement'>FWP Upland Game Bird Enhancement</span>": fwpUGBEP,
+			"<span id='fwpWMA' name='FWP Wildlife Management Areas'><i>FWP Wildlife Management Areas (zoom in)</i></span>": fwpWMA,
+			"<span id='fwpUGBEP' name='FWP Upland Game Bird Enhancement'><i>FWP Upland Game Bird Enhancement (zoom in)</i></span>": fwpUGBEP,
 			"<span id='fwpBMA' name='FWP Block Management Areas'><i>FWP Block Management Areas (zoom in)</i></span>": fwpBMA,
 			"<span id='fwpTurkeyHabitat' name='FWP Turkey Habitat'><i>FWP Turkey Habitat (zoom in)</i></span>": fwpTurkeyHabitat,
 			"<span id='fwpTurkeySpring' name='FWP Spring Turkey Districts'><i>FWP Spring Turkey Districts (zoom in)</i></span>": fwpTurkeySpring,
