@@ -290,7 +290,7 @@
 			<div class="sidebar-pane" id="help">
                 <h1 class="sidebar-header">Getting started<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 
 				<p class="sidebar-text"><i><b>NOTE:</b> the web map is meant to help you decide where to create your map, and does not represent the high-resolution map you will receive.</i></p>
 
@@ -1430,7 +1430,7 @@
 			style: {
 				"color": "#9d25c5",
 				"weight": 2,
-				"opacity": 0.65
+				"opacity": 0.15
 			},
 			onEachFeature: function (feature, layer) {
 				layer.bindPopup('<u>Turkey Habitat</u><br>Region: ' + feature.properties.region + '<br>Species: ' + feature.properties.species + '<br>Habitat: ' + feature.properties.habqual);
@@ -1450,8 +1450,10 @@
 		var fwpTurkeySpring = new L.GeoJSON.AJAX(null, {
 			style: {
 				"color": "#0000ff",
-				"weight": 2,
-				"opacity": 0.65
+				"weight": 4,
+				"fill-opacity": 0.05,
+				"stroke-opacity": 0.15,
+				"opacity": 0.10
 			},
 			onEachFeature: function (feature, layer) {
 				layer.bindPopup('<u>Spring Turkey Districts</u><br>Harvest Type: ' + feature.properties.harvtype_s + '<br>Region: ' + feature.properties.reg + '<br>Name: ' + feature.properties.name + '<br><a href="' + feature.properties.webpage + '" target="_blank">FWP Turkey Hunting Guide</a>');
