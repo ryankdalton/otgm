@@ -311,22 +311,6 @@ def index():
 
 # ---------------- Partner URLS --------------
 
-@app.route('/lakestream', methods=['GET', 'POST'])
-def lakestream():
-
-    try:
-        if request.method == 'POST':
-            orderstatus = postOrder(request)
-            return render_template('index.html', orderstatus=orderstatus)
-
-        else:
-            emailaddress = 'lakestream.com'
-            partner, partnerMaps = getMapProjects(emailaddress)
-            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
-
-    except:
-        return render_template('404.html')
-
 
 @app.route('/larys', methods=['GET', 'POST'])
 def larys():
@@ -338,41 +322,6 @@ def larys():
 
         else:
             emailaddress = 'larysflyandsupply@gmail.com'
-            partner, partnerMaps = getMapProjects(emailaddress)
-            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
-
-    except:
-        return render_template('404.html')
-
-
-@app.route('/mystique', methods=['GET', 'POST'])
-def mystique():
-
-    try:
-        if request.method == 'POST':
-            orderstatus = postOrder(request)
-            return render_template('index.html', orderstatus=orderstatus)
-
-        else:
-            emailaddress = 'mystiqueflyshop.com'
-            partner, partnerMaps = getMapProjects(emailaddress)
-            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
-
-    except:
-        return render_template('404.html')
-
-
-
-@app.route('/izaakwaltoninn', methods=['GET', 'POST'])
-def izaakwaltoninn():
-
-    try:
-        if request.method == 'POST':
-            orderstatus = postOrder(request)
-            return render_template('index.html', orderstatus=orderstatus)
-
-        else:
-            emailaddress = 'izaakwaltoninn.com'
             partner, partnerMaps = getMapProjects(emailaddress)
             return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
 
@@ -396,6 +345,24 @@ def sleddogracing():
 
     except:
         return render_template('404.html')
+
+
+@app.route('/lakestream', methods=['GET', 'POST'])
+def lakestream():
+
+    try:
+        if request.method == 'POST':
+            orderstatus = postOrder(request)
+            return render_template('index.html', orderstatus=orderstatus)
+
+        else:
+            emailaddress = 'lakestream.com'
+            partner, partnerMaps = getMapProjects(emailaddress)
+            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
+
+    except:
+        return render_template('404.html')
+
 
 
 @app.route('/glaciergundogclub', methods=['GET', 'POST'])
@@ -645,6 +612,47 @@ def pgrecsites():
     except:
         return "ERROR: Could not return valid recsites.geojson"
 
+
+#return Spring Turkey districts:
+@app.route("/data/pgturkeyspring")
+def pgturkeyspring():
+
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.fwp_turkeyspring"
+        fields = "reg, name, harvtype_s, webpage"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
+
+    except:
+        return "ERROR: Could not return valid turkeyspring.geojson"
+
+
+#return Fall Turkey districts:
+@app.route("/data/pgturkeyfall")
+def pgturkeyfall():
+
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.fwp_turkeyfall"
+        fields = "reg, name, harvtype_f, webpage"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
+
+    except:
+        return "ERROR: Could not return valid turkeyfall.geojson"
+
+
+#return Turkey habitat:
+@app.route("/data/pgturkeyhabitat")
+def pgturkeyhabitat():
+
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.fwp_turkeyhabitat"
+        fields = "region, species, habqual"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
+
+    except:
+        return "ERROR: Could not return valid turkeyhabitat.geojson"
 
 
 

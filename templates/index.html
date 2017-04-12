@@ -58,8 +58,9 @@
 	load the leaflet.geosearch library for searching for locations -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet.geosearch/0.1/css/l.geosearch.css" />
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/leaflet.geosearch/0.1/js/l.control.geosearch.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/leaflet.geosearch/0.1/js/l.geosearch.provider.openstreetmap.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/leaflet.geosearch/0.1/js/l.geosearch.provider.google.js"></script>
 	<!-- 
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/leaflet.geosearch/0.1/js/l.geosearch.provider.openstreetmap.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/leaflet.geosearch/0.1/js/l.geosearch.provider.google.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/leaflet.geosearch/0.1/js/l.geosearch.provider.esri.js"></script>
 	-->
@@ -219,7 +220,7 @@
             <div class="sidebar-pane" id="welcome">
                 <h1 class="sidebar-header">OffTheGridMaps.com<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 
 				<h3 class="sidebar-text"><i>Putting <u>you</u> in control of <u>your</u> map!</i></h3>
 				<p class="sidebar-text">OffTheGridMaps lets you design <a href="javascript:void(0);" onclick="sidebar.open('help');">custom</a> recreation maps for outdoor activities like hiking, fishing, hunting, and more.</p>
@@ -289,7 +290,7 @@
 			<div class="sidebar-pane" id="help">
                 <h1 class="sidebar-header">Getting started<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 
 				<p class="sidebar-text"><i><b>NOTE:</b> the web map is meant to help you decide where to create your map, and does not represent the high-resolution map you will receive.</i></p>
 
@@ -320,7 +321,7 @@
 			<div class="sidebar-pane" id="samples">
                 <h1 class="sidebar-header">Sample maps<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
 				<h3 class="sidebar-text">What will my map look like?</h3>
 				<p class="sidebar-text">Click to download our map of the <a href="static/maps/NorthForkFlatheadRiver-info@offthegridmaps.com.pdf" target="_blank"><i>North Fork Flathead River</i></a>.  This is a great example of the quality and detail you can expect to see in all of our recreation-based maps.</p>
@@ -354,7 +355,7 @@
 			<div class="sidebar-pane" id="faq">
                 <h1 class="sidebar-header">F.A.Q.<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 
 				<h3 class="sidebar-text">What will my map look like?</h3>
 				<p class="sidebar-text">Each map shows different details based on the <a href="javascript:void(0);" onclick="sidebar.open('samples');">map theme</a> you choose.  Please view our <a href="javascript:void(0);" onclick="sidebar.open('samples');">sample maps</a> to decide which theme best suits your needs.</p>
@@ -383,7 +384,7 @@
 			<div class="sidebar-pane" id="gps">
                 <h1 class="sidebar-header">GPS-enabled maps<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
 				<h3 class="sidebar-text">Will my map work on my phone?</h3>
                 <p class="sidebar-text">YES!!!  This is one of the most popular features of our digital maps.  They even work <u>offline and without cell service</u>, using your phone's internal GPS to show your position on the map.</p>
@@ -426,7 +427,7 @@
             <div class="sidebar-pane" id="feedback">
                 <h1 class="sidebar-header">Feedback<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 				
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 
 				<p class="sidebar-text">You can contact us through any of the following methods:</p>
 				<ul class="sidebar-text">
@@ -442,7 +443,7 @@
             <div class="sidebar-pane" id="popular">
                 <h1 class="sidebar-header">Quick Picks<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 				
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
 				<p class="sidebar-text">We have a number of popular maps that are available on-demand... no waiting!  Just choose from the list of pre-made maps below and get it as soon as you submit your order.</p>
 				
@@ -499,7 +500,7 @@
             <div class="sidebar-pane" id="order">
                 <h1 class="sidebar-header">Submit your order<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 				
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
 				<p class="sidebar-text">Right on... you're all set to submit your order.  Fill out the form below and we'll get started making your new map!</p>
 
@@ -747,7 +748,7 @@
             <div class="sidebar-pane" id="ordercomplete">
                 <h1 class="sidebar-header">Order acknowledgement<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 				
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
 				<p class="sidebar-text">Thank you! We've received your order and will begin processing it right away.</p>
 				
@@ -765,7 +766,7 @@
             <div class="sidebar-pane" id="profile">
                 <h1 class="sidebar-header">Profile<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 				
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
 				<p class="lorem">User profiles coming soon.</p>
 <!--
@@ -799,7 +800,7 @@
             <div class="sidebar-pane" id="messages">
                 <h1 class="sidebar-header">Messages<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 				
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
 				<p class="lorem">Communication with the customer coming soon.</p>
             </div>
@@ -808,7 +809,7 @@
 			<div class="sidebar-pane" id="customer">
                 <h1 class="sidebar-header">Customer Downloads<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 				
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
 				<p class="sidebar-text">OffTheGridMaps.com is proud to provide high quality recreation maps for Montana.</p>
 
@@ -844,7 +845,7 @@
 			<div class="sidebar-pane" id="partner">
                 <h1 class="sidebar-header">{% if partner %} {{ partner.name }} {% else %} Maps{% endif %}<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 				
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
 				<p class="sidebar-text">OffTheGridMaps.com is proud {% if partner and partner.name != "OffTheGridMaps.com" %} to partner with <b><a href={{partner.url}} target="_blank">{{partner.name}}</a></b> {%endif%} to provide high quality {% if partner %} {{partner.maptype}} {%else%} recreation-based {%endif%} maps for Montana.<p>
 
@@ -881,14 +882,12 @@
             <div class="sidebar-pane" id="bugreports">
                 <h1 class="sidebar-header">Bug Reports<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 				
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
+				<h3 class="sidebar-text">How to report a bug</h3>
 				<p class="sidebar-text">So you found an error or ommision, huh?</p>
 				
 				<p class="sidebar-text">Every effort is made to ensure this map is accurate and free of errors.  However, the information on this map is derived from numerous sources, and <i>no warranty is provided for the map or its features to be spatially or temporally accurate</i>.
-				
-				
-				<h3 class="sidebar-text"><u>How to report a bug</u></h3>
 
 				<h3 class="sidebar-text">Contact the source</h3>
 				<p class="sidebar-text">If you are familiar with who manages a particular map data source, please contact the authoritatve data source, as listed on our <a href="javascript:void(0);" onclick="sidebar.open('acknowledgements');">acknowledgements</a> page for contact information.</p>
@@ -905,7 +904,7 @@
             <div class="sidebar-pane" id="legal">
                 <h1 class="sidebar-header">Legal Information<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
 				<h3 class="sidebar-text">Disclaimer: This map is for information only and may not be used for legal purposes.  Distances are approximate and may not be suitable for navigation.</h3>		
 				
@@ -925,7 +924,7 @@
             <div class="sidebar-pane" id="acknowledgements">
                 <h1 class="sidebar-header">Acknowledgements<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
 				<h3 class="sidebar-text">Data Sources</h3>
 				<p class="sidebar-text">The data used to produce our maps have been collected or derived from a variety of sources, and we strive to use the most recent available data.</p>
@@ -959,7 +958,7 @@
 			<div class="sidebar-pane" id="about">
                 <h1 class="sidebar-header">About<span class="sidebar-close" title="Hide sidebar"><i class="fa fa-chevron-circle-left"></i></span></h1>
 
-				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show me the Map</a></p>
+				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
 				<!--
 				<h3 class="sidebar-text">Contact Us</h3>
@@ -1256,26 +1255,6 @@
 		
 		//Add state boundary to the basemap
 		pgState.addTo(map);
-
-		
-		//Add FWP block management areas
-		var fwpBMA = new L.GeoJSON.AJAX(null, {
-			style: {
-				"color": "#ff7800",
-				"weight": 2,
-				"opacity": 0.65
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>FWP Block Management Areas</u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">Access Info</a>');
-			}
-		});
-
-		//Refresh layer data on move
-		map.on('moveend', function() {
-			//refreshLayer(pgRecsites, "/data/pgrecsites", 10);
-			var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbma", zoom: 10};
-			refreshLayer2(bmaLayer);
-		});
 		
 		
 		//Load Counties from PostGIS
@@ -1316,6 +1295,26 @@
 			}
 		});
 
+
+		//Add FWP block management areas
+		var fwpBMA = new L.GeoJSON.AJAX(null, {
+			style: {
+				"color": "#ff7800",
+				"weight": 2,
+				"opacity": 0.65
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>FWP Block Management Areas</u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">FWP Access Info</a>');
+			}
+		});
+
+		//Refresh layer data on move
+		map.on('moveend', function() {
+			//refreshLayer(pgRecsites, "/data/pgrecsites", 10);
+			var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbma", zoom: 9};
+			refreshLayer2(bmaLayer);
+		});
+		
 		
 		// ------------- Add dynamically loaded layers ----------------
 
@@ -1413,6 +1412,61 @@
 		});
 
 		
+		//Add FWP Upland Game Bird Enhancement Program
+		var fwpUGBEP = new L.GeoJSON.AJAX("/data/pgugbep", {
+			style: {
+				"color": "#9d25c5",
+				"weight": 2,
+				"opacity": 0.65
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>FWP Upland Game Bird Enhancement</u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/accessGuide.html" target="_blank">Access Guide</a>');
+			}
+		});
+
+		
+		//Create the Turkey Habitat layer
+		var fwpTurkeyHabitat = new L.GeoJSON.AJAX(null, {
+			style: {
+				"color": "#9d25c5",
+				"weight": 2,
+				"opacity": 0.65
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>Turkey Habitat</u><br>Region: ' + feature.properties.region + '<br>Species: ' + feature.properties.species + '<br>Habitat: ' + feature.properties.habqual);
+			}
+		});
+
+		//refresh the Turkey Habitat based on zoom level
+		map.on('moveend', function() {
+			//refreshLayer(pgRecsites, "/data/pgrecsites", 10);
+			var turkeyHabitatLayer = {name: "fwpTurkeyHabitat", object: fwpTurkeyHabitat, source: "/data/pgturkeyhabitat", zoom: 8};
+			refreshLayer2(turkeyHabitatLayer);
+		});
+		
+		
+
+		//Create the Spring Turkey districts layer
+		var fwpTurkeySpring = new L.GeoJSON.AJAX(null, {
+			style: {
+				"color": "#0000ff",
+				"weight": 2,
+				"opacity": 0.65
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>Spring Turkey Districts</u><br>Harvest Type: ' + feature.properties.harvtype_s + '<br>Region: ' + feature.properties.reg + '<br>Name: ' + feature.properties.name + '<br><a href="' + feature.properties.webpage + '" target="_blank">FWP Turkey Hunting Guide</a>');
+			}
+		});
+
+		//refresh the Turkey Habitat based on zoom level
+		map.on('moveend', function() {
+			//refreshLayer(pgRecsites, "/data/pgrecsites", 10);
+			var turkeySpringLayer = {name: "fwpTurkeySpring", object: fwpTurkeySpring, source: "/data/pgturkeyspring", zoom: 7};
+			refreshLayer2(turkeySpringLayer);
+		});
+
+
+		
 		//Get Wildfire data from GeoMAC
 		//var geomacFires = new L.geoJson.ajax("https://wildfire.cr.usgs.gov/ArcGIS/rest/services/geomac_dyn/MapServer/7?f=pjson", {dataType:"jsonp"});
 
@@ -1434,21 +1488,6 @@
 		});
 */
 
-/*
-		var fwpTurkeyDistricts = new L.GeoJSON.AJAX("http://data.mtfwp.opendata.arcgis.com/datasets/a063d01c1b8d4a79a594348dd04e3245_0.geojson", {
-			filter: function(feature, layer) {
-				return (feature.properties.NAME !== "NOT A HUNTING DISTRICT");
-			},
-			style: {
-				"color": "#0000ff",
-				"weight": 2,
-				"opacity": 0.65
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>FWP Turkey Districts</u><br>Region: ' + feature.properties.REG + '<br>District: ' + feature.properties.DISTRICT + '<br>Name: ' + feature.properties.NAME);
-			}
-		});
-*/
 
 /*
 		var fwpUplandBirdRegions = new L.GeoJSON.AJAX("http://data.mtfwp.opendata.arcgis.com/datasets/b9396b4302ca458ba7207c5c6913c6db_0.geojson", {
@@ -1547,16 +1586,10 @@
 
 
 		var baseOverlays = {
-			//"FWP Fishing Access Points": fwpFishingAccessPoints,
-			"<span id='fwpLicenseProviders' name='FWP License Providers'>FWP License Providers (zoom in)</span>": fwpLicenseProviders,
-			"<span id='pgRecsites' name='Recreation Sites'>Recreation Sites (zoom in)</span>": pgRecsites,
-			"<span id='pgSummerTrails' name='Summer Trails'>Summer Trails (zoom in)</span>": pgSummerTrails,
-			"<span id='pgWinterTrails' name='Winter Trails'>Winter Trails (zoom in)</span>": pgWinterTrails,
-			"<span id='fwpWMA' name='FWP Wildlife Management Areas'>FWP Wildlife Management Areas</span>": fwpWMA,
-			"<span id='fwpUGBEP' name='FWP Upland Game Bird Enhancement'>FWP Upland Game Bird Enhancement</span>": fwpUGBEP,
-			"<span id='fwpBMA' name='FWP Block Management Areas'>FWP Block Management Areas (zoom in)</span>": fwpBMA,
-			//"<span id='geomacFires' name='2015 Forest Fires'>2015 Forest Fires</span>": geomacFires,
-			"<span id='pgPubLands' name='Public Lands'>Public Lands (zoom in)</span>": pgPubLands,
+			"<span id='pgRecsites' name='Recreation Sites'><i>Recreation Sites (zoom in)</i></span>": pgRecsites,
+			"<span id='pgSummerTrails' name='Summer Trails'><i>Summer Trails (zoom in)</i></span>": pgSummerTrails,
+			"<span id='pgWinterTrails' name='Winter Trails'><i>Winter Trails (zoom in)</i></span>": pgWinterTrails,
+			"<span id='pgPubLands' name='Public Lands'><i>Public Lands (zoom in)</i></span>": pgPubLands,
 			"<span id='pgCounties' name='Counties'>Counties</span>": pgCounties,
 			"<span id='openSnowMap' name='Downhill Ski Trails'>Downhill Ski Trails</span>": openSnowMap
 			};
@@ -1568,12 +1601,20 @@
 		//pgPubLands.addTo(map);
 
 
-/*
+
 		//Add hunting district boundaries
 		var noLayer = new L.GeoJSON.AJAX();
-		var sportTiles = {
-			"None": noLayer,
-			"Winter Sports": openSnowMap
+		var huntTiles = {
+			"None": noLayer
+		};
+
+		var huntLayers = {
+			"<span id='fwpLicenseProviders' name='FWP License Providers'><i>FWP License Providers (zoom in)</i></span>": fwpLicenseProviders,
+			"<span id='fwpWMA' name='FWP Wildlife Management Areas'>FWP Wildlife Management Areas</span>": fwpWMA,
+			"<span id='fwpUGBEP' name='FWP Upland Game Bird Enhancement'>FWP Upland Game Bird Enhancement</span>": fwpUGBEP,
+			"<span id='fwpBMA' name='FWP Block Management Areas'><i>FWP Block Management Areas (zoom in)</i></span>": fwpBMA,
+			"<span id='fwpTurkeyHabitat' name='FWP Turkey Habitat'><i>FWP Turkey Habitat (zoom in)</i></span>": fwpTurkeyHabitat,
+			"<span id='fwpTurkeySpring' name='FWP Spring Turkey Districts'><i>FWP Spring Turkey Districts (zoom in)</i></span>": fwpTurkeySpring,
 			//"FWP Antelope Districts": fwpAntelopeDistricts,
 			//"FWP Bighorn Sheep Districts": fwpBighornSheepDistricts,
 			//"FWP Black Bear Districts": fwpBlackBearDistricts,
@@ -1581,13 +1622,12 @@
 			//"FWP Furbearer Trapping Districts": fwpFurbearerTrappingDistricts,
 			//"FWP Moose Districts": fwpMooseDistricts,
 			//"FWP Mountain Goat Districts": fwpMountainGoatDistricts,
-			//"FWP Turkey Districts": fwpTurkeyDistricts,
 			//"FWP Upland Bird Hunting": fwpUplandBirdRegions
-		};
-		
+			};
+			
 		//Add hunting districts to their own control
-		var sportsControl = new L.control.layers(sportTiles, sportLayers, {position: 'topleft'}).addTo(map);
-*/
+		var huntControl = new L.control.layers(null, huntLayers, {position: 'topleft'}).addTo(map);
+
 
 		//Add zoom controls to web page, but disable zoom control for mobile browsers
 		if (!(L.Browser.mobile)) {
