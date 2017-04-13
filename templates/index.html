@@ -506,7 +506,7 @@
 				
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
-				<p class="sidebar-text">Right on... you're all set to submit your order.  Fill out the form below and we'll get started making your new map!</p>
+				<p class="sidebar-text">Great... you're all set to submit your order.  Please fill out the form below to complete the process.</p>
 
 				<!--
 				<h3 class="sidebar-text">Choose your own price</h3>
@@ -514,10 +514,9 @@
 				-->
 				
 				<h3 class="sidebar-text">Lucky you... FREE MAPS!</h3>
-				<p class="sidebar-text">For a limited time, we're offering custom maps at no cost to you.  We just ask that you take a <a href="javascript:void(0);" onclick="sidebar.open('feedback');">short survey</a> about how our maps look and work in the field.</p>
+				<p class="sidebar-text">For a limited time, we're offering custom maps at no cost.  We just ask that you take a short survey when you receive your map.</p>
 
 				<h3 class="sidebar-text">Submit your order</h3>
-				<p class="lorem"><i><u>There is no charge for this map order</u>.  However, please pick the price you would be willing to pay this map so that we can test our order processing functions.</i></p>
 
 				<form name="orderform" action="" onsubmit="return validateForm()" method="post">
 				<table width="400px">
@@ -591,13 +590,18 @@
 
 					<tr>
 						<td valign="bottom">
-							<label for="priceinput">Map Price* ( <i>$5 - $15 </i>)</label>
+							<label for="priceinput">Map Price*</label>
 						</td>
 					</tr>
 					<tr>
 						<td valign="bottom">
-							$<input name="priceinput" type="number" class="required" title="Map Price is a required field" min="5" max="15" value="8" style="background-color: #F9E79F; font-weight: bold;" /> (USD)
-						</td>					
+							$<input name="priceinput" type="number" class="required" title="Map Price is a required field" min="5" max="15" value="8" style="background-color: #F9E79F; font-weight: bold;" /> (<i>5 - 15 USD</i>)
+						</td>
+					</tr>
+					<tr>
+						<td valign="bottom">
+							<p class="lorem"><i><b>You will not be charged for this order</b>. For market research, please choose the price you <u>would be willing</u> to pay.</i></p>
+						</td>
 					</tr>
 					<tr>
 						<td valign="center">
@@ -754,9 +758,9 @@
 				
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
-				<p class="sidebar-text">Thank you! We've received your order and will begin processing it right away.</p>
+				<p class="sidebar-text">Thank you. We've received your order and will begin processing it right away.</p>
 				
-				<p class="sidebar-text">Each map is custom made and it takes some time to build your map. You should receive your personalized map in about 1-2 business days.</p>
+				<p class="sidebar-text">Since each map is custom made, it takes time to build.  Expect to receive your personalized map in about 1-4 business days. Thanks for your patience!</p>
 				
 				<p class="sidebar-text">If you would like to place another order, you can <a href="javascript:void(0);" onclick="sidebar.open('help');">get started</a> immediately.</p>
 				
