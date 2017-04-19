@@ -257,7 +257,7 @@ def getMapScale(mapGeom):
     pageSize = getPageSize(pageOrientation)
     pageUnits = "Inches"
 
-    optimalScale = getOptimalScale(mapGeom, mapUnits, pageSize, pageUnits, 1.05)
+    optimalScale = getOptimalScale(mapGeom, mapUnits, pageSize, pageUnits, 1.15)
     return optimalScale
 
 
@@ -474,6 +474,23 @@ def onthehunt():
     except:
         return render_template('404.html')
 
+
+@app.route('/onthebike', methods=['GET', 'POST'])
+def onthebike():
+
+    try:
+        if request.method == 'POST':
+            orderstatus = postOrder(request)
+            return render_template('index.html', orderstatus=orderstatus)
+
+        else:
+            emailaddress = 'info@offthegridmaps.com'
+            mapproject = 'onthebike'
+            partner, partnerMaps = getMapProjects(emailaddress, mapproject)
+            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
+
+    except:
+        return render_template('404.html')
 
 # ---------------- GeoJSON data layers --------------
 
