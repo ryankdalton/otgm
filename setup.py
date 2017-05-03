@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='offthegridmaps',
-      version='0.4',
+      version='1.0',
       description='OffTheGridMaps',
       author='Ryan Dalton',
       author_email='info@offthegridmaps.com',

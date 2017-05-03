@@ -29,16 +29,18 @@ def postOrder(request):
         confirmemail = request.form['cEmail']
         mapname = request.form['mapname']
         maptype = request.form['maptype']
+        maplicense = request.form['license']
         comments = request.form['comments']
     ##        fileUpload = request.form['fileupload']
         priceinput = request.form['priceinput']
-        discount = request.form['pDiscount']
+        discountCode = request.form['pDiscount']
         mapgeom = request.form['mapgeom']
+
 
         pageOrientation = getPageOrientation(mapgeom)
         mapScale = getMapScale(mapgeom)
 
-        sql = """INSERT INTO webapp.orders (emailaddress, maptype, mapname, orderdate, comments, price, pageorientation, mapscale, geom) VALUES ($${emailaddress}$$, $${maptype}$$, $${mapname}$$, CURRENT_TIMESTAMP AT TIME ZONE 'MST', $${comments}$$, {priceinput}, $${pageOrientation}$$, {mapScale}, ST_GeomFromText($${mapgeom}$$, 4326) )""".format(emailaddress=emailaddress, maptype=maptype, mapname=mapname, comments=comments, priceinput=priceinput, pageOrientation=pageOrientation, mapScale=mapScale, mapgeom=mapgeom)
+        sql = """INSERT INTO webapp.orders (emailaddress, maptype, license, mapname, orderdate, comments, price, discountcode, pageorientation, mapscale, geom) VALUES ($${emailaddress}$$, $${maptype}$$, $${maplicense}$$, $${mapname}$$, CURRENT_TIMESTAMP AT TIME ZONE 'MST', $${comments}$$, {priceinput}, $${discountCode}$$, $${pageOrientation}$$, {mapScale}, ST_GeomFromText($${mapgeom}$$, 4326) )""".format(emailaddress=emailaddress, maptype=maptype, maplicense=maplicense, mapname=mapname, comments=comments, priceinput=priceinput, discountCode=discountCode, pageOrientation=pageOrientation, mapScale=mapScale, mapgeom=mapgeom)
 
         db.query( sql )
         orderstatus = {'status': 'True'}
@@ -306,6 +308,16 @@ def index():
         return render_template('404.html')
 
 
+@app.route('/bootstrap', methods=['GET'])
+def bootstrap():
+
+    try:
+        return render_template('bootstrap.html')
+
+    except:
+        return render_template('404.html')
+
+
 
 
 
@@ -385,21 +397,21 @@ def glaciergundogclub():
 
 # ---------------- Sample map URLS --------------
 
-@app.route('/samples', methods=['GET', 'POST'])
-def samples():
-
-    try:
-        if request.method == 'POST':
-            orderstatus = postOrder(request)
-            return render_template('index.html', orderstatus=orderstatus)
-
-        else:
-            emailaddress = 'info@offthegridmaps.com'
-            partner, partnerMaps = getMapProjects(emailaddress)
-            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
-
-    except:
-        return render_template('404.html')
+##@app.route('/samples', methods=['GET', 'POST'])
+##def samples():
+##
+##    try:
+##        if request.method == 'POST':
+##            orderstatus = postOrder(request)
+##            return render_template('index.html', orderstatus=orderstatus)
+##
+##        else:
+##            emailaddress = 'info@offthegridmaps.com'
+##            partner, partnerMaps = getMapProjects(emailaddress)
+##            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
+##
+##    except:
+##        return render_template('404.html')
 
 
 @app.route('/onthesnow', methods=['GET', 'POST'])
