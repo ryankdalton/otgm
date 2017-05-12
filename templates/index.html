@@ -884,11 +884,10 @@
 					<p class="lorem">Bummer!  We don't have any maps ready for you to download right now, but we'll work on making some available soon.</p>
 				{%endif%}
 
-				<p class="sidebar-text"><br>If you're ready to <a href="javascript:void(0);" onclick="sidebar.open('help');">design a new map</a>, you can start any time!</p>
+				<p class="sidebar-text"><br>If you're ready to <a href="javascript:void(0);" onclick="sidebar.open('help');">design a new map</a>, just head over to the map and get started!</p>
 
-				<p class="sidebar-text"><b>How are we doing?</b></p>
-				<p class="sidebar-text"><i>To help us improve our products and service, please answer a few short <a href="https://www.surveymonkey.com/r/G7MWV6D" target="_blank">questions</a>.</i></p>
-				<p class="sidebar-text">Please follow us on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> and share with friends to hear about our latest maps!</p>
+				<p class="sidebar-text"><b>Want updates about our new maps?</b></p>
+				<p class="sidebar-text">Please follow us on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a></p>
 
 			</div>
 
@@ -900,12 +899,12 @@
 				
 				<p class="sidebar-text">OffTheGridMaps.com is proud {% if partner and partner.name != "OffTheGridMaps.com" %} to partner with <b><a href={{partner.url}} target="_blank">{{partner.name}}</a></b> {%endif%} to provide high quality {% if partner %} {{partner.maptype}} {%else%} recreation-based {%endif%} maps for Montana.<p>
 
-				<p class="sidebar-text">These maps are optimized for print on 11x17 paper, and are <b>GPS-enabled</b> for your smartphone when used with the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.<p>
+				<p class="sidebar-text">These maps are <b>GPS-enabled</b> for your smartphone when used with the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.<p>
 
 				{%if partnerMaps%}
 					
 					<!-- <p class="sidebar-text"><i>The following map(s) are provided <b>free of charge</b> {%if partner%} courtesy of</i> <a href={{partner.url}} target="_blank">{{partner.name}}</a>{%endif%}.  You can GPS-enable these maps by loading them into the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.</p> -->
-					<p class="sidebar-text"><i>The following map(s) are provided free of charge{% if partner and partner.name != "OffTheGridMaps.com" %} by <a href={{partner.url}} target="_blank">{{partner.name}}</a>{%endif%}:</i></p>
+					<p class="sidebar-text"><i>The following map(s) are available{% if partner and partner.name != "OffTheGridMaps.com" %} from <a href={{partner.url}} target="_blank">{{partner.name}}</a>{%endif%}:</i></p>
 					
 					<ul>
 						{%for f in partnerMaps%}
@@ -925,11 +924,10 @@
 					<p class="lorem">Bummer!  We don't have any maps available for download right now, but we'll work on making some available soon.</p>
 				{%endif%}
 
-				<p class="sidebar-text"><br>Follow our simple tutorial to <a href="javascript:void(0);" onclick="sidebar.open('help');">design your own map</a> in under 5 minutes!</p>
+				<p class="sidebar-text"><br>To <a href="javascript:void(0);" onclick="sidebar.open('help');">design your own map</a> in under 5 minutes, please follow our simple tutorial!</p>
 
-				<p class="sidebar-text"><b>How are we doing?</b></p>
-				<p class="sidebar-text"><i>To help us improve our products and service, please answer a few short <a href="https://www.surveymonkey.com/r/G7MWV6D" target="_blank">questions</a>.</i></p>
-				<p class="sidebar-text">Please follow us on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> and share with friends to hear about our latest maps!</p>
+				<p class="sidebar-text"><b>Want updates about our new maps?</b></p>
+				<p class="sidebar-text">Please follow us on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a></p>
 				
 			</div>
 			
@@ -1134,40 +1132,18 @@
 			sidebar.open("welcome");
 		}
 
-		//Create a zoom function to use when clicking on a feature
-		function zoomBBOX(bounds, layer) {
-			var array = bounds.name.split(',');
-			map.fitBounds(
-				L.latLngBounds(
-					L.latLng(array[1], array[0]),
-					L.latLng(array[3], array[2])
-				)
-			);
-		}
-
 		
+		//Set a variable for the start and end map scale on move
+		map.on('movestart', function() {
+			var startBBox = map.getBounds().toBBoxString()
+			//console.log('startBBox = ' + startBBox)
+		});
 		
-		//Create a function that refreshes the a layer based on the current BBOX
-		function refreshLayer(layerObject, layerSource, layerZoom, whereClause) {
-			
-			if (whereClause === undefined) {
-				whereClause = "1=1";
-			}
-			
-			//console.log( map.getZoom() );
-			var bboxString = map.getBounds().toBBoxString();
-			//console.log (bboxString);
-			
-			if ( map.getZoom() < layerZoom && map.hasLayer(layerObject) ) {
-				layerObject.clearLayers();
-			}
-			else if ( map.getZoom() >= layerZoom && map.hasLayer(layerObject) ) {
-				//Refresh layer based on current view extent
-				layerObject.refresh(layerSource + "?bbox=" + bboxString + "&whereClause=" + whereClause);
-			}
-		}
-
-
+		map.on('moveend', function() {
+			var endBBox = map.getBounds().toBBoxString()
+			//console.log('endBBox = ' + endBBox)
+		});
+		
 		//Create a function that refreshes the a layer based on the current BBOX
 		function refreshLayer2(layer) {
 			//console.log(layer);
@@ -1207,8 +1183,49 @@
 				//Change name if within visible zoom, but checked off
 				document.getElementById(layerName).innerHTML = document.getElementById(layerName).getAttribute("name");
 			}
-		}		
+		}
 
+
+		//Create a function that refreshes the a layer based on the current BBOX
+		function refreshLayer3(layer) {
+			//console.log(layer);
+			//Get the bounding box string of the current extent
+			var bboxString = map.getBounds().toBBoxString();
+					
+			//Get layer variables
+			var layerName = layer.name;
+			var layerObject = layer.object;
+			var layerSource = layer.source;
+			var layerZoom = layer.zoom;
+			if (layer.whereClause === undefined) {
+				var whereClause = "1=1";
+			}
+			else {
+				var whereClause = layer.whereClause;
+			}
+			
+			
+			//Refresh layers based on zoom level
+			if ( map.getZoom() < layerZoom && map.hasLayer(layerObject) ) {
+				//Clear map features and change name when zoomed out beyond visible extent
+				layerObject.clearLayers();
+				document.getElementById(layerName).innerHTML = "<i>" + document.getElementById(layerName).getAttribute("name") + " (zoom in)</i>";
+			}
+			else if ( map.getZoom() < layerZoom && ! map.hasLayer(layerObject) ) {
+				//Change name when zoomed out beyond visible extent
+				document.getElementById(layerName).innerHTML = "<i>" + document.getElementById(layerName).getAttribute("name") + " (zoom in)</i>";
+			}
+			else if ( map.getZoom() >= layerZoom && map.hasLayer(layerObject) ) {
+			//else if ( map.getZoom() >= layerZoom ) {
+				//Refresh layer based on current view extent and if turned on
+				layerObject.refresh(layerSource + "?bbox=" + bboxString + "&whereClause=" + whereClause);
+				document.getElementById(layerName).innerHTML = document.getElementById(layerName).getAttribute("name");
+			}
+			else if ( map.getZoom() >= layerZoom && ! map.hasLayer(layerObject)) {
+				//Change name if within visible zoom, but checked off
+				document.getElementById(layerName).innerHTML = document.getElementById(layerName).getAttribute("name");
+			}
+		}
 
 		function hoverPopup (layer, popupText) {
 			layer.bindPopup(popupText, {'autoPan': false, 'offset': L.point(0,-10)});
@@ -1334,7 +1351,7 @@
 		
 		//Add the base layers to a single managed variable
 		//var baseLayers = {"Streets": esriWorldStreetMap, "Topography": esriWorldTopo, "Imagery": esriWorldImagery};
-		var baseLayers = {"Terrain 1": esriWorldTopo, "Terrain 2": mapboxOutdoors,  "Streets": mapboxStreets, "Satellite": mapboxSatellite, "Hybrid Satellite": mapboxHybrid};
+		var baseLayers = {"Terrain 1": esriWorldTopo, "Terrain 2": mapboxOutdoors, "Streets": mapboxStreets, "Satellite": mapboxSatellite, "Hybrid Satellite": mapboxHybrid};
 
 
 
