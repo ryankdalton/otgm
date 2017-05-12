@@ -395,6 +395,40 @@ def glaciergundogclub():
         return render_template('404.html')
 
 
+
+@app.route('/grizzlyhackle', methods=['GET', 'POST'])
+def grizzlyhackle():
+
+    try:
+        if request.method == 'POST':
+            orderstatus = postOrder(request)
+            return render_template('index.html', orderstatus=orderstatus)
+
+        else:
+            emailaddress = 'info@grizzlyhackle.com'
+            partner, partnerMaps = getMapProjects(emailaddress)
+            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
+
+    except:
+        return render_template('404.html')
+
+
+@app.route('/glaciercyclery', methods=['GET', 'POST'])
+def glaciercyclery():
+
+    try:
+        if request.method == 'POST':
+            orderstatus = postOrder(request)
+            return render_template('index.html', orderstatus=orderstatus)
+
+        else:
+            emailaddress = 'info@glaciercyclery.com'
+            partner, partnerMaps = getMapProjects(emailaddress)
+            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
+
+    except:
+        return render_template('404.html')
+
 # ---------------- Sample map URLS --------------
 
 ##@app.route('/samples', methods=['GET', 'POST'])
