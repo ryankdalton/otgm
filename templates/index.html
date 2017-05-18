@@ -1346,11 +1346,9 @@
 		});	
 
 		//Add the initial basemap
-		//esriWorldStreetMap.addTo(map);
-		mapboxOutdoors.addTo(map);
+		esriWorldTopo.addTo(map);
 		
 		//Add the base layers to a single managed variable
-		//var baseLayers = {"Streets": esriWorldStreetMap, "Topography": esriWorldTopo, "Imagery": esriWorldImagery};
 		var baseLayers = {"Terrain 1": esriWorldTopo, "Terrain 2": mapboxOutdoors, "Streets": mapboxStreets, "Satellite": mapboxSatellite, "Hybrid Satellite": mapboxHybrid};
 
 
