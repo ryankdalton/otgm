@@ -225,7 +225,7 @@ def getMapScale(mapGeom):
 
     def getOptimalScale(mapGeom, mapUnits, pageSize, pageUnits, fBuffer=1.0):
 
-        standardScales = [7920,15840,31680,47520,63360,95040,126720,158400,190080,253440,316800,380160,443520,506880,570240,633600]
+        standardScales = [7920,15840,21120,31680,42240,47520,63360,79200,95040,110080,126720,158400,190080,253440,316800,380160,443520,506880,570240,633600]
 
         featureOrientation = getFeatureOrientation(mapGeom) #P
         ##print featureOrientation
