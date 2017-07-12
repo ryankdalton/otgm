@@ -503,6 +503,24 @@ def onthewater():
         return render_template('404.html')
 
 
+@app.route('/onthehook', methods=['GET', 'POST'])
+def onthehook():
+
+    try:
+        if request.method == 'POST':
+            orderstatus = postOrder(request)
+            return render_template('index.html', orderstatus=orderstatus)
+
+        else:
+            emailaddress = 'info@offthegridmaps.com'
+            mapproject = 'onthehook'
+            partner, partnerMaps = getMapProjects(emailaddress, mapproject)
+            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
+
+    except:
+        return render_template('404.html')
+
+
 @app.route('/onthehunt', methods=['GET', 'POST'])
 def onthehunt():
 
