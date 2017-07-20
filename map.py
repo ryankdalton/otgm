@@ -503,6 +503,7 @@ def onthewater():
         return render_template('404.html')
 
 
+
 @app.route('/onthehook', methods=['GET', 'POST'])
 def onthehook():
 
@@ -853,6 +854,32 @@ def pending():
 
     except:
         return render_template('404.html')
+
+
+
+@app.route ('/fishing')
+def fishing():
+    return redirect('/onthehook', code=302)
+
+@app.route ('/boating')
+def boating():
+    return redirect('/onthewater', code=302)
+
+@app.route ('/hunting')
+def hunting():
+    return redirect('/onthehunt', code=302)
+
+@app.route ('/hiking')
+def hiking():
+    return redirect('/onthetrail', code=302)
+
+@app.route ('/biking')
+def biking():
+    return redirect('/onthebike', code=302)
+
+@app.route ('/skiing')
+def skiing():
+    return redirect('/onthesnow', code=302)
 
 
 ##@app.route ('/feedback')
