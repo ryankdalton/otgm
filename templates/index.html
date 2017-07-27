@@ -11,6 +11,7 @@
 
 	<title>OffTheGridMaps.com - Custom Maps. Designed By You!</title>
 	
+	<!-- Google Analytics tracking --->
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -21,6 +22,62 @@
 		ga('send', 'pageview');
 	</script>
 
+	<!-- Script to allow Google Analytics tracking of downloads --->
+	<script type="text/javascript">
+		if (typeof jQuery != 'undefined') {
+		  jQuery(document).ready(function($) {
+			var filetypes = /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i;
+			var baseHref = '';
+			if (jQuery('base').attr('href') != undefined) baseHref = jQuery('base').attr('href');
+		 
+			jQuery('a').on('click', function(event) {
+			  var el = jQuery(this);
+			  var track = true;
+			  var href = (typeof(el.attr('href')) != 'undefined' ) ? el.attr('href') :"";
+			  var isThisDomain = href.match(document.domain.split('.').reverse()[1] + '.' + document.domain.split('.').reverse()[0]);
+			  if (!href.match(/^javascript:/i)) {
+				var elEv = []; elEv.value=0, elEv.non_i=false;
+				if (href.match(/^mailto\:/i)) {
+				  elEv.category = "email";
+				  elEv.action = "click";
+				  elEv.label = href.replace(/^mailto\:/i, '');
+				  elEv.loc = href;
+				}
+				else if (href.match(filetypes)) {
+				  var extension = (/[.]/.exec(href)) ? /[^.]+$/.exec(href) : undefined;
+				  elEv.category = "download";
+				  elEv.action = "click-" + extension[0];
+				  elEv.label = href.replace(/ /g,"-");
+				  elEv.loc = baseHref + href;
+				}
+				else if (href.match(/^https?\:/i) && !isThisDomain) {
+				  elEv.category = "external";
+				  elEv.action = "click";
+				  elEv.label = href.replace(/^https?\:\/\//i, '');
+				  elEv.non_i = true;
+				  elEv.loc = href;
+				}
+				else if (href.match(/^tel\:/i)) {
+				  elEv.category = "telephone";
+				  elEv.action = "click";
+				  elEv.label = href.replace(/^tel\:/i, '');
+				  elEv.loc = href;
+				}
+				else track = false;
+		 
+				if (track) {
+				  _gaq.push(['_trackEvent', elEv.category.toLowerCase(), elEv.action.toLowerCase(), elEv.label.toLowerCase(), elEv.value, elEv.non_i]);
+				  if ( el.attr('target') == undefined || el.attr('target').toLowerCase() != '_blank') {
+					setTimeout(function() { location.href = elEv.loc; }, 400);
+					return false;
+			  }
+			}
+			  }
+			});
+		  });
+		}
+		</script>
+	
 	<!--
 	<link rel="icon" href ="/favicon.ico" type="image/x-icon" /> <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 	<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120-precomposed.png" /> <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152-precomposed.png" />
@@ -237,8 +294,7 @@
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 
 				<h3 class="sidebar-text"><i>Putting you in control of your map!</i></h3>
-				<p class="sidebar-text">OffTheGridMaps lets you design custom <a href="javascript:void(0);" onclick="sidebar.open('samples');">recreation maps</a> for outdoor activities like hiking, camping, fishing, hunting and more.</p>
-				<p class="sidebar-text">It's easy and for a limited time, personal-use map orders are FREE!</p>
+				<p class="sidebar-text">OffTheGridMaps lets you design custom <a href="javascript:void(0);" onclick="sidebar.open('samples');">recreation maps</a> for outdoor activities like fishing, hunting, hiking and more.</p>
 
 <!--				
 				<ul class="sidebar-text">
@@ -255,22 +311,22 @@
 
 
 				<h3 class="sidebar-text">How does it work?</h3>
-				<!--<h3 class="sidebar-text">How it works:</h3>-->
-				<p class="sidebar-text">You can <a href="javascript:void(0);" onclick="sidebar.open('help');">design your map</a> in 3 simple steps.</p>
+				<p class="sidebar-text">It's easy, and orders for personal use are FREE! You can <a href="javascript:void(0);" onclick="sidebar.open('help');">design your map</a> in just 3 steps:</p>
 					<ol class="sidebar-text">
 						<li>Zoom to the area you are interested in.</li>
 						<li>Draw a box around your map boundary.</li>
 						<li>Place your order.</li>
 					</ol>
+				<p class="sidebar-text">Yep, that's all there is to it.</p>
 				
 
-				<h3 class="sidebar-text">What makes OffTheGridMaps unique?</h3>
+				<h3 class="sidebar-text">Why choose OffTheGridMaps?</h3>
 				<p class="sidebar-text">Our innovative 2-in-1 maps are tailored to <i>your activity and area of interest</i>. You get:</p>
 				<ul class="sidebar-text">
-				<li>A <a href="javascript:void(0);" onclick="sidebar.open('samples');">high-resolution</a> PDF map that you can print and take with you. Plus,</li>
+				<li>A <a href="javascript:void(0);" onclick="sidebar.open('samples');">high-resolution</a>, 11x17 PDF map that you can print and take with you.</li>
 				<li>A <a href="javascript:void(0);" onclick="sidebar.open('gps');">GPS-enabled</a> companion map for your smart-phone. <i>No cell service needed</i>!</li>
 				</ul>
-				<p class="sidebar-text">Take a look at our <a href="javascript:void(0);" onclick="sidebar.open('samples');">sample maps</a> to see the level of detail we put into our maps.</p>
+
 
 				
 				<!-- 
@@ -291,8 +347,10 @@
 				</ul>
 -->
 					
-				<h3 class="sidebar-text">Design <i>your first map</i> today!</h3>
-				<p class="sidebar-text">Follow our <a href="javascript:void(0);" onclick="sidebar.open('help');">simple tutorial</a> to design a custom map anywhere in Montana, <i>in under 5 minutes</i>!</p>
+				<h3 class="sidebar-text">Sound good?</h3>
+				<p class="sidebar-text">Design your first map <i>in under 5 minutes</i> by following our <a href="javascript:void(0);" onclick="sidebar.open('help');">simple tutorial</a>.</p>
+				
+				<p class="sidebar-text">You also might like to take a look at our <a href="javascript:void(0);" onclick="sidebar.open('samples');">sample maps</a> to see the level of detail we put into each map.</p>
 			</div>
 
 
@@ -301,7 +359,7 @@
 
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 
-				<p class="sidebar-text"><i><b>NOTE:</b> the web map is meant to help you decide where to create your map, and does not represent the high-resolution map you will receive.</i></p>
+				<p class="sidebar-text"><i><b>NOTE:</b> the web map is just meant to help you decide where to create your map. To see what our print maps look like, please head on over to our <a href="javascript:void(0);" onclick="sidebar.open('samples');">sample maps</a></i>.</p>
 
 				<h3 class="sidebar-text">How to decide where to make a map:</h3>
 					<ul>
@@ -342,13 +400,9 @@
 				-->
 				
 				<h3 class="sidebar-text">What will my map look like?</h3>
-				<p class="sidebar-text">Click to download our map of the <a href="static/maps/NorthForkFlatheadRiver-info@offthegridmaps.com.pdf" target="_blank"><i>North Fork Flathead River</i></a>.  This is a great example of the quality and detail you can expect to see in all of our recreation-based maps.</p>
-
-				<h3 class="sidebar-text">Map Themes</h3>
-				<p class="sidebar-text">When you are ready to create your own map, you first need to <a href="javascript:void(0);" onclick="sidebar.open('help');">draw your map boundary</a>.</p>
-				<p class="sidebar-text">Next, you'll want to choose your "Map Theme", which defines specialty layers that we'll add to your map based on the type of activity you are interested in.</p>
+				<p class="sidebar-text">Click to download our map of the <a href="static/maps/NorthForkFlatheadRiver-info@offthegridmaps.com.pdf" target="_blank"><i>North Fork Flathead River</i></a>.  This is a great example of the quality and detail you can expect to see in all of our outdoor recreation maps.</p>
 				
-				<p class="sidebar-text">Below are examples your can use to help choose the map theme that best fits your next adventure!</p>
+				<p class="sidebar-text">Below are examples of the "Map Themes" your can use to help us create the map that best fits your next adventure!</p>
 
 				<h3 class="sidebar-text"><i>Hiking/Mountain Biking</i></h3>
 				<p class="image-caption">Key Features: Scenic areas, public land ownership, trailheads, trail names, trail mileage.</p>
@@ -576,11 +630,14 @@
 						<td valign="center">
 							<select id="maptype" name="maptype" type="text" class="required" title="Map Theme is a required field" >
 								<option value="none"></option>
+								<option value="hunting">Big Game Hunting</option>
 								<option value="birds">Bird Hunting</option>
-								<option value="biggame">Big Game Hunting</option>
-								<option value="water">Fishing/Boating</option>
+								<option value="fishing">Fishing</option>
 								<option value="trails">Hiking/Mountain Biking</option>
+								<option value="boating">Rafting/Boating</option>
 								<option value="winter">Skiing/Snowmobiling</option>
+								<option value="urban">Urban</option>
+								<option value="other">Other (include comments below)</option>
 							</select>
 						</td>
 					</tr>
@@ -859,13 +916,13 @@
 				
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
-				<p class="sidebar-text">OffTheGridMaps.com is proud to provide high quality recreation maps for Montana.</p>
-
-				<p class="sidebar-text">These maps are optimized for print on 11x17 paper, and are <b>GPS-enabled</b> for your smartphone when used with the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.<p>
+				<p class="sidebar-text">OffTheGridMaps.com is proud to provide high quality recreation maps for Montana.  These maps are optimized for print on 11x17 paper, and are <b>GPS-enabled</b> for your smartphone when loaded into the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.<p>
+				
+				<p class="sidebar-text">Don't see the map you want?  Follow our simple tutorial to  <a href="javascript:void(0);" onclick="sidebar.open('help');">design your own map</a>!</p>
 
 				{%if customerMaps%}
 
-					<p class="sidebar-text">{% if customer %}<i>The following map(s) are licensed for personal use to</i>: <b>{{ customer.name }}</b>{% endif %}</p>
+					<p class="sidebar-text">{% if customer %}<b><i>The following map(s) are licensed for personal use to: {{ customer.name }}</i></b>{% endif %}</p>
 				
 					<ul>
 						{%for f in customerMaps%}
@@ -884,10 +941,8 @@
 					<p class="lorem">Bummer!  We don't have any maps ready for you to download right now, but we'll work on making some available soon.</p>
 				{%endif%}
 
-				<p class="sidebar-text"><br>If you're ready to <a href="javascript:void(0);" onclick="sidebar.open('help');">design a new map</a>, just head over to the map and get started!</p>
-
-				<p class="sidebar-text"><b>Want updates about our new maps?</b></p>
-				<p class="sidebar-text">Please follow us on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a></p>
+				<p class="sidebar-text"><br><b>Want to be the first to know when we publish new maps?</b></p>
+				<p class="sidebar-text">Please follow us on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> or <a href="https://twitter.com/offthegridmaps" target="_blank">Twitter</a>.</p>
 
 			</div>
 
@@ -897,14 +952,14 @@
 				
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
-				<p class="sidebar-text">OffTheGridMaps.com is proud {% if partner and partner.name != "OffTheGridMaps.com" %} to partner with <b><a href={{partner.url}} target="_blank">{{partner.name}}</a></b> {%endif%} to provide high quality {% if partner %} {{partner.maptype}} {%else%} recreation-based {%endif%} maps for Montana.<p>
-
-				<p class="sidebar-text">These maps are <b>GPS-enabled</b> for your smartphone when used with the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.<p>
+				<p class="sidebar-text">OffTheGridMaps.com is proud {% if partner and partner.name != "OffTheGridMaps.com" %} to partner with <b><a href={{partner.url}} target="_blank">{{partner.name}}</a></b> {%endif%} to provide high quality {% if partner %} {{partner.maptype}} {%else%} recreation-based {%endif%} maps for Montana.  These maps are <b>GPS-enabled</b> for your smartphone when used with the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.<p>
+				
+				<p class="sidebar-text">Don't see the map you want?  Follow our simple tutorial to  <a href="javascript:void(0);" onclick="sidebar.open('help');">design your own map</a>!</p>
 
 				{%if partnerMaps%}
 					
 					<!-- <p class="sidebar-text"><i>The following map(s) are provided <b>free of charge</b> {%if partner%} courtesy of</i> <a href={{partner.url}} target="_blank">{{partner.name}}</a>{%endif%}.  You can GPS-enable these maps by loading them into the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.</p> -->
-					<p class="sidebar-text"><i>The following map(s) are available{% if partner and partner.name != "OffTheGridMaps.com" %} from <a href={{partner.url}} target="_blank">{{partner.name}}</a>{%endif%}:</i></p>
+					<p class="sidebar-text"><b><i>The following map(s) are available{% if partner and partner.name != "OffTheGridMaps.com" %} from <a href={{partner.url}} target="_blank">{{partner.name}}</a>{%endif%}:</i></b></p>
 					
 					<ul>
 						{%for f in partnerMaps%}
@@ -924,10 +979,8 @@
 					<p class="lorem">Bummer!  We don't have any maps available for download right now, but we'll work on making some available soon.</p>
 				{%endif%}
 
-				<p class="sidebar-text"><br>To <a href="javascript:void(0);" onclick="sidebar.open('help');">design your own map</a> in under 5 minutes, please follow our simple tutorial!</p>
-
-				<p class="sidebar-text"><b>Want updates about our new maps?</b></p>
-				<p class="sidebar-text">Please follow us on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a></p>
+				<p class="sidebar-text"><br><b>Want to be the first to know when we publish new maps?</b></p>
+				<p class="sidebar-text">Please follow us on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> or <a href="https://twitter.com/offthegridmaps" target="_blank">Twitter</a>.</p>
 				
 			</div>
 			
