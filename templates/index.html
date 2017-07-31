@@ -963,7 +963,7 @@
 				
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
-				<p class="sidebar-text">OffTheGridMaps.com is proud {% if partner and partner.name != "OffTheGridMaps.com" %} to partner with <b><a href={{partner.url}} target="_blank">{{partner.name}}</a></b> {%endif%} to provide high quality {% if partner %} {{partner.maptype}} {%else%} recreation-based {%endif%} maps for Montana.  These maps are <b>GPS-enabled</b> for your smartphone when used with the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.<p>
+				<p class="sidebar-text">OffTheGridMaps.com is proud {% if partner and partner.name != "Off The Grid Maps" %} to partner with <b><a href={{partner.url}} target="_blank">{{partner.name}}</a></b> {%endif%} to provide high quality {% if partner %} {{partner.maptype}} {%else%} recreation-based {%endif%} maps for Montana.  These maps are <b>GPS-enabled</b> for your smartphone when used with the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.<p>
 				
 				<p class="sidebar-text"><b>Don't see the map you want?</b></p>
 				<p class="sidebar-text">Follow our simple tutorial to  <a href="javascript:void(0);" onclick="sidebar.open('help');">design your own map today</a>!</p>
@@ -971,7 +971,7 @@
 				{%if partnerMaps%}
 					
 					<!-- <p class="sidebar-text"><i>The following map(s) are provided <b>free of charge</b> {%if partner%} courtesy of</i> <a href={{partner.url}} target="_blank">{{partner.name}}</a>{%endif%}.  You can GPS-enable these maps by loading them into the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.</p> -->
-					<p class="sidebar-text"><i>The following map(s) are available {% if partner and partner.name != "OffTheGridMaps.com" %} for sale at <a href={{partner.url}} target="_blank">{{partner.name}}</a>{%endif%}:</i></p>
+					<p class="sidebar-text"><i>The following map(s) are available {% if partner and partner.name != "Off The Grid Maps" %} for sale at <a href={{partner.url}} target="_blank">{{partner.name}}</a>{%endif%}:</i></p>
 					
 					<ul>
 						{%for f in partnerMaps%}
