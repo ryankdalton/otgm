@@ -29,7 +29,7 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="681"
+     inkscape:window-width="716"
      inkscape:window-height="696"
      inkscape:window-x="676"
      inkscape:window-y="0"
@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -58,7 +58,9 @@
        transform="matrix(1.3333333,0,0,-1.3333333,13.014,14.714333)">
       <path
          d="M 0,0 C 0.652,0 1.182,0.529 1.182,1.182 V 8.703 C 1.182,9.355 0.652,9.884 0,9.884 h -7.521 c -0.653,0 -1.182,-0.529 -1.182,-1.181 V 1.182 C -8.703,0.529 -8.174,0 -7.521,0 Z"
-		 fill="param(fill) #FFF" stroke="param(outline) #000" stroke-width="param(outline-width) 0.1"
+         fill="param(fill) #FFF"
+         stroke="param(outline) #000"
+         stroke-width="param(outline-width) 0.1"
          id="path30112"
          inkscape:connector-curvature="0" />
     </g>
@@ -73,10 +75,12 @@
     </g>
     <g
        id="g30118"
-       transform="matrix(1.3333333,0,0,-1.3333333,12.378533,11.628333)">
+       transform="matrix(1.0666666,0,0,-1.0666666,11.5028,10.856733)">
       <path
          d="M 0,0 -3.258,6.236 -6.514,0 H -7.203 V -0.449 H 0.635 V 0 Z M -5.002,0 -3.258,3.342 -1.512,0 Z"
-         fill="param(fill) #e6e6e6" stroke="param(outline) #000" stroke-width="param(outline-width) 0.1"
+         fill="param(fill) #e6e6e6"
+         stroke="param(outline) #000"
+         stroke-width="param(outline-width) 0.1"
          id="path30120"
          inkscape:connector-curvature="0" />
     </g>

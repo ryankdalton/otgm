@@ -24,7 +24,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="16"
-     inkscape:cx="-5.4594275"
+     inkscape:cx="-13.625"
      inkscape:cy="8"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -82,47 +82,51 @@
        stroke-opacity="param(outline-opacity)"
        width="5.397418"
        height="4.0106153" />
-    <path
-       style="stroke-width:0.01706666"
-       id="path695"
-       fill="param(fill) #000"
-       fill-opacity="param(fill-opacity)"
-       stroke="param(outline) #FFF"
-       stroke-opacity="param(outline-opacity)"
-       d="M 3.8902024,7.7127348 12.109798,7.7491892 9.7109081,5.0146316 h -3.52768 z"
-       inkscape:connector-curvature="0" />
-    <rect
-       id="rect698"
-       x="8.2068052"
-       y="8.4129629"
-       fill="param(fill) #000"
-       fill-opacity="param(fill-opacity)"
-       stroke="param(outline) #FFF"
-       stroke-opacity="param(outline-opacity)"
-       width="1.9756031"
-       height="3.0551381"
-       style="stroke-width:0.0770321" />
-    <rect
-       style="stroke-width:0.01706666"
-       id="rect3055"
-       x="5.9738889"
-       y="8.4285955"
-       fill="param(fill) #000"
-       fill-opacity="param(fill-opacity)"
-       stroke="param(outline) #FFF"
-       stroke-opacity="param(outline-opacity)"
-       width="1.5081813"
-       height="1.3953023" />
-    <rect
-       style="stroke-width:0.01706666"
-       id="rect3057"
-       x="7.9215531"
-       y="4.2818913"
-       fill="param(fill) #000"
-       fill-opacity="param(fill-opacity)"
-       stroke="param(outline) #FFF"
-       stroke-opacity="param(outline-opacity)"
-       width="1.5506601"
-       height="0.75137699" />
+    <g
+       id="g20"
+       transform="matrix(0.9,0,0,0.9,0.80000002,0.78749962)">
+      <path
+         inkscape:connector-curvature="0"
+         d="M 3.8902024,7.7127348 12.109798,7.7491892 9.7109081,5.0146316 h -3.52768 z"
+         stroke-opacity="param(outline-opacity)"
+         stroke="param(outline) #FFF"
+         fill-opacity="param(fill-opacity)"
+         fill="param(fill) #000"
+         id="path695"
+         style="stroke-width:0.01706666" />
+      <rect
+         style="stroke-width:0.0770321"
+         height="3.0551381"
+         width="1.9756031"
+         stroke-opacity="param(outline-opacity)"
+         stroke="param(outline) #FFF"
+         fill-opacity="param(fill-opacity)"
+         fill="param(fill) #000"
+         y="8.4129629"
+         x="8.2068052"
+         id="rect698" />
+      <rect
+         height="1.3953023"
+         width="1.5081813"
+         stroke-opacity="param(outline-opacity)"
+         stroke="param(outline) #FFF"
+         fill-opacity="param(fill-opacity)"
+         fill="param(fill) #000"
+         y="8.4285955"
+         x="5.9738889"
+         id="rect3055"
+         style="stroke-width:0.01706666" />
+      <rect
+         height="0.75137699"
+         width="1.5506601"
+         stroke-opacity="param(outline-opacity)"
+         stroke="param(outline) #FFF"
+         fill-opacity="param(fill-opacity)"
+         fill="param(fill) #000"
+         y="4.2818913"
+         x="7.9215531"
+         id="rect3057"
+         style="stroke-width:0.01706666" />
+    </g>
   </g>
 </svg>

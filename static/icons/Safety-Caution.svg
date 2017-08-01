@@ -29,7 +29,7 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="681"
+     inkscape:window-width="716"
      inkscape:window-height="696"
      inkscape:window-x="676"
      inkscape:window-y="0"
@@ -53,7 +53,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -80,18 +80,22 @@
          inkscape:connector-curvature="0" />
     </g>
     <g
-       id="g7934"
-       transform="matrix(1.3333333,0,0,-1.3333333,3.7318601,11.635467)">
+       id="g18"
+       transform="matrix(0.9,0,0,0.9,0.79974857,0.76493004)">
+      <g
+         transform="matrix(1.3333333,0,0,-1.3333333,3.7318601,11.635467)"
+         id="g7934">
+        <path
+           inkscape:connector-curvature="0"
+           id="path7936"
+           style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           d="M 0,0 C -0.197,0 -0.277,0.139 -0.179,0.31 L 3.02,5.851 c 0.098,0.171 0.26,0.171 0.358,0 L 6.577,0.31 C 6.676,0.139 6.595,0 6.398,0 Z" />
+      </g>
       <path
-         d="M 0,0 C -0.197,0 -0.277,0.139 -0.179,0.31 L 3.02,5.851 c 0.098,0.171 0.26,0.171 0.358,0 L 6.577,0.31 C 6.676,0.139 6.595,0 6.398,0 Z"
-         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         id="path7936"
-         inkscape:connector-curvature="0" />
+         inkscape:connector-curvature="0"
+         id="path7938"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.33333325"
+         d="M 7.5702624,9.7420001 H 8.4235957 V 10.596667 H 7.5702624 Z M 7.5275957,6.3393335 h 0.94 l -0.128,2.848 h -0.696 z" />
     </g>
-    <path
-       d="M 7.5702624,9.7420001 H 8.4235957 V 10.596667 H 7.5702624 Z M 7.5275957,6.3393335 h 0.94 l -0.128,2.848 h -0.696 z"
-       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.33333325"
-       id="path7938"
-       inkscape:connector-curvature="0" />
   </g>
 </svg>
