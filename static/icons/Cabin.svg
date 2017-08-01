@@ -29,7 +29,7 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="681"
+     inkscape:window-width="716"
      inkscape:window-height="696"
      inkscape:window-x="-9"
      inkscape:window-y="0"
@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -74,13 +74,13 @@
          inkscape:connector-curvature="0" />
     </g>
     <polygon
-       transform="matrix(0.0292706,0,0,0.02592638,-0.47563974,-0.14725971)"
+       transform="matrix(0.02341648,0,0,0.0207411,1.2220551,1.4969395)"
        fill="param(fill)"
        fill-opacity="param(fill-opacity)"
        stroke="param(outline)"
        stroke-opacity="param(outline-opacity)"
        stroke-width="param(outline-width)"
-       points="258.414,380.717 323.783,380.717 323.783,506.07 418.637,506.07 418.637,293.668 451.307,293.668 290.329,128.447 290,128.11 129.451,292.891 128.693,293.668 161.365,293.668 161.365,506.07 258.414,506.07 "
+       points="323.783,380.717 323.783,506.07 418.637,506.07 418.637,293.668 451.307,293.668 290.329,128.447 290,128.11 129.451,292.891 128.693,293.668 161.365,293.668 161.365,506.07 258.414,506.07 258.414,380.717 "
        id="polygon22" />
   </g>
 </svg>
