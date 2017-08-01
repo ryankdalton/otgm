@@ -692,8 +692,8 @@ def pgrecsites():
     try:
         bboxString = str( request.args.get('bbox') )
         tablename = "webdata.mvw_recsites"
-        fields = "labelname, siteclass, sitetype"
-        return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
+        fields = "labelname, sitetype, source"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 500)
 
     except:
         return "ERROR: Could not return valid recsites.geojson"

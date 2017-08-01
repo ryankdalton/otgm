@@ -15,7 +15,7 @@
    version="1.1"
    id="SVGRoot"
    inkscape:version="0.92.1 r15371"
-   sodipodi:docname="Information.svg">
+   sodipodi:docname="Womens Room.svg">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -24,8 +24,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="16"
-     inkscape:cx="-2.40625"
-     inkscape:cy="17.015625"
+     inkscape:cx="8"
+     inkscape:cy="8"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -54,41 +54,40 @@
      inkscape:groupmode="layer"
      inkscape:label="Layer 1">
     <g
-       id="g29860"
+       id="g13731"
        transform="matrix(1.3333333,0,0,-1.3333333,13.014667,14.588667)">
       <path
-         d="m 0,0 c 0.652,0 1.181,0.529 1.181,1.182 v 7.521 c 0,0.653 -0.529,1.18 -1.181,1.18 h -7.521 c -0.653,0 -1.182,-0.527 -1.182,-1.18 V 1.182 C -8.703,0.529 -8.174,0 -7.521,0 Z"
+         d="M 0,0 C 0.651,0 1.181,0.528 1.181,1.18 V 8.702 C 1.181,9.354 0.651,9.883 0,9.883 h -7.522 c -0.653,0 -1.181,-0.529 -1.181,-1.181 V 1.18 C -8.703,0.528 -8.175,0 -7.522,0 Z"
          style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         id="path29862"
+         id="path13733"
          inkscape:connector-curvature="0" />
     </g>
     <g
-       id="g29864"
-       transform="matrix(1.3333333,0,0,-1.3333333,2.9860002,1.6785365)">
+       id="g13735"
+       transform="matrix(1.3333333,0,0,-1.3333333,2.9846662,1.6784065)">
       <path
-         d="m 0,0 c -0.542,0 -0.981,-0.439 -0.981,-0.979 v -7.522 c 0,-0.541 0.439,-0.981 0.981,-0.981 h 7.521 c 0.541,0 0.981,0.44 0.981,0.981 v 7.522 C 8.502,-0.439 8.062,0 7.521,0 Z"
+         d="m 0,0 c -0.541,0 -0.98,-0.44 -0.98,-0.98 v -7.523 c 0,-0.54 0.439,-0.979 0.98,-0.979 h 7.522 c 0.541,0 0.981,0.439 0.981,0.979 V -0.98 C 8.503,-0.44 8.063,0 7.522,0 Z"
          style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         id="path29866"
+         id="path13737"
          inkscape:connector-curvature="0" />
     </g>
     <g
-       id="g29868"
-       transform="matrix(1.3333333,0,0,-1.3333333,2.5160002,7.9974665)">
+       id="g13739"
+       transform="matrix(1.3333333,0,0,-1.3333333,8.7906662,4.5834665)">
       <path
-         d="M 0,0 C 0,2.271 1.842,4.111 4.113,4.111 6.385,4.111 8.227,2.271 8.227,0 8.227,-2.271 6.385,-4.113 4.113,-4.113 1.842,-4.113 0,-2.271 0,0 m 4.113,-3.51 c 1.938,0 3.51,1.57 3.51,3.51 0,1.937 -1.572,3.508 -3.51,3.508 C 2.174,3.508 0.602,1.937 0.602,0 c 0,-1.94 1.572,-3.51 3.511,-3.51"
+         d="m 0,0 c 0.464,0 0.797,-0.382 0.867,-0.59 l 0.569,-1.87 c 0.113,-0.401 -0.4,-0.568 -0.52,-0.177 L 0.403,-0.921 H 0.108 l 0.858,-3.05 H 0.149 v -2.38 c 0,-0.406 -0.611,-0.404 -0.611,0 v 2.395 h -0.309 v -2.39 c 0,-0.411 -0.614,-0.411 -0.614,0 v 2.375 h -0.819 l 0.848,3.05 h -0.281 l -0.511,-1.721 c -0.122,-0.374 -0.639,-0.221 -0.52,0.182 l 0.567,1.87 C -2.04,-0.377 -1.77,0 -1.303,0 Z"
          style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         id="path29870"
+         id="path13741"
          inkscape:connector-curvature="0" />
     </g>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:8px;line-height:1.25;font-family:'Bookman Old Style';-inkscape-font-specification:'Bookman Old Style, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
-       x="7.9375"
-       y="10.6875"
-       id="text18"><tspan
-         sodipodi:role="line"
-         id="tspan16"
-         x="7.9375"
-         y="10.6875">i</tspan></text>
+    <g
+       id="g13743"
+       transform="matrix(1.3333333,0,0,-1.3333333,7.9690662,4.3958665)">
+      <path
+         d="M 0,0 C 0.364,0 0.662,0.297 0.662,0.662 0.662,1.029 0.364,1.326 0,1.326 -0.368,1.326 -0.662,1.029 -0.662,0.662 -0.662,0.297 -0.368,0 0,0"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path13745"
+         inkscape:connector-curvature="0" />
+    </g>
   </g>
 </svg>

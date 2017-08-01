@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="16px"
+   height="16px"
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="SVGRoot"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="House.svg">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="16"
+     inkscape:cx="-5.4594275"
+     inkscape:cy="8"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:grid-bbox="true" />
+  <defs
+     id="defs20207" />
+  <metadata
+     id="metadata20210">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <g
+       id="g30314"
+       transform="matrix(1.3333333,0,0,-1.3333333,13.014,14.588667)">
+      <path
+         d="M 0,0 C 0.652,0 1.182,0.527 1.182,1.18 V 8.701 C 1.182,9.354 0.652,9.883 0,9.883 h -7.521 c -0.653,0 -1.182,-0.529 -1.182,-1.182 V 1.18 C -8.703,0.527 -8.174,0 -7.521,0 Z"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path30316"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       id="g30318"
+       transform="matrix(1.3333333,0,0,-1.3333333,2.9853336,1.6771965)">
+      <path
+         d="m 0,0 c -0.542,0 -0.981,-0.441 -0.981,-0.982 v -7.522 c 0,-0.539 0.439,-0.978 0.981,-0.978 h 7.521 c 0.542,0 0.982,0.439 0.982,0.978 v 7.522 C 8.503,-0.441 8.063,0 7.521,0 Z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path30320"
+         inkscape:connector-curvature="0" />
+    </g>
+    <rect
+       style="stroke-width:0.01706666"
+       id="rect693"
+       x="5.301291"
+       y="7.4574857"
+       fill="param(fill) #000"
+       fill-opacity="param(fill-opacity)"
+       stroke="param(outline) #FFF"
+       stroke-opacity="param(outline-opacity)"
+       width="5.397418"
+       height="4.0106153" />
+    <path
+       style="stroke-width:0.01706666"
+       id="path695"
+       fill="param(fill) #000"
+       fill-opacity="param(fill-opacity)"
+       stroke="param(outline) #FFF"
+       stroke-opacity="param(outline-opacity)"
+       d="M 3.8902024,7.7127348 12.109798,7.7491892 9.7109081,5.0146316 h -3.52768 z"
+       inkscape:connector-curvature="0" />
+    <rect
+       id="rect698"
+       x="8.2068052"
+       y="8.4129629"
+       fill="param(fill) #000"
+       fill-opacity="param(fill-opacity)"
+       stroke="param(outline) #FFF"
+       stroke-opacity="param(outline-opacity)"
+       width="1.9756031"
+       height="3.0551381"
+       style="stroke-width:0.0770321" />
+    <rect
+       style="stroke-width:0.01706666"
+       id="rect3055"
+       x="5.9738889"
+       y="8.4285955"
+       fill="param(fill) #000"
+       fill-opacity="param(fill-opacity)"
+       stroke="param(outline) #FFF"
+       stroke-opacity="param(outline-opacity)"
+       width="1.5081813"
+       height="1.3953023" />
+    <rect
+       style="stroke-width:0.01706666"
+       id="rect3057"
+       x="7.9215531"
+       y="4.2818913"
+       fill="param(fill) #000"
+       fill-opacity="param(fill-opacity)"
+       stroke="param(outline) #FFF"
+       stroke-opacity="param(outline-opacity)"
+       width="1.5506601"
+       height="0.75137699" />
+  </g>
+</svg>

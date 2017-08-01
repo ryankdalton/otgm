@@ -1307,7 +1307,7 @@
 			
 			layer.on('mouseout', function (e) {
 			    if(!isClicked) {
-					this.closePopup();
+					map.closePopup();
 				}
 			});
 
@@ -1451,39 +1451,81 @@
 			}
 		});
 
-
 		
 		// ------------- Add dynamically loaded layers ----------------
 		
 		//Template for custom icons
 		var templateIcon = L.icon({
-			iconUrl: '/static/icons/Campground.svg',
+			iconUrl: '/static/icons/filename.svg',
 			iconSize: [24,24]
 		});
 
 		//Create custom icons for RecSites
+		
+		//Boating SiteClass
+		
 		var boatIcon = L.icon({
 			iconUrl: '/static/icons/Boat launch.svg',
 			iconSize: [24,24]
 		});
 		
+		var rapidIcon = L.icon({
+			iconUrl: '/static/icons/Safety-Caution.svg',
+			iconSize: [24,24]
+		});
+		
+		// Camping SiteClass
+		var cabinIcon = L.icon({
+			iconUrl: '/static/icons/Cabin.svg',
+			iconSize: [24,24]
+		});
+
 		var campIcon = L.icon({
 			iconUrl: '/static/icons/Campground.svg',
 			iconSize: [24,24]
 		});
+		
+		//FWP Licenes
+		var checkboxIcon = L.icon({
+			iconUrl: '/static/icons/Checkbox.svg',
+			iconSize: [24,24]
+		});
 
-		var fishIcon = L.icon({
-			iconUrl: '/static/icons/Fish hatchery.svg',
+		//Day Use SiteClass
+		var picnicIcon = L.icon({
+			iconUrl: '/static/icons/Picnic area.svg',
 			iconSize: [24,24]
 		});
 		
-		var lookoutIcon = L.icon({
-			iconUrl: '/static/icons/Lookout tower.svg',
+		var parkIcon = L.icon({
+			iconUrl: '/static/icons/Wilderness.svg',
 			iconSize: [24,24]
 		});
 
-		var picnicIcon = L.icon({
-			iconUrl: '/static/icons/Picnic area.svg',
+		var restroomIcon = L.icon({
+			iconUrl: '/static/icons/Restrooms.svg',
+			iconSize: [24,24]
+		});		
+
+		var swimmingIcon = L.icon({
+			iconUrl: '/static/icons/Swimming.svg',
+			iconSize: [24,24]
+		});	
+
+		//Fishing SiteClass
+		var fishIcon = L.icon({
+			iconUrl: '/static/icons/Fishing custom.svg',
+			iconSize: [24,24]
+		});
+
+		var fishHatcheryIcon = L.icon({
+			iconUrl: '/static/icons/Fish hatchery.svg',
+			iconSize: [24,24]
+		});
+
+		//Hiking SiteClass
+		var lookoutIcon = L.icon({
+			iconUrl: '/static/icons/Lookout tower.svg',
 			iconSize: [24,24]
 		});
 		
@@ -1492,50 +1534,80 @@
 			iconSize: [24,24]
 		});
 
+		var waterfallIcon = L.icon({
+			iconUrl: '/static/icons/Waterfall.svg',
+			iconSize: [24,24]
+		});		
+		
+		
+		//Information SiteClass
 		var infoIcon = L.icon({
 			iconUrl: '/static/icons/Information.svg',
 			iconSize: [24,24]
 		});
 
-		var parkIcon = L.icon({
-			iconUrl: '/static/icons/Wilderness.svg',
-			iconSize: [24,24]
-		});
-
-		var checkboxIcon = L.icon({
-			iconUrl: '/static/icons/Checkbox.svg',
+		var interpIcon = L.icon({
+			iconUrl: '/static/icons/Interpretive exhibit.svg',
 			iconSize: [24,24]
 		});
 		
 		var viewIcon = L.icon({
-			iconUrl: '/static/icons/Wildlife viewing.svg',
+			iconUrl: '/static/icons/Viewing area.svg',
 			iconSize: [24,24]
 		});
+		
+		
+		//Transportation SiteClass
 
+		
+		//Winter Sports SiteClass
+		var nordicSkiingIcon = L.icon({
+			iconUrl: '/static/icons/Cross country ski trail.svg',
+			iconSize: [24,24]
+		});
+		
 		var winterIcon = L.icon({
 			iconUrl: '/static/icons/Winter recreation.svg',
 			iconSize: [24,24]
 		});
-
+		
+		//Anything else
 		var otherIcon = L.icon({
 			iconUrl: '/static/icons/Wilderness.svg',
 			iconSize: [24,24]
 		});
-
 		
 		//Create the initial layer
 		var pgRecsites = new L.GeoJSON.AJAX(null, {
 			pointToLayer: function(feature, latlng) {
-				switch (feature.properties.siteclass) {
-					case 'Boating': return L.marker(latlng, {icon: boatIcon});
-					case 'Camping': return L.marker(latlng, {icon: campIcon});
-					case 'Day Use': return L.marker(latlng, {icon: picnicIcon});
-					case 'Fire Lookouts/Cabins Overnight': return L.marker(latlng, {icon: lookoutIcon});
-					case 'Fishing': return L.marker(latlng, {icon: fishIcon});
-					case 'Hiking': return L.marker(latlng, {icon: hikeIcon});
-					case 'Observation Site': return L.marker(latlng, {icon: viewIcon});
+				switch (feature.properties.sitetype) {
+					case 'Boat Camp': return L.marker(latlng, {icon: campIcon});
+					case 'Boating Site': return L.marker(latlng, {icon: boatIcon});
+
+					case 'Cabin': return L.marker(latlng, {icon: cabinIcon});
+					case 'Campground': return L.marker(latlng, {icon: campIcon});
+					case 'Campsite': return L.marker(latlng, {icon: campIcon});
+
+					case 'Day Use Area': return L.marker(latlng, {icon: picnicIcon});
 					case 'Park': return L.marker(latlng, {icon: parkIcon});
-					case 'Winter Sports': return L.marker(latlng, {icon: winterIcon});
+					case 'Picnic Area': return L.marker(latlng, {icon: picnicIcon});
+					case 'Restroom': return L.marker(latlng, {icon: restroomIcon});
+					case 'Swimming Site': return L.marker(latlng, {icon: swimmingIcon});
+
+					case 'Fishing Site': return L.marker(latlng, {icon: fishIcon});
+					case 'Fish Stocking Site': return L.marker(latlng, {icon: fishHatcheryIcon});
+	
+					case 'Fire Lookout': return L.marker(latlng, {icon: lookoutIcon});
+					case 'Trailhead': return L.marker(latlng, {icon: hikeIcon});
+					case 'Waterfall': return L.marker(latlng, {icon: waterfallIcon});
+					
+					case 'Information Site': return L.marker(latlng, {icon: infoIcon});
+					case 'Interpretive Site': return L.marker(latlng, {icon: interpIcon});
+					case 'Observation Site': return L.marker(latlng, {icon: viewIcon});
+					
+					case 'Ski Area Nordic': return L.marker(latlng, {icon: nordicSkiingIcon});
+					case 'Snowpark': return L.marker(latlng, {icon: winterIcon});
+					
 					default: return L.marker(latlng, {icon: otherIcon});
 				}
 			},
@@ -1552,7 +1624,7 @@
 					this.closePopup();
 				});
 				*/
-				hoverPopup(layer, '<u><b>Recreation Sites</b></u><br>Name: ' + feature.properties.labelname + '<br>Type: ' + feature.properties.sitetype);
+				hoverPopup(layer, '<u><b>Recreation Sites</b></u><br>Name: ' + feature.properties.labelname + '<br>Type: ' + feature.properties.sitetype + '<br>Data Source: ' + feature.properties.source);
 			}
 		});
 

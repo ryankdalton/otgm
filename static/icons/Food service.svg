@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="16px"
+   height="16px"
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="SVGRoot"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="Food service.svg">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="16"
+     inkscape:cx="8"
+     inkscape:cy="8"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="681"
+     inkscape:window-height="696"
+     inkscape:window-x="676"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:grid-bbox="true" />
+  <defs
+     id="defs20207" />
+  <metadata
+     id="metadata20210">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <g
+       id="g30392"
+       transform="matrix(1.3333333,0,0,-1.3333333,13.014,14.588667)">
+      <path
+         d="M 0,0 C 0.652,0 1.181,0.528 1.181,1.18 V 8.702 C 1.181,9.354 0.652,9.883 0,9.883 h -7.521 c -0.653,0 -1.181,-0.529 -1.181,-1.181 V 1.18 C -8.702,0.528 -8.174,0 -7.521,0 Z"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path30394"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       id="g30396"
+       transform="matrix(1.3333333,0,0,-1.3333333,2.9853343,1.6785365)">
+      <path
+         d="m 0,0 c -0.54,0 -0.98,-0.44 -0.98,-0.981 v -7.522 c 0,-0.54 0.44,-0.979 0.98,-0.979 h 7.521 c 0.541,0 0.981,0.439 0.981,0.979 v 7.522 C 8.502,-0.44 8.062,0 7.521,0 Z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path30398"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       id="g30400"
+       transform="matrix(1.3333333,0,0,-1.3333333,7.4268003,6.0477365)">
+      <path
+         d="m 0,0 c 0,-0.261 -0.237,-0.539 -0.545,-0.539 v -4.402 c 0,-0.624 -0.852,-0.624 -0.852,0 v 4.402 c -0.3,0 -0.561,0.231 -0.561,0.578 v 2.422 c 0,0.211 0.305,0.22 0.305,-0.008 V 0.662 h 0.255 0.294 -0.023 v 1.805 c 0,0.202 0.285,0.21 0.285,-0.008 V 0.662 h 0.545 V 2.467 C -0.297,2.666 0,2.674 0,2.459 Z"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path30402"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       id="g30404"
+       transform="matrix(1.3333333,0,0,-1.3333333,10.988,3.5177365)">
+      <path
+         d="m 0,0 v -6.836 c 0,-0.611 -0.854,-0.603 -0.854,0 v 2.711 H -1.309 V 0 C -1.309,0.959 0,0.959 0,0"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path30406"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+</svg>

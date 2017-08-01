@@ -15,7 +15,7 @@
    version="1.1"
    id="SVGRoot"
    inkscape:version="0.92.1 r15371"
-   sodipodi:docname="Information.svg">
+   sodipodi:docname="Mens Room.svg">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -24,8 +24,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="16"
-     inkscape:cx="-2.40625"
-     inkscape:cy="17.015625"
+     inkscape:cx="8"
+     inkscape:cy="8"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -54,41 +54,40 @@
      inkscape:groupmode="layer"
      inkscape:label="Layer 1">
     <g
-       id="g29860"
-       transform="matrix(1.3333333,0,0,-1.3333333,13.014667,14.588667)">
+       id="g13763"
+       transform="matrix(1.3333333,0,0,-1.3333333,13.138333,14.651167)">
       <path
-         d="m 0,0 c 0.652,0 1.181,0.529 1.181,1.182 v 7.521 c 0,0.653 -0.529,1.18 -1.181,1.18 h -7.521 c -0.653,0 -1.182,-0.527 -1.182,-1.18 V 1.182 C -8.703,0.529 -8.174,0 -7.521,0 Z"
+         d="M 0,0 C 0.652,0 1.182,0.528 1.182,1.18 V 8.702 C 1.182,9.354 0.652,9.883 0,9.883 h -7.521 c -0.653,0 -1.181,-0.529 -1.181,-1.181 V 1.18 C -8.702,0.528 -8.174,0 -7.521,0 Z"
          style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         id="path29862"
+         id="path13765"
          inkscape:connector-curvature="0" />
     </g>
     <g
-       id="g29864"
-       transform="matrix(1.3333333,0,0,-1.3333333,2.9860002,1.6785365)">
+       id="g13767"
+       transform="matrix(1.3333333,0,0,-1.3333333,3.109668,1.7410365)">
       <path
-         d="m 0,0 c -0.542,0 -0.981,-0.439 -0.981,-0.979 v -7.522 c 0,-0.541 0.439,-0.981 0.981,-0.981 h 7.521 c 0.541,0 0.981,0.44 0.981,0.981 v 7.522 C 8.502,-0.439 8.062,0 7.521,0 Z"
+         d="m 0,0 c -0.541,0 -0.98,-0.44 -0.98,-0.98 v -7.523 c 0,-0.54 0.439,-0.979 0.98,-0.979 h 7.521 c 0.542,0 0.982,0.439 0.982,0.979 V -0.98 C 8.503,-0.44 8.063,0 7.521,0 Z"
          style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         id="path29866"
+         id="path13769"
          inkscape:connector-curvature="0" />
     </g>
     <g
-       id="g29868"
-       transform="matrix(1.3333333,0,0,-1.3333333,2.5160002,7.9974665)">
+       id="g13771"
+       transform="matrix(1.3333333,0,0,-1.3333333,8.0992676,4.4610365)">
       <path
-         d="M 0,0 C 0,2.271 1.842,4.111 4.113,4.111 6.385,4.111 8.227,2.271 8.227,0 8.227,-2.271 6.385,-4.113 4.113,-4.113 1.842,-4.113 0,-2.271 0,0 m 4.113,-3.51 c 1.938,0 3.51,1.57 3.51,3.51 0,1.937 -1.572,3.508 -3.51,3.508 C 2.174,3.508 0.602,1.937 0.602,0 c 0,-1.94 1.572,-3.51 3.511,-3.51"
+         d="M 0,0 C 0.364,0 0.662,0.295 0.662,0.662 0.662,1.027 0.364,1.324 0,1.324 -0.365,1.324 -0.662,1.027 -0.662,0.662 -0.662,0.295 -0.365,0 0,0"
          style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         id="path29870"
+         id="path13773"
          inkscape:connector-curvature="0" />
     </g>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:8px;line-height:1.25;font-family:'Bookman Old Style';-inkscape-font-specification:'Bookman Old Style, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
-       x="7.9375"
-       y="10.6875"
-       id="text18"><tspan
-         sodipodi:role="line"
-         id="tspan16"
-         x="7.9375"
-         y="10.6875">i</tspan></text>
+    <g
+       id="g13775"
+       transform="matrix(1.3333333,0,0,-1.3333333,6.9000676,13.032637)">
+      <path
+         d="m 0,0 c 0,-0.205 0.167,-0.372 0.372,-0.372 0.205,0 0.372,0.167 0.372,0.372 V 3.118 H 1.056 V 0 c 0,-0.205 0.165,-0.372 0.37,-0.372 0.205,0 0.372,0.167 0.372,0.372 L 1.801,5.375 H 2.109 V 3.393 c 0,-0.399 0.52,-0.399 0.518,0 v 2.026 c 0,0.439 -0.341,0.869 -0.856,0.869 L 0.012,6.291 c -0.469,0 -0.846,-0.385 -0.846,-0.86 V 3.393 c 0,-0.394 0.523,-0.394 0.523,0 v 1.982 h 0.314 z"
+         style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path13777"
+         inkscape:connector-curvature="0" />
+    </g>
   </g>
 </svg>

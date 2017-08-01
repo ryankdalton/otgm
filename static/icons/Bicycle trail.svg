@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="16px"
+   height="16px"
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="SVGRoot"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="Bicycle trail.svg">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="16"
+     inkscape:cx="6.359375"
+     inkscape:cy="4.313125"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="681"
+     inkscape:window-height="696"
+     inkscape:window-x="676"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:grid-bbox="true" />
+  <defs
+     id="defs20207">
+    <pattern
+       y="0"
+       x="0"
+       height="6"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       id="EMFhbasepattern" />
+  </defs>
+  <metadata
+     id="metadata20210">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <g
+       transform="matrix(1.0666666,0,0,1.0666666,2.1994087,-103.57469)"
+       style="overflow:visible"
+       id="g7213">
+      <path
+         d="m 9.243,109.425 c 0.652,0 1.182,-0.527 1.182,-1.18 v -7.522 c 0,-0.652 -0.529,-1.181 -1.182,-1.181 H 1.721 c -0.652,0 -1.182,0.528 -1.182,1.181 v 7.522 c 0,0.652 0.529,1.18 1.182,1.18 z"
+         id="path7215"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 1.721,99.742 c -0.542,0 -0.981,0.44 -0.981,0.98 v 7.522 c 0,0.54 0.44,0.979 0.981,0.979 h 7.521 c 0.542,0 0.981,-0.439 0.981,-0.979 v -7.522 c 0,-0.541 -0.44,-0.98 -0.981,-0.98 z"
+         id="path7217"
+         inkscape:connector-curvature="0"
+         style="fill:#ffffff" />
+      <path
+         d="m 2.893,107.662 c 0.792,0 1.435,-0.642 1.435,-1.435 0,-0.792 -0.643,-1.434 -1.435,-1.434 -0.79,0 -1.433,0.642 -1.433,1.434 0,0.793 0.643,1.435 1.433,1.435 z m -1.759,-1.434 c 0,-0.972 0.789,-1.759 1.759,-1.759 0.973,0 1.761,0.787 1.761,1.759 0,0.973 -0.788,1.759 -1.761,1.759 -0.97,0 -1.759,-0.787 -1.759,-1.759 z"
+         id="path7219"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 8.073,107.679 c 0.79,0 1.433,-0.642 1.433,-1.434 0,-0.792 -0.643,-1.435 -1.433,-1.435 -0.792,0 -1.435,0.642 -1.435,1.435 0,0.792 0.643,1.434 1.435,1.434 z m -1.761,-1.434 c 0,-0.973 0.789,-1.759 1.761,-1.759 0.97,0 1.759,0.787 1.759,1.759 0,0.972 -0.789,1.759 -1.759,1.759 -0.972,0 -1.761,-0.787 -1.761,-1.759 z"
+         id="path7221"
+         inkscape:connector-curvature="0" />
+      <circle
+         cx="6.3169999"
+         cy="101.291"
+         r="0.66100001"
+         id="circle7223" />
+      <path
+         d="m 6.344,103.557 c -0.096,0.002 -0.199,-0.046 -0.275,-0.166 l -0.43,-0.672 -0.887,0.878 0.822,0.433 c 0.338,0.162 0.287,0.459 0.287,0.459 v 1.861 c 0,0.211 -0.17,0.383 -0.381,0.383 -0.211,0 -0.38,-0.172 -0.38,-0.383 v -1.49 l -1.426,-0.792 c -0.17,-0.095 -0.285,-0.276 -0.285,-0.483 0,-0.143 0.053,-0.273 0.143,-0.371 l 1.398,-1.401 c 0.174,-0.196 0.416,-0.165 0.416,-0.165 0.293,0 0.447,0.256 0.447,0.256 l 0.727,1.139 1.104,-0.002 c 0.396,0 0.396,0.518 0,0.518 h -1.28 z"
+         id="path7225"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+</svg>
