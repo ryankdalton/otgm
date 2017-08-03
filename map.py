@@ -319,7 +319,7 @@ def bootstrap():
 
 
 @app.route('/montanafishingmaps', methods=['GET'])
-def bootstrap():
+def montanafishingmaps():
 
     try:
         return render_template('montanafishingmaps.html')
