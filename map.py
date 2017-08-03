@@ -318,6 +318,14 @@ def bootstrap():
         return render_template('404.html')
 
 
+@app.route('/montanafishingmaps', methods=['GET'])
+def bootstrap():
+
+    try:
+        return render_template('montanafishingmaps.html')
+
+    except:
+        return render_template('404.html')
 
 
 
