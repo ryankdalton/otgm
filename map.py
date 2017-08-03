@@ -562,27 +562,56 @@ def onthebike():
 #return state boundary:
 @app.route("/data/pgstate")
 def pgstate():
-
     try:
         tablename = "webdata.msdi_state"
         fields = "name"
         return pgToGeoJSON(tablename, fields)
-
     except:
         return "ERROR: Could not return valid state.geojson"
+
+##@app.route("/data/pgstate")
+##def pgstate():
+##    try:
+##        bboxString = str( request.args.get('bbox') )
+##        tablename = "webdata.msdi_state"
+##        fields = "name"
+##        return pgToGeoJsonBBox(tablename, fields, bboxString)
+##    except:
+##        return "ERROR: Could not return valid state.geojson"
+
+@app.route("/data/pgstatehd")
+def pgstatehd():
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.msdi_statehd"
+        fields = "name"
+        return pgToGeoJsonBBox(tablename, fields, bboxString)
+    except:
+        return "ERROR: Could not return valid state.geojson"
+
 
 
 #return counties:
 @app.route("/data/pgcounties")
 def pgcounties():
-
     try:
+        bboxString = str( request.args.get('bbox') )
         tablename = "webdata.msdi_counties"
         fields = "name"
-        return pgToGeoJSON(tablename, fields)
-
+        return pgToGeoJsonBBox(tablename, fields, bboxString)
     except:
         return "ERROR: Could not return valid counties.geojson"
+
+@app.route("/data/pgcountieshd")
+def pgcountieshd():
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.msdi_countieshd"
+        fields = "name"
+        return pgToGeoJsonBBox(tablename, fields, bboxString)
+    except:
+        return "ERROR: Could not return valid counties.geojson"
+
 
 
 #return FWP Block Management Areas:
@@ -643,14 +672,23 @@ def pglicense():
 
 #return Public Lands as singlepart features:
 @app.route("/data/pgpublands")
-def pgpublands_sp():
-
+def pgpublands():
     try:
         bboxString = str( request.args.get('bbox') )
         tablename = "webdata.mnhp_publiclands"
         fields = "ownername"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 2000)
+    except:
+        return "ERROR: Could not return valid publiclands.geojson"
 
+#return Public Lands as singlepart features:
+@app.route("/data/pgpublandshd")
+def pgpublandshd():
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.mnhp_publiclandshd"
+        fields = "ownername"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 1000)
     except:
         return "ERROR: Could not return valid publiclands.geojson"
 
@@ -679,7 +717,7 @@ def pgtrailshd():
         whereClause =str( request.args.get('whereClause') )
         tablename = "webdata.msdi_trailshd"
         fields = "labelname, miles, season"
-        return pgToGeoJsonBBox(tablename, fields, bboxString, 200, whereClause)
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 500, whereClause)
 
     except:
         return "ERROR: Could not return valid trailshd.geojson"
@@ -698,6 +736,69 @@ def pgrecsites():
     except:
         return "ERROR: Could not return valid recsites.geojson"
 
+#return Boating/Fishing Rec Sites:
+@app.route("/data/pgfishing")
+def pgfishing():
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.mvw_recsites"
+        fields = "labelname, sitetype, source"
+        whereClause = "SiteClass IN ('Boating','Fishing')"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 200, whereClause)
+    except:
+        return "ERROR: Could not return valid fishing.geojson"
+
+
+#return Camping/Day Use Rec Sites:
+@app.route("/data/pgcamping")
+def pgcamping():
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.mvw_recsites"
+        fields = "labelname, sitetype, source"
+        whereClause = "SiteClass IN ('Camping','Day Use')"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 200, whereClause)
+    except:
+        return "ERROR: Could not return valid camping.geojson"
+
+
+#return Hiking Rec Sites:
+@app.route("/data/pghiking")
+def pghiking():
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.mvw_recsites"
+        fields = "labelname, sitetype, source"
+        whereClause = "SiteClass IN ('Hiking')"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 200, whereClause)
+    except:
+        return "ERROR: Could not return valid hiking.geojson"
+
+
+#return Other Rec Sites:
+@app.route("/data/pgother")
+def pgother():
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.mvw_recsites"
+        fields = "labelname, sitetype, source"
+        whereClause = "SiteClass IN ('Information', 'Land Management', 'Transportation')"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 200, whereClause)
+    except:
+        return "ERROR: Could not return valid otherpoi.geojson"
+
+
+#return Winter Sports Rec Sites:
+@app.route("/data/pgwinter")
+def pgwinter():
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.mvw_recsites"
+        fields = "labelname, sitetype, source"
+        whereClause = "SiteClass IN ('Winter Sports')"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 200, whereClause)
+    except:
+        return "ERROR: Could not return valid winter.geojson"
 
 #return Spring Turkey districts:
 @app.route("/data/pgturkeyspring")

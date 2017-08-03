@@ -1396,9 +1396,11 @@
 			attribution: "&copy; <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>"
 		});	
 
+/*
 		var mapboxSatellite = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicnlhbmtkYWx0b24iLCJhIjoiLUdza0ZmMCJ9.kEO21Vls8v1NpHYGkPktlA', {
 			attribution: "&copy; <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>"
 		});
+*/
 		
 		var mapboxHybrid = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicnlhbmtkYWx0b24iLCJhIjoiLUdza0ZmMCJ9.kEO21Vls8v1NpHYGkPktlA', {
 			attribution: "&copy; <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>"
@@ -1414,13 +1416,14 @@
 		mapboxOutdoors.addTo(map);
 		
 		//Add the base layers to a single managed variable
-		var baseLayers = {"Terrain 1": mapboxOutdoors, "Terrain 2": esriWorldTopo, "Streets": mapboxStreets, "Satellite": mapboxSatellite, "Hybrid Satellite": mapboxHybrid};
+		var baseLayers = {"Terrain 1": mapboxOutdoors, "Terrain 2": esriWorldTopo, "Streets": mapboxStreets, "Hybrid Satellite": mapboxHybrid};
 
 
 
 		
 		//---------- Add static (1-time load) basemap overlays --------------
-		
+
+
 		//Load State boundary from PostGIS
 		var pgState = new L.GeoJSON.AJAX("/data/pgstate", {
 			style: {
@@ -1436,21 +1439,66 @@
 		
 		//Add state boundary to the basemap
 		pgState.addTo(map);
+
+/*
+		//Load dynamic State layer
+		var pgState = new L.GeoJSON.AJAX(null, {
+			style: {
+				"fill": false,
+				"color": "#FF0000",
+				"weight": 12,
+				"opacity": 0.4
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u><b>State Name</b></u><br>' + feature.properties.name, {'autoPan': false});
+			}
+		});
 		
+		//load the state layer
+		map.on('layeradd', function() {
+			var stateLayer = {name: "pgState", object: pgState, source: "/data/pgstate"};
+			refreshLayer2(stateLayer);
+		});
 		
-		//Load Counties from PostGIS
-		var pgCounties = new L.GeoJSON.AJAX("/data/pgcounties", {
+		map.on('moveend overlayadd', function() {
+			if (map.getZoom() < 10) {
+				var stateLayer = {name: "pgState", object: pgState, source: "/data/pgstate", zoom: 6};
+				refreshLayer2(stateLayer);
+			}
+			else if (map.getZoom() >= 10){
+				var stateLayer = {name: "pgState", object: pgState, source: "/data/pgstatehd", zoom: 10};
+				refreshLayer2(stateLayer);
+			}
+		});
+
+		//Add state boundary to the basemap
+		pgState.addTo(map);
+*/
+
+		
+		//Load Counties layer
+		var pgCounties = new L.GeoJSON.AJAX(null, {
 			style: {
 				"color": "#808080",
 				"weight": 2,
 				"opacity": 0.95
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup(feature.properties.name + ' County');
-				//hoverPopup(layer, feature.properties.name + ' County');
+				layer.bindPopup(feature.properties.name + ' County', {'autoPan': false});
 			}
 		});
-
+		
+		//refresh the counties based on zoom level
+		map.on('moveend overlayadd', function() {
+			if (map.getZoom() < 10) {
+				var countiesLayer = {name: "pgCounties", object: pgCounties, source: "/data/pgcounties", zoom: 6};
+				refreshLayer2(countiesLayer);
+			}
+			else if (map.getZoom() >= 10){
+				var countiesLayer = {name: "pgCounties", object: pgCounties, source: "/data/pgcountieshd", zoom: 10};
+				refreshLayer2(countiesLayer);
+			}
+		});
 		
 		// ------------- Add dynamically loaded layers ----------------
 		
@@ -1542,7 +1590,7 @@
 		
 		//Information SiteClass
 		var infoIcon = L.icon({
-			iconUrl: '/static/icons/Information.svg',
+			iconUrl: '/static/icons/Interpretive exhibit.svg',
 			iconSize: [24,24]
 		});
 
@@ -1577,7 +1625,8 @@
 			iconSize: [24,24]
 		});
 		
-		//Create the initial layer
+/*
+		//Create the Recsites layer
 		var pgRecsites = new L.GeoJSON.AJAX(null, {
 			pointToLayer: function(feature, latlng) {
 				switch (feature.properties.sitetype) {
@@ -1612,18 +1661,6 @@
 				}
 			},
 			onEachFeature: function (feature, layer) {
-				//Create a popup on-click
-				//layer.bindPopup('<u>Recreation Sites</u><br>Name: ' + feature.properties.labelname + '<br>Type: ' + feature.properties.sitetype);
-				//Create a hover icon
-				/*
-				layer.bindPopup('<u>Recreation Sites</u><br>Name: ' + feature.properties.labelname + '<br>Type: ' + feature.properties.sitetype);
-				layer.on('mouseover', function (e) {
-					this.openPopup();
-				});
-				layer.on('mouseout', function (e) {
-					this.closePopup();
-				});
-				*/
 				hoverPopup(layer, '<u><b>Recreation Sites</b></u><br>Name: ' + feature.properties.labelname + '<br>Type: ' + feature.properties.sitetype + '<br>Data Source: ' + feature.properties.source);
 			}
 		});
@@ -1633,20 +1670,253 @@
 			var recsitesLayer = {name: "pgRecsites", object: pgRecsites, source: "/data/pgrecsites", zoom: 10};
 			refreshLayer2(recsitesLayer);
 		});
+*/
 
 
-		//Create the Summer layer
-		var pgSummerTrails = new L.GeoJSON.AJAX(null, {
-			style: function(feature) {
-				switch (feature.properties.season) {
-					case 'Summer':   return {color: "#8B4513", "weight": 3, "opacity": 0.65};
-					case 'Winter':   return {color: "#F633FF", "weight": 3, "opacity": 0.65};
+		//Create the Fishing layer
+		var pgFishing = new L.GeoJSON.AJAX(null, {
+			pointToLayer: function(feature, latlng) {
+				switch (feature.properties.sitetype) {
+					case 'Boat Camp': return L.marker(latlng, {icon: campIcon});
+					case 'Boating Site': return L.marker(latlng, {icon: boatIcon});
+
+					case 'Cabin': return L.marker(latlng, {icon: cabinIcon});
+					case 'Campground': return L.marker(latlng, {icon: campIcon});
+					case 'Campsite': return L.marker(latlng, {icon: campIcon});
+
+					case 'Day Use Area': return L.marker(latlng, {icon: picnicIcon});
+					case 'Park': return L.marker(latlng, {icon: parkIcon});
+					case 'Picnic Area': return L.marker(latlng, {icon: picnicIcon});
+					case 'Restroom': return L.marker(latlng, {icon: restroomIcon});
+					case 'Swimming Site': return L.marker(latlng, {icon: swimmingIcon});
+
+					case 'Fishing Site': return L.marker(latlng, {icon: fishIcon});
+					case 'Fish Stocking Site': return L.marker(latlng, {icon: fishHatcheryIcon});
+	
+					case 'Fire Lookout': return L.marker(latlng, {icon: lookoutIcon});
+					case 'Trailhead': return L.marker(latlng, {icon: hikeIcon});
+					case 'Waterfall': return L.marker(latlng, {icon: waterfallIcon});
+					
+					case 'Information Site': return L.marker(latlng, {icon: infoIcon});
+					case 'Interpretive Site': return L.marker(latlng, {icon: interpIcon});
+					case 'Observation Site': return L.marker(latlng, {icon: viewIcon});
+					
+					case 'Ski Area Nordic': return L.marker(latlng, {icon: nordicSkiingIcon});
+					case 'Snowpark': return L.marker(latlng, {icon: winterIcon});
+					
+					default: return L.marker(latlng, {icon: otherIcon});
 				}
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u><b>Summer Trails</b></u><br>Name: ' + feature.properties.labelname + '<br>Miles: ' + feature.properties.miles + '<br>Season: ' + feature.properties.season, {'autoPan': false});
+				hoverPopup(layer, '<u><b>Fishing &amp; Boating POI</b></u><br>Name: ' + feature.properties.labelname + '<br>Type: ' + feature.properties.sitetype + '<br>Data Source: ' + feature.properties.source);
+			}
+		});
+
+		//Refresh layer data on move
+		map.on('moveend overlayadd', function() {
+			var fishingLayer = {name: "pgFishing", object: pgFishing, source: "/data/pgfishing", zoom: 10};
+			refreshLayer2(fishingLayer);
+		});
+		
+
+		//Create the Fishing layer
+		var pgCamping = new L.GeoJSON.AJAX(null, {
+			pointToLayer: function(feature, latlng) {
+				switch (feature.properties.sitetype) {
+					case 'Boat Camp': return L.marker(latlng, {icon: campIcon});
+					case 'Boating Site': return L.marker(latlng, {icon: boatIcon});
+
+					case 'Cabin': return L.marker(latlng, {icon: cabinIcon});
+					case 'Campground': return L.marker(latlng, {icon: campIcon});
+					case 'Campsite': return L.marker(latlng, {icon: campIcon});
+
+					case 'Day Use Area': return L.marker(latlng, {icon: picnicIcon});
+					case 'Park': return L.marker(latlng, {icon: parkIcon});
+					case 'Picnic Area': return L.marker(latlng, {icon: picnicIcon});
+					case 'Restroom': return L.marker(latlng, {icon: restroomIcon});
+					case 'Swimming Site': return L.marker(latlng, {icon: swimmingIcon});
+
+					case 'Fishing Site': return L.marker(latlng, {icon: fishIcon});
+					case 'Fish Stocking Site': return L.marker(latlng, {icon: fishHatcheryIcon});
+	
+					case 'Fire Lookout': return L.marker(latlng, {icon: lookoutIcon});
+					case 'Trailhead': return L.marker(latlng, {icon: hikeIcon});
+					case 'Waterfall': return L.marker(latlng, {icon: waterfallIcon});
+					
+					case 'Information Site': return L.marker(latlng, {icon: infoIcon});
+					case 'Interpretive Site': return L.marker(latlng, {icon: interpIcon});
+					case 'Observation Site': return L.marker(latlng, {icon: viewIcon});
+					
+					case 'Ski Area Nordic': return L.marker(latlng, {icon: nordicSkiingIcon});
+					case 'Snowpark': return L.marker(latlng, {icon: winterIcon});
+					
+					default: return L.marker(latlng, {icon: otherIcon});
+				}
+			},
+			onEachFeature: function (feature, layer) {
+				hoverPopup(layer, '<u><b>Camping &amp; Day Use POI</b></u><br>Name: ' + feature.properties.labelname + '<br>Type: ' + feature.properties.sitetype + '<br>Data Source: ' + feature.properties.source);
+			}
+		});
+
+		//Refresh layer data on move
+		map.on('moveend overlayadd', function() {
+			var campingLayer = {name: "pgCamping", object: pgCamping, source: "/data/pgcamping", zoom: 10};
+			refreshLayer2(campingLayer);
+		});
+
+
+		//Create the Fishing layer
+		var pgHiking = new L.GeoJSON.AJAX(null, {
+			pointToLayer: function(feature, latlng) {
+				switch (feature.properties.sitetype) {
+					case 'Boat Camp': return L.marker(latlng, {icon: campIcon});
+					case 'Boating Site': return L.marker(latlng, {icon: boatIcon});
+
+					case 'Cabin': return L.marker(latlng, {icon: cabinIcon});
+					case 'Campground': return L.marker(latlng, {icon: campIcon});
+					case 'Campsite': return L.marker(latlng, {icon: campIcon});
+
+					case 'Day Use Area': return L.marker(latlng, {icon: picnicIcon});
+					case 'Park': return L.marker(latlng, {icon: parkIcon});
+					case 'Picnic Area': return L.marker(latlng, {icon: picnicIcon});
+					case 'Restroom': return L.marker(latlng, {icon: restroomIcon});
+					case 'Swimming Site': return L.marker(latlng, {icon: swimmingIcon});
+
+					case 'Fishing Site': return L.marker(latlng, {icon: fishIcon});
+					case 'Fish Stocking Site': return L.marker(latlng, {icon: fishHatcheryIcon});
+	
+					case 'Fire Lookout': return L.marker(latlng, {icon: lookoutIcon});
+					case 'Trailhead': return L.marker(latlng, {icon: hikeIcon});
+					case 'Waterfall': return L.marker(latlng, {icon: waterfallIcon});
+					
+					case 'Information Site': return L.marker(latlng, {icon: infoIcon});
+					case 'Interpretive Site': return L.marker(latlng, {icon: interpIcon});
+					case 'Observation Site': return L.marker(latlng, {icon: viewIcon});
+					
+					case 'Ski Area Nordic': return L.marker(latlng, {icon: nordicSkiingIcon});
+					case 'Snowpark': return L.marker(latlng, {icon: winterIcon});
+					
+					default: return L.marker(latlng, {icon: otherIcon});
+				}
+			},
+			onEachFeature: function (feature, layer) {
+				hoverPopup(layer, '<u><b>Hiking POI</b></u><br>Name: ' + feature.properties.labelname + '<br>Type: ' + feature.properties.sitetype + '<br>Data Source: ' + feature.properties.source);
+			}
+		});
+
+		//Refresh layer data on move
+		map.on('moveend overlayadd', function() {
+			var hikingLayer = {name: "pgHiking", object: pgHiking, source: "/data/pghiking", zoom: 10};
+			refreshLayer2(hikingLayer);
+		});
+
+
+		//Create the Fishing layer
+		var pgOther = new L.GeoJSON.AJAX(null, {
+			pointToLayer: function(feature, latlng) {
+				switch (feature.properties.sitetype) {
+					case 'Boat Camp': return L.marker(latlng, {icon: campIcon});
+					case 'Boating Site': return L.marker(latlng, {icon: boatIcon});
+
+					case 'Cabin': return L.marker(latlng, {icon: cabinIcon});
+					case 'Campground': return L.marker(latlng, {icon: campIcon});
+					case 'Campsite': return L.marker(latlng, {icon: campIcon});
+
+					case 'Day Use Area': return L.marker(latlng, {icon: picnicIcon});
+					case 'Park': return L.marker(latlng, {icon: parkIcon});
+					case 'Picnic Area': return L.marker(latlng, {icon: picnicIcon});
+					case 'Restroom': return L.marker(latlng, {icon: restroomIcon});
+					case 'Swimming Site': return L.marker(latlng, {icon: swimmingIcon});
+
+					case 'Fishing Site': return L.marker(latlng, {icon: fishIcon});
+					case 'Fish Stocking Site': return L.marker(latlng, {icon: fishHatcheryIcon});
+	
+					case 'Fire Lookout': return L.marker(latlng, {icon: lookoutIcon});
+					case 'Trailhead': return L.marker(latlng, {icon: hikeIcon});
+					case 'Waterfall': return L.marker(latlng, {icon: waterfallIcon});
+					
+					case 'Information Site': return L.marker(latlng, {icon: infoIcon});
+					case 'Interpretive Site': return L.marker(latlng, {icon: interpIcon});
+					case 'Observation Site': return L.marker(latlng, {icon: viewIcon});
+					
+					case 'Ski Area Nordic': return L.marker(latlng, {icon: nordicSkiingIcon});
+					case 'Snowpark': return L.marker(latlng, {icon: winterIcon});
+					
+					default: return L.marker(latlng, {icon: otherIcon});
+				}
+			},
+			onEachFeature: function (feature, layer) {
+				hoverPopup(layer, '<u><b>Other POI</b></u><br>Name: ' + feature.properties.labelname + '<br>Type: ' + feature.properties.sitetype + '<br>Data Source: ' + feature.properties.source);
+			}
+		});
+
+		//Refresh layer data on move
+		map.on('moveend overlayadd', function() {
+			var otherLayer = {name: "pgOther", object: pgOther, source: "/data/pgother", zoom: 10};
+			refreshLayer2(otherLayer);
+		});
+
+/*
+		//Create the Fishing layer
+		var pgWinter = new L.GeoJSON.AJAX(null, {
+			pointToLayer: function(feature, latlng) {
+				switch (feature.properties.sitetype) {
+					case 'Boat Camp': return L.marker(latlng, {icon: campIcon});
+					case 'Boating Site': return L.marker(latlng, {icon: boatIcon});
+
+					case 'Cabin': return L.marker(latlng, {icon: cabinIcon});
+					case 'Campground': return L.marker(latlng, {icon: campIcon});
+					case 'Campsite': return L.marker(latlng, {icon: campIcon});
+
+					case 'Day Use Area': return L.marker(latlng, {icon: picnicIcon});
+					case 'Park': return L.marker(latlng, {icon: parkIcon});
+					case 'Picnic Area': return L.marker(latlng, {icon: picnicIcon});
+					case 'Restroom': return L.marker(latlng, {icon: restroomIcon});
+					case 'Swimming Site': return L.marker(latlng, {icon: swimmingIcon});
+
+					case 'Fishing Site': return L.marker(latlng, {icon: fishIcon});
+					case 'Fish Stocking Site': return L.marker(latlng, {icon: fishHatcheryIcon});
+	
+					case 'Fire Lookout': return L.marker(latlng, {icon: lookoutIcon});
+					case 'Trailhead': return L.marker(latlng, {icon: hikeIcon});
+					case 'Waterfall': return L.marker(latlng, {icon: waterfallIcon});
+					
+					case 'Information Site': return L.marker(latlng, {icon: infoIcon});
+					case 'Interpretive Site': return L.marker(latlng, {icon: interpIcon});
+					case 'Observation Site': return L.marker(latlng, {icon: viewIcon});
+					
+					case 'Ski Area Nordic': return L.marker(latlng, {icon: nordicSkiingIcon});
+					case 'Snowpark': return L.marker(latlng, {icon: winterIcon});
+					
+					default: return L.marker(latlng, {icon: otherIcon});
+				}
+			},
+			onEachFeature: function (feature, layer) {
+				hoverPopup(layer, '<u><b>Winter Sports POI</b></u><br>Name: ' + feature.properties.labelname + '<br>Type: ' + feature.properties.sitetype + '<br>Data Source: ' + feature.properties.source);
+			}
+		});
+
+		//Refresh layer data on move
+		map.on('moveend overlayadd', function() {
+			var winterLayer = {name: "pgWinter", object: pgWinter, source: "/data/pgwinter", zoom: 10};
+			refreshLayer2(winterLayer);
+		});
+*/
+
+		
+
+		//Create the Summer trails layer
+		var pgSummerTrails = new L.GeoJSON.AJAX(null, {
+			style: function(feature) {
+				switch (feature.properties.season) {
+					case 'Summer':   return {color: "#8B4513", weight: 2.5, opacity: 0.65, dashArray: '8,8'};
+					case 'Winter':   return {color: "#F633FF", weight: 2.5, opacity: 0.65, dashArray: '8,8',};
+				}
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u><b>Summer Recreation Trails</b></u><br>Name: ' + feature.properties.labelname + '<br>Miles: ' + feature.properties.miles, {'autoPan': false});
 				
-				//hoverPopup(layer, '<u><b>Summer Trails</b></u><br>Name: ' + feature.properties.labelname + '<br>Miles: ' + feature.properties.miles + '<br>Season: ' + feature.properties.season,);
+				//hoverPopup(layer, '<u><b>Summer Trails</b></u><br>Name: ' + feature.properties.labelname + '<br>Miles: ' + feature.properties.miles);
 			}
 		});
 
@@ -1662,18 +1932,19 @@
 			}
 		});
 
-		
+
+
 /*
 		//Create the winter trails layer
 		var pgWinterTrails = new L.GeoJSON.AJAX(null, {
 			style: function(feature) {
 				switch (feature.properties.season) {
-					case 'Summer':   return {color: "#8B4513", "weight": 3, "opacity": 0.65};
-					case 'Winter':   return {color: "#F633FF", "weight": 3, "opacity": 0.65};
+					case 'Summer':   return {color: "#8B4513", weight: 2.5, opacity: 0.65, dashArray: '10,8'};
+					case 'Winter':   return {color: "#F633FF", weight: 2.5, opacity: 0.65, dashArray: '10,8'};
 				}
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>Winter Trails</u><br>Name: ' + feature.properties.labelname + '<br>Miles: ' + feature.properties.miles + '<br>Season: ' + feature.properties.season, {'autoPan': false});
+				layer.bindPopup('<u>Winter Trails</u><br>Name: ' + feature.properties.labelname + '<br>Miles: ' + feature.properties.miles, {'autoPan': false});
 			}
 		});
 
@@ -1730,12 +2001,19 @@
 			}
 		});
 		
-		//Refresh layer data on move
-		map.on('moveend overlayadd', function() {
-			var publandsLayer = {name: "pgPubLands", object: pgPubLands, source: "/data/pgpublands", zoom: 10};
-			refreshLayer2(publandsLayer);
-		});		
 
+		//refresh the public lands based on zoom level
+		map.on('moveend overlayadd', function() {
+			if (map.getZoom() < 12) {
+				var publandsLayer = {name: "pgPubLands", object: pgPubLands, source: "/data/pgpublands", zoom: 9};
+				refreshLayer2(publandsLayer);
+			}
+			else if (map.getZoom() >= 12){
+				var publandsLayer = {name: "pgPubLands", object: pgPubLands, source: "/data/pgpublandshd", zoom: 12};
+				refreshLayer2(publandsLayer);
+			}
+		});
+		
 		
 		//Set layer ordering
 		pgPubLands.setZIndex(1);
@@ -1796,7 +2074,7 @@
 			refreshLayer2(wmaLayer);
 		});
 		
-		
+/*
 		//Add FWP Upland Game Bird Enhancement Program
 		var fwpUGBEP = new L.GeoJSON.AJAX(null, {
 			style: {
@@ -1837,9 +2115,9 @@
 			var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbma", zoom: 9};
 			//refreshLayer2(bmaLayer);
 		});
-		
+*/
 
-		
+/*
 		//Create the Turkey Habitat layer
 		var fwpTurkeyHabitat = new L.GeoJSON.AJAX(null, {
 			style: {
@@ -1879,7 +2157,7 @@
 			var turkeySpringLayer = {name: "fwpTurkeySpring", object: fwpTurkeySpring, source: "/data/pgturkeyspring", zoom: 8};
 			refreshLayer2(turkeySpringLayer);
 		});
-
+*/
 		
 /*
 		var fwpBlackBearDistricts = new L.GeoJSON.AJAX("http://data.mtfwp.opendata.arcgis.com/datasets/36c34df6f02249169bad33f2e4e54b56_0.geojson", {
@@ -1933,8 +2211,8 @@
 
 
 		fwpLicenseProviders.setZIndex(2);
-		fwpBMA.setZIndex(3);
-		fwpUGBEP.setZIndex(4);
+		//fwpBMA.setZIndex(3);
+		//fwpUGBEP.setZIndex(4);
 
 
 /*
@@ -1968,28 +2246,29 @@
 */
 
 		var groupedOverlays = {
-			"Recreation Activities": {
-				"<span id='pgRecsites' name='Recreation Sites'><i>Recreation Sites (zoom in)</i></span>": pgRecsites,
-				"<span id='pgSummerTrails' name='Summer Trails'><i>Summer Trails (zoom in)</i></span>": pgSummerTrails
+			"Recreation Points of Interest": {
+				//"<span id='pgRecsites' name='Recreation Sites'><i>Recreation Sites (zoom in)</i></span>": pgRecsites,
+				"<span id='pgCamping' name='Camping &amp; Day Use POI'><i>Camping &amp; Day Use POI (zoom in)</i></span>": pgCamping,
+				"<span id='pgFishing' name='Fishing &amp; Boating POI'><i>Fishing &amp; Boating POI (zoom in)</i></span>": pgFishing,
+				"<span id='pgOther' name='Other POI'><i>Other POI (zoom in)</i></span>": pgOther
+				
 			},
-			"Public Access": {
-				"<span id='pgPubLands' name='Public Lands'><i>Public Lands (zoom in)</i></span>": pgPubLands
+			"Hiking": {
+				"<span id='pgHiking' name='Hiking POI'><i>Hiking POI (zoom in)</i></span>": pgHiking,
+				"<span id='pgSummerTrails' name='Summer Recreation Trails'><i>Summer Recreation Trails (zoom in)</i></span>": pgSummerTrails
 			},
 /*
-			"Winter Activities": {
-				"<span id='pgWinterTrails' name='Winter Trails'><i>Winter Trails (zoom in)</i></span>": pgWinterTrails,
-				"<span id='openSnowMap' name='Downhill Ski Trails'>Ski Trails</span>": openSnowMap
+			"Winter Sports": {
+				"<span id='pgWinter' name='Winter POI'><i>Winter Sports POI (zoom in)</i></span>": pgWinter,
+				"<span id='pgWinterTrails' name='Winter Recreation Trails'><i>Winter Trails (zoom in)</i></span>": pgWinterTrails,
+				"<span id='openSnowMap' name='Winter Ski Trails'>Ski Trails</span>": openSnowMap
 			},
 */
 			"MT Fish, Wildlife, and Parks": {
-				"<span id='fwpLicenseProviders' name='FWP License Providers'><i>FWP License Providers (zoom in)</i></span>": fwpLicenseProviders,			
+				"<span id='fwpLicenseProviders' name='FWP License Providers'><i>FWP License Providers (zoom in)</i></span>": fwpLicenseProviders,
+				"<span id='fwpWMA' name='FWP Wildlife Management Areas'><i>FWP Wildlife Management Areas (zoom in)</i></span>": fwpWMA,
 				//"<span id='fwpBMA' name='FWP Block Management Areas'><i>2016 FWP Block Management Areas (zoom in)</i></span>": fwpBMA,
-				//"<span id='fwpUGBEP' name='FWP Upland Game Bird Enhancement'><i>2016 FWP Upland Game Bird Enhancement (zoom in)</i></span>": fwpUGBEP,
-				"<span id='fwpWMA' name='FWP Wildlife Management Areas'><i>FWP Wildlife Management Areas (zoom in)</i></span>": fwpWMA			
-			},
-			"MT FWP Hunting Seasons":{
-				"<span id='fwpTurkeyHabitat' name='FWP Turkey Habitat'><i>FWP Turkey Habitat (zoom in)</i></span>": fwpTurkeyHabitat,
-				"<span id='fwpTurkeySpring' name='FWP Spring Turkey Districts'><i>FWP Spring Turkey Districts (zoom in)</i></span>": fwpTurkeySpring
+				//"<span id='fwpUGBEP' name='FWP Upland Game Bird Enhancement'><i>2016 FWP Upland Game Bird Enhancement (zoom in)</i></span>": fwpUGBEP
 			},
 			//"MT FWP Hunting Layers: {
 				//"FWP Antelope Districts": fwpAntelopeDistricts,
@@ -1999,9 +2278,12 @@
 				//"FWP Furbearer Trapping Districts": fwpFurbearerTrappingDistricts,
 				//"FWP Moose Districts": fwpMooseDistricts,
 				//"FWP Mountain Goat Districts": fwpMountainGoatDistricts,
+				//"<span id='fwpTurkeyHabitat' name='FWP Turkey Habitat'><i>FWP Turkey Habitat (zoom in)</i></span>": fwpTurkeyHabitat,
+				//"<span id='fwpTurkeySpring' name='FWP Spring Turkey Districts'><i>FWP Spring Turkey Districts (zoom in)</i></span>": fwpTurkeySpring
 				//"FWP Upland Bird Hunting": fwpUplandBirdRegions
 			//},
-			"Other": {
+			"Other Areas": {
+				"<span id='pgPubLands' name='Public Lands'><i>Public Lands (zoom in)</i></span>": pgPubLands,
 				"<span id='pgCounties' name='Counties'>Counties</span>": pgCounties
 			}
 		};
