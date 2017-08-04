@@ -640,14 +640,12 @@
 						<td valign="center">
 							<select id="maptype" name="maptype" type="text" class="required" title="Map Theme is a required field" >
 								<option value="none"></option>
+								<option value="fishing">Fishing/Boating/Rafting</option>
+								<option value="trails">Hiking/Camping</option>
 								<option value="hunting">Big Game Hunting</option>
 								<option value="birds">Bird Hunting</option>
-								<option value="fishing">Fishing</option>
-								<option value="trails">Hiking/Mountain Biking</option>
-								<option value="boating">Rafting/Boating</option>
 								<option value="winter">Skiing/Snowmobiling</option>
-								<option value="urban">Urban</option>
-								<option value="other">Other (include comments below)</option>
+								<option value="other">Other (provide details below)</option>
 							</select>
 						</td>
 					</tr>
@@ -952,8 +950,8 @@
 					<p class="lorem">Bummer!  We don't have any maps ready for you to download right now, but we'll work on making some available soon.</p>
 				{%endif%}
 
-				<p class="sidebar-text"><br><b>Want to be the first to know when we publish new maps?</b></p>
-				<p class="sidebar-text">Please follow us on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> or <a href="https://twitter.com/offthegridmaps" target="_blank">Twitter</a>.</p>
+				<p class="sidebar-text"><br><b>Follow us on social media</b></p>
+				<p class="sidebar-text">We're on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> or <a href="https://twitter.com/offthegridmaps" target="_blank">Twitter</a>.</p>
 
 			</div>
 
@@ -991,8 +989,8 @@
 					<p class="lorem">Bummer!  We don't have any maps available for download right now, but we'll work on making some available soon.</p>
 				{%endif%}
 
-				<p class="sidebar-text"><br><b>Want to be the first to know when we publish new maps?</b></p>
-				<p class="sidebar-text">Please follow us on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> or <a href="https://twitter.com/offthegridmaps" target="_blank">Twitter</a>.</p>
+				<p class="sidebar-text"><br><b>Follow us on social media</b></p>
+				<p class="sidebar-text">We're on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> or <a href="https://twitter.com/offthegridmaps" target="_blank">Twitter</a>.</p>
 				
 			</div>
 			
@@ -1909,8 +1907,8 @@
 		var pgSummerTrails = new L.GeoJSON.AJAX(null, {
 			style: function(feature) {
 				switch (feature.properties.season) {
-					case 'Summer':   return {color: "#8B4513", weight: 2.5, opacity: 0.65, dashArray: '8,8'};
-					case 'Winter':   return {color: "#F633FF", weight: 2.5, opacity: 0.65, dashArray: '8,8',};
+					case 'Summer':   return {color: "#8B4513", weight: 2.5, opacity: 0.65, dashArray: '6,5'};
+					case 'Winter':   return {color: "#F633FF", weight: 2.5, opacity: 0.65, dashArray: '6,5',};
 				}
 			},
 			onEachFeature: function (feature, layer) {
@@ -1923,7 +1921,7 @@
 		//refresh the trails based on zoom level
 		map.on('moveend overlayadd', function() {
 			if (map.getZoom() < 13) {
-				var summertrailsLayer = {name: "pgSummerTrails", object: pgSummerTrails, source: "/data/pgtrails", zoom: 10, whereClause: "season='Summer'"};
+				var summertrailsLayer = {name: "pgSummerTrails", object: pgSummerTrails, source: "/data/pgtrails", zoom: 11, whereClause: "season='Summer'"};
 				refreshLayer2(summertrailsLayer);
 			}
 			else if (map.getZoom() >= 13){
@@ -2004,12 +2002,12 @@
 
 		//refresh the public lands based on zoom level
 		map.on('moveend overlayadd', function() {
-			if (map.getZoom() < 12) {
+			if (map.getZoom() < 11) {
 				var publandsLayer = {name: "pgPubLands", object: pgPubLands, source: "/data/pgpublands", zoom: 9};
 				refreshLayer2(publandsLayer);
 			}
-			else if (map.getZoom() >= 12){
-				var publandsLayer = {name: "pgPubLands", object: pgPubLands, source: "/data/pgpublandshd", zoom: 12};
+			else if (map.getZoom() >= 11){
+				var publandsLayer = {name: "pgPubLands", object: pgPubLands, source: "/data/pgpublandshd", zoom: 11};
 				refreshLayer2(publandsLayer);
 			}
 		});

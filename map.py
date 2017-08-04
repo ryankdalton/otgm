@@ -457,6 +457,7 @@ def glaciercyclery():
 
 
 @app.route('/onthesnow', methods=['GET', 'POST'])
+@app.route('/skiing', methods=['GET', 'POST'])
 def onthesnow():
 
     try:
@@ -475,6 +476,7 @@ def onthesnow():
 
 
 @app.route('/onthetrail', methods=['GET', 'POST'])
+@app.route('/hiking', methods=['GET', 'POST'])
 def onthetrail():
 
     try:
@@ -492,8 +494,8 @@ def onthetrail():
         return render_template('404.html')
 
 
-
 @app.route('/onthewater', methods=['GET', 'POST'])
+@app.route('/boating', methods=['GET', 'POST'])
 def onthewater():
 
     try:
@@ -513,6 +515,7 @@ def onthewater():
 
 
 @app.route('/onthehook', methods=['GET', 'POST'])
+@app.route('/fishing', methods=['GET', 'POST'])
 def onthehook():
 
     try:
@@ -531,6 +534,7 @@ def onthehook():
 
 
 @app.route('/onthehunt', methods=['GET', 'POST'])
+@app.route('/hunting', methods=['GET', 'POST'])
 def onthehunt():
 
     try:
@@ -549,6 +553,7 @@ def onthehunt():
 
 
 @app.route('/onthebike', methods=['GET', 'POST'])
+@app.route('/biking', methods=['GET', 'POST'])
 def onthebike():
 
     try:
@@ -564,6 +569,65 @@ def onthebike():
 
     except:
         return render_template('404.html')
+
+
+@app.route('/status', methods=['GET'])
+def status():
+    try:
+        statusMessage = '<strong>Status = 200 OK</strong>'
+        print statusMessage
+
+        pendingCount = 0
+        tablename = "webapp.vw_pendingorders"
+        pendingOrders = db.query("SELECT emailaddress, ordercount FROM {0};".format(tablename)).getresult()
+
+        if len(pendingOrders) > 0:
+            pendingMessage = ""
+            for orderDetails in pendingOrders:
+                pendingMessage += "<i>{0} ({1})</i><br>".format(orderDetails[0],orderDetails[1])
+                pendingCount += orderDetails[1]
+            ##print "Pending orders = {0}".format(pendingCount)
+            pendingMessage = "<strong>Pending orders = {0}</strong><br>{1}".format(pendingCount, pendingMessage)
+            return pendingMessage
+        else:
+            pendingMessage = "<strong>Pending orders = {0}</strong>".format(pendingCount)
+            ##print "Pending orders = {0}".format(pendingCount)
+
+        return statusMessage
+
+    except:
+        return render_template('404.html')
+
+
+
+#return record count of pending orders:
+@app.route("/pending", methods=['GET'])
+def pending():
+    try:
+        pendingCount = 0
+        tablename = "webapp.vw_pendingorders"
+        pendingOrders = db.query("SELECT emailaddress, ordercount FROM {0};".format(tablename)).getresult()
+
+        if len(pendingOrders) > 0:
+            pendingMessage = ""
+            for orderDetails in pendingOrders:
+                pendingMessage += "<i>{0} ({1})</i><br>".format(orderDetails[0],orderDetails[1])
+                pendingCount += orderDetails[1]
+            ##print "Pending orders = {0}".format(pendingCount)
+            pendingMessage = "<strong>Pending orders = {0}</strong><br>{1}".format(pendingCount, pendingMessage)
+            return pendingMessage
+        else:
+            pendingMessage = "<strong>Pending orders = {0}</strong>".format(pendingCount)
+            ##print "Pending orders = {0}".format(pendingCount)
+            return pendingMessage
+
+    except:
+        return render_template('404.html')
+
+
+
+
+
 
 # ---------------- GeoJSON data layers --------------
 
@@ -911,84 +975,7 @@ def pageNotFound(error):
         return "ERROR: Could not find correct page"
 
 
-@app.route('/status', methods=['GET'])
-def status():
-    try:
-        statusMessage = '<strong>Status = 200 OK</strong>'
-        print statusMessage
 
-        pendingCount = 0
-        tablename = "webapp.vw_pendingorders"
-        pendingOrders = db.query("SELECT emailaddress, ordercount FROM {0};".format(tablename)).getresult()
-
-        if len(pendingOrders) > 0:
-            pendingMessage = ""
-            for orderDetails in pendingOrders:
-                pendingMessage += "<i>{0} ({1})</i><br>".format(orderDetails[0],orderDetails[1])
-                pendingCount += orderDetails[1]
-            ##print "Pending orders = {0}".format(pendingCount)
-            pendingMessage = "<strong>Pending orders = {0}</strong><br>{1}".format(pendingCount, pendingMessage)
-            return pendingMessage
-        else:
-            pendingMessage = "<strong>Pending orders = {0}</strong>".format(pendingCount)
-            ##print "Pending orders = {0}".format(pendingCount)
-
-        return statusMessage
-
-    except:
-        return render_template('404.html')
-
-
-
-#return record count of pending orders:
-@app.route("/pending", methods=['GET'])
-def pending():
-    try:
-        pendingCount = 0
-        tablename = "webapp.vw_pendingorders"
-        pendingOrders = db.query("SELECT emailaddress, ordercount FROM {0};".format(tablename)).getresult()
-
-        if len(pendingOrders) > 0:
-            pendingMessage = ""
-            for orderDetails in pendingOrders:
-                pendingMessage += "<i>{0} ({1})</i><br>".format(orderDetails[0],orderDetails[1])
-                pendingCount += orderDetails[1]
-            ##print "Pending orders = {0}".format(pendingCount)
-            pendingMessage = "<strong>Pending orders = {0}</strong><br>{1}".format(pendingCount, pendingMessage)
-            return pendingMessage
-        else:
-            pendingMessage = "<strong>Pending orders = {0}</strong>".format(pendingCount)
-            ##print "Pending orders = {0}".format(pendingCount)
-            return pendingMessage
-
-    except:
-        return render_template('404.html')
-
-
-
-@app.route ('/fishing')
-def fishing():
-    return redirect('/onthehook', code=302)
-
-@app.route ('/boating')
-def boating():
-    return redirect('/onthewater', code=302)
-
-@app.route ('/hunting')
-def hunting():
-    return redirect('/onthehunt', code=302)
-
-@app.route ('/hiking')
-def hiking():
-    return redirect('/onthetrail', code=302)
-
-@app.route ('/biking')
-def biking():
-    return redirect('/onthebike', code=302)
-
-@app.route ('/skiing')
-def skiing():
-    return redirect('/onthesnow', code=302)
 
 
 ##@app.route ('/feedback')
