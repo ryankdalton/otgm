@@ -143,7 +143,6 @@
 	<!-- load the leaflet-control-geocoder library  for searching for locations -->
 	<link rel="stylesheet" href="static/dist/leaflet.Control.Geocoder/Control.Geocoder.css" />
 	<script src="static/dist/leaflet.Control.Geocoder/Control.Geocoder.js"></script>
-	
 
 	<!-- load the leaflet-locatecontrol library for adding user location button.  
 	Must have a secure (https) address to use this control.  Once HTTPS is enabled, use the MapBox API -->
@@ -168,13 +167,15 @@
 	-->
 	<script type="text/javascript" src="https://cdn-geoweb.s3.amazonaws.com/terraformer/1.0.6/terraformer.min.js"></script>
 	<script type="text/javascript" src="https://cdn-geoweb.s3.amazonaws.com/terraformer-wkt-parser/1.1.1/terraformer-wkt-parser.min.js"></script>
-	
-	<!-- load the leaflet-fullHash library -->
-	<script type="text/javascript" src="static/dist/leaflet-fullHash/leaflet-fullHash.js"></script>
 
-	<!-- load the leaflet-fullHash library
+	<!-- load the leaflet-hash (basic) library-->
 	<script type="text/javascript" src="static/dist/leaflet-hash/leaflet-hash.js"></script>
-	 -->
+	 
+	 
+	<!-- load the leaflet-fullHash library 
+	<script type="text/javascript" src="static/dist/leaflet-fullHash/leaflet-fullHash.js"></script>
+	-->
+
 
 	<!-- load the font-awesome library for cool icons -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
@@ -936,8 +937,7 @@
 					<ul>
 						{%for f in customerMaps%}
 							<li class="sidebar-text">
-								<a href={{f.url}} target="_blank"> <i>{{f.mapname}}</i></a> 
-								<!-- <a href={{f.url}}>[Preview]</a> -->
+								<a href={{f.url}} target="_blank"> <i>{{f.mapname}}</i></a>
 							</li>
 						{%endfor%}
 						
@@ -1313,7 +1313,7 @@
 				isClicked = false;
 			});
 		}
-
+		
 		
 		//Add a scale bar to the map
 		var scale = L.control.scale({
@@ -1437,7 +1437,7 @@
 		
 		//Add state boundary to the basemap
 		pgState.addTo(map);
-
+		
 /*
 		//Load dynamic State layer
 		var pgState = new L.GeoJSON.AJAX(null, {
@@ -1497,6 +1497,7 @@
 				refreshLayer2(countiesLayer);
 			}
 		});
+
 		
 		// ------------- Add dynamically loaded layers ----------------
 		
@@ -1917,6 +1918,7 @@
 				//hoverPopup(layer, '<u><b>Summer Trails</b></u><br>Name: ' + feature.properties.labelname + '<br>Miles: ' + feature.properties.miles);
 			}
 		});
+		
 
 		//refresh the trails based on zoom level
 		map.on('moveend overlayadd', function() {
@@ -1929,6 +1931,7 @@
 				refreshLayer2(summertrailsLayer);
 			}
 		});
+		
 
 
 
@@ -2002,19 +2005,20 @@
 
 		//refresh the public lands based on zoom level
 		map.on('moveend overlayadd', function() {
-			if (map.getZoom() < 11) {
+			if ( (L.Browser.mobile) && (map.getZoom() < 12) ) {
 				var publandsLayer = {name: "pgPubLands", object: pgPubLands, source: "/data/pgpublands", zoom: 9};
 				refreshLayer2(publandsLayer);
 			}
-			else if (map.getZoom() >= 11){
+			else if ( (!(L.Browser.mobile)) && (map.getZoom() < 12) ) {
+				var publandsLayer = {name: "pgPubLands", object: pgPubLands, source: "/data/pgpublands", zoom: 10};
+				refreshLayer2(publandsLayer);
+			}
+			else if (map.getZoom() >= 12) {
 				var publandsLayer = {name: "pgPubLands", object: pgPubLands, source: "/data/pgpublandshd", zoom: 11};
 				refreshLayer2(publandsLayer);
 			}
 		});
 		
-		
-		//Set layer ordering
-		pgPubLands.setZIndex(1);
 
 /*
 		var baseOverlays = {
@@ -2208,10 +2212,6 @@
 */
 
 
-		fwpLicenseProviders.setZIndex(2);
-		//fwpBMA.setZIndex(3);
-		//fwpUGBEP.setZIndex(4);
-
 
 /*
 		var baseOverlays = {
@@ -2242,6 +2242,22 @@
 		//Add the selected baselayers and vector layers to the control and onto the map
 		var baseLayersControl = L.control.layers(baseLayers, baseOverlays, {position: 'topleft'}).addTo(map);
 */
+
+		//Set layer ordering for Polygons -- 0-100
+		pgState.setZIndex(0);
+		pgCounties.setZIndex(1);
+		pgPubLands.setZIndex(2);
+		//fwpBMA.setZIndex(3);
+		//fwpUGBEP.setZIndex(4);
+		
+		//Set layer ordering for Lines -- 100-199
+		//pgWinterTrails.setZIndex(100);
+		pgSummerTrails.setZIndex(101);
+		
+		//Set layer ordering for Points -- 200-299
+		fwpLicenseProviders.setZIndex(200);
+
+		
 
 		var groupedOverlays = {
 			"Recreation Points of Interest": {
@@ -2288,6 +2304,17 @@
 
 		var baseLayersControl = L.control.groupedLayers(baseLayers, groupedOverlays, {position: 'topleft'}).addTo(map);
 		
+		//Update the Grouped Layer control to allow scrolling
+		//	https://github.com/Leaflet/Leaflet/issues/2882
+		//map.addControl(baseLayersControl);  
+		if (!L.Browser.touch) {
+		   L.DomEvent
+			.disableClickPropagation(baseLayersControl._container)
+			.disableScrollPropagation(baseLayersControl._container);
+		} else {
+			L.DomEvent.disableClickPropagation(baseLayersControl._container);
+		}
+		
 		
 		
 		
@@ -2300,13 +2327,10 @@
 		}
 
 		
-		// Assuming your map instance is in a variable called map
-		//var hash = new L.Hash(map);
+		// Use leaflet-hash to add zoom + location to URL
+		var hash = new L.Hash(map);
 
-		// Assuming your map instance is in a variable called map
-		//var allMapLayers = {'layerName1': layerObject1, 
-							//'layerName2': layerObject2};
-		//var hash = new L.Hash(map, allMapLayers);
+		// Leaflet-FullHash-- Consider adding functionality for layers + zoom
 		
 		
 		// Initialise the FeatureGroup to store editable draw layers
