@@ -925,11 +925,15 @@
 				
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
-				<p class="sidebar-text">OffTheGridMaps.com is proud to provide high quality recreation maps for Montana.  These maps are optimized for print on 11x17 paper, and are <b>GPS-enabled</b> for your smartphone when loaded into the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.<p>
+				<p class="sidebar-text">OffTheGridMaps.com is proud to provide you with high quality recreation maps, anywhere within the state of Montana.</p>
+				<p class="sidebar-text">You can print your maps (best on 11x17 paper), or see your location on the map by using your <b>GPS-enabled</b> smartphone and the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>, even without cell coverage!</p>
 				
 				<p class="sidebar-text"><b>Don't see the map you want?</b></p>
-				<p class="sidebar-text">Follow our simple tutorial to  <a href="javascript:void(0);" onclick="sidebar.open('help');">design your own map today</a>!</p>
+				<ul>
+					<li class="sidebar-text">Follow our simple tutorial to  <a href="javascript:void(0);" onclick="sidebar.open('help');">design a new map right now</a>!</li>
+				</ul>
 
+				<p class="sidebar-text"><b>Your Available Maps</b></p>
 				{%if customerMaps%}
 
 					<p class="sidebar-text">{% if customer %}<i>The following map(s) are licensed for personal use to: {{ customer.name }}</i>{% endif %}</p>
@@ -947,11 +951,13 @@
 					
 					
 				{%else%}
-					<p class="lorem">Bummer!  We don't have any maps ready for you to download right now, but we'll work on making some available soon.</p>
+					<ul>
+						<li class="lorem">Bummer!  We don't have any maps ready for you right now, but check back again soon</li>
+					</ul>
 				{%endif%}
 
 				<p class="sidebar-text"><br><b>Follow us on social media</b></p>
-				<p class="sidebar-text">We're on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> or <a href="https://twitter.com/offthegridmaps" target="_blank">Twitter</a>.</p>
+				<p class="sidebar-text">To get the latest news and updates, we're on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> and <a href="https://twitter.com/offthegridmaps" target="_blank">Twitter</a>.</p>
 
 			</div>
 
@@ -961,11 +967,15 @@
 				
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 				
-				<p class="sidebar-text">OffTheGridMaps.com is proud {% if partner and partner.name != "Off The Grid Maps" %} to partner with <b><a href={{partner.url}} target="_blank">{{partner.name}}</a></b> {%endif%} to provide high quality {% if partner %} {{partner.maptype}} {%else%} recreation-based {%endif%} maps for Montana.  These maps are <b>GPS-enabled</b> for your smartphone when used with the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.<p>
+				<p class="sidebar-text">OffTheGridMaps.com is proud {% if partner and partner.name != "Off The Grid Maps" %} to partner with <b><a href={{partner.url}} target="_blank">{{partner.name}}</a></b> {%endif%} to provide you with high quality {% if partner %} {{partner.maptype}} {%else%} recreation-based {%endif%} maps, anywhere within the state of Montana.</p>
+				<p class="sidebar-text">You can print your maps (best on 11x17 paper), or see your location on the map by using your <b>GPS-enabled</b> smartphone and the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>, even without cell coverage!</p>
 				
 				<p class="sidebar-text"><b>Don't see the map you want?</b></p>
-				<p class="sidebar-text">Follow our simple tutorial to  <a href="javascript:void(0);" onclick="sidebar.open('help');">design your own map today</a>!</p>
+				<ul>
+					<li class="sidebar-text">Follow our simple tutorial to  <a href="javascript:void(0);" onclick="sidebar.open('help');">design a new map right now</a>!</li>
+				</ul>
 
+				<p class="sidebar-text"><b>Available Maps</b></p>
 				{%if partnerMaps%}
 					
 					<!-- <p class="sidebar-text"><i>The following map(s) are provided <b>free of charge</b> {%if partner%} courtesy of</i> <a href={{partner.url}} target="_blank">{{partner.name}}</a>{%endif%}.  You can GPS-enable these maps by loading them into the free <a href="javascript:void(0);" onclick="sidebar.open('gps');">Avenza Maps app</a>.</p> -->
@@ -986,11 +996,13 @@
 				
 				
 				{%else%}
-					<p class="lorem">Bummer!  We don't have any maps available for download right now, but we'll work on making some available soon.</p>
+					<ul>
+						<li class="lorem">Bummer!  We don't have any maps ready for you right now, but check back again soon</li>
+					</ul>
 				{%endif%}
 
 				<p class="sidebar-text"><br><b>Follow us on social media</b></p>
-				<p class="sidebar-text">We're on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> or <a href="https://twitter.com/offthegridmaps" target="_blank">Twitter</a>.</p>
+				<p class="sidebar-text">To get the latest news and updates, we're on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> and <a href="https://twitter.com/offthegridmaps" target="_blank">Twitter</a>.</p>
 				
 			</div>
 			
