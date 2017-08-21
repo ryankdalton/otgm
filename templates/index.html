@@ -9,7 +9,7 @@
 	<meta name="keywords" content="Montana, maps, GPS, GIS, custom, fishing, hunting, upland bird hunting, hiking, mountain biking, camping, recreation">
 	<meta name="author" content="Ryan Dalton">
 
-	<title>OffTheGridMaps.com - Custom | Targeted | GPS-enabled. Maps designed by You!</title>
+	<title>OffTheGridMaps.com - Custom | Targeted | GPS-enabled. Custom maps, designed by you!</title>
 	
 
 	<link rel="icon" href ="/static/logos/OffTheGridMaps.ico" type="image/x-icon" /> <link rel="shortcut icon" href="/static/icons/OffTheGridMaps.ico" type="image/x-icon" />
@@ -304,8 +304,8 @@
 
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 
-				<h3 class="sidebar-text"><i>Putting you in control of your map!</i></h3>
-				<p class="sidebar-text">OffTheGridMaps lets you design custom <a href="javascript:void(0);" onclick="sidebar.open('samples');">recreation maps</a> for outdoor activities like fishing, hunting, hiking and more.</p>
+				<h3 class="sidebar-text"><i>Custom | Targeted | GPS-enabled.</i></h3>
+				<p class="sidebar-text">Custom maps, designed by you! OffTheGridMaps lets you design <a href="javascript:void(0);" onclick="sidebar.open('samples');">maps that meet your needs</a> for your favorite outdoor activities like fishing, hunting, and hiking.</p>
 
 <!--				
 				<ul class="sidebar-text">
@@ -322,13 +322,12 @@
 
 
 				<h3 class="sidebar-text">How does it work?</h3>
-				<p class="sidebar-text">It's easy, and orders for personal use are FREE! You can <a href="javascript:void(0);" onclick="sidebar.open('help');">design your map</a> in just 3 steps:</p>
+				<p class="sidebar-text">It's easy and FREE for personal use! All in <a href="javascript:void(0);" onclick="sidebar.open('help');">three easy steps</a>:</p>
 					<ol class="sidebar-text">
 						<li>Zoom to the area you are interested in.</li>
 						<li>Draw a box around your map boundary.</li>
-						<li>Place your order.</li>
+						<li>Place your order. That's all there is to it.</li>
 					</ol>
-				<p class="sidebar-text">Yep, that's all there is to it.</p>
 				
 
 				<h3 class="sidebar-text">Why choose OffTheGridMaps?</h3>
@@ -1208,6 +1207,12 @@
 		}
 
 		
+		//Close sidebar when click on map
+		map.on('click', function() {
+			sidebar.close();
+		});
+		
+		
 		//Set a variable for the start and end map scale on move
 		map.on('movestart', function() {
 			var startBBox = map.getBounds().toBBoxString()
@@ -1983,27 +1988,28 @@
 		//Load Public Lands from PostGIS; Min zoom = 10
 		var pgPubLands = new L.GeoJSON.AJAX(null, {
 			style: function(feature) {
-				switch (feature.properties.ownername) {
-					case 'US Army Corps of Engineers':   return {color: "#ee3b34", "weight": 1.5, "opacity": 0.55};
-					case 'US Bureau of Land Management':   return {color: "#ffff00", "weight": 1.5, "opacity": 0.65};
-					case 'US Bureau of Reclamation':   return {color: "#ffd400", "weight": 1.5, "opacity": 0.55};
-					case 'City Government':   return {color: "#afb38a", "weight": 1.5, "opacity": 0.55};
-					case 'County Government':   return {color: "#afb38a", "weight": 1.5, "opacity": 0.55};
-					case 'US Dept of Agriculture':   return {color: "#d8e8c8", "weight": 1.5, "opacity": 0.55};
-					case 'US Dept of Defense':   return {color: "#f3a3ff", "weight": 1.5, "opacity": 0.55};
-					case 'Local Government':   return {color: "#afb38a", "weight": 1.5, "opacity": 0.55};
-					case 'Montana Dept of Natural Resources Water Projects':   return {color: "#346712", "weight": 1.5, "opacity": 0.55};
-					case 'Montana Dept of Corrections':   return {color: "#f8a407", "weight": 1.5, "opacity": 0.55};
-					case 'Montana Dept of Transportation':   return {color: "#d7500e", "weight": 1.5, "opacity": 0.55};
-					case 'Montana Fish, Wildlife, and Parks':   return {color: "#b7c2e6", "weight": 1.5, "opacity": 0.55};
-					case 'Montana State Trust Lands':   return {color: "#80b9ff", "weight": 1.5, "opacity": 0.55};
-					case 'Montana University System':   return {color: "#de73ff", "weight": 1.5, "opacity": 0.55};
-					case 'National Park Service':   return {color: "#33a02c", "weight": 1.5, "opacity": 0.55};
-					case 'State of Montana':   return {color: "#80b9ff", "weight": 1.5, "opacity": 0.55};
-					case 'Unknown':   return {color: "#afb38a", "weight": 1.5, "opacity": 0.55};
-					case 'US Government':   return {color: "#a8a8a8", "weight": 1.5, "opacity": 0.55};
-					case 'US Forest Service': return {color: "#73b373", "weight": 1.5, "opacity": 0.55};
-					case 'US Fish and Wildlife Service':   return {color: "#a48165", "weight": 1.5, "opacity": 0.55};
+				switch (feature.properties.ownertype) {
+					case 'Army Corps of Engineers':   return {color: "#ee3b34", "weight": 1.5, "opacity": 0.55};
+					case 'BLM':   return {color: "#ffff00", "weight": 1.5, "opacity": 0.65};
+					case 'BOR':   return {color: "#ffd400", "weight": 1.5, "opacity": 0.55};
+					case 'City Govt':   return {color: "#afb38a", "weight": 1.5, "opacity": 0.55};
+					case 'County Govt':   return {color: "#afb38a", "weight": 1.5, "opacity": 0.55};
+					case 'DOA':   return {color: "#d8e8c8", "weight": 1.5, "opacity": 0.55};
+					case 'DOD':   return {color: "#f3a3ff", "weight": 1.5, "opacity": 0.55};
+					case 'Indian Reservation':   return {color: "#c4720c", "weight": 2, "opacity": 0.55};
+					case 'Local Govt':   return {color: "#afb38a", "weight": 1.5, "opacity": 0.55};
+					case 'MT DNR':   return {color: "#346712", "weight": 1.5, "opacity": 0.55};
+					case 'MT DOC':   return {color: "#f8a407", "weight": 1.5, "opacity": 0.55};
+					case 'MT DOT':   return {color: "#d7500e", "weight": 1.5, "opacity": 0.55};
+					case 'MT FWP':   return {color: "#b7c2e6", "weight": 1.5, "opacity": 0.55};
+					case 'MT State Trust':   return {color: "#80b9ff", "weight": 1.5, "opacity": 0.55};
+					case 'MT Univ':   return {color: "#de73ff", "weight": 1.5, "opacity": 0.55};
+					case 'NPS':   return {color: "#33a02c", "weight": 1.5, "opacity": 0.55};
+					case 'State':   return {color: "#80b9ff", "weight": 1.5, "opacity": 0.55};
+					case 'UNK':   return {color: "#afb38a", "weight": 1.5, "opacity": 0.55};
+					case 'US Govt':   return {color: "#a8a8a8", "weight": 1.5, "opacity": 0.55};
+					case 'USFS': return {color: "#73b373", "weight": 1.5, "opacity": 0.55};
+					case 'USFWS':   return {color: "#a48165", "weight": 1.5, "opacity": 0.55};
 					case '':   return {color: "#afb38a", "weight": 2, "opacity": 0.55};
 					case null:   return {color: "#afb38a", "weight": 2, "opacity": 0.55};
 				}
@@ -2022,7 +2028,7 @@
 				refreshLayer2(publandsLayer);
 			}
 			else if ( (!(L.Browser.mobile)) && (map.getZoom() < 12) ) {
-				var publandsLayer = {name: "pgPubLands", object: pgPubLands, source: "/data/pgpublands", zoom: 10};
+				var publandsLayer = {name: "pgPubLands", object: pgPubLands, source: "/data/pgpublands", zoom: 9};
 				refreshLayer2(publandsLayer);
 			}
 			else if (map.getZoom() >= 12) {
@@ -2031,21 +2037,6 @@
 			}
 		});
 		
-
-/*
-		var baseOverlays = {
-			"<span id='pgRecsites' name='Recreation Sites'><i>Recreation Sites (zoom in)</i></span>": pgRecsites,
-			"<span id='pgSummerTrails' name='Summer Trails'><i>Summer Trails (zoom in)</i></span>": pgSummerTrails,
-			"<span id='pgWinterTrails' name='Winter Trails'><i>Winter Trails (zoom in)</i></span>": pgWinterTrails,
-			"<span id='pgPubLands' name='Public Lands'><i>Public Lands (zoom in)</i></span>": pgPubLands,
-			"<span id='pgCounties' name='Counties'>Counties</span>": pgCounties,
-			"<span id='openSnowMap' name='Downhill Ski Trails'>Downhill Ski Trails</span>": openSnowMap
-			};
-		
-		//Add the selected baselayers and vector layers to the control and onto the map
-		var baseLayersControl = L.control.layers(baseLayers, baseOverlays, {position: 'topleft'}).addTo(map);
-*/
-
 
 		//Add hunting district layers
 
@@ -2088,7 +2079,7 @@
 			refreshLayer2(wmaLayer);
 		});
 		
-/*
+
 		//Add FWP Upland Game Bird Enhancement Program
 		var fwpUGBEP = new L.GeoJSON.AJAX(null, {
 			style: {
@@ -2097,7 +2088,7 @@
 				"opacity": 0.65
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u><b>FWP Upland Game Bird Enhancement</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/" target="_blank">Access Guide</a>', {'autoPan': false});
+				layer.bindPopup('<u><b>FWP Upland Game Bird Enhancement Program</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/" target="_blank">UGBEP Projects Access Guide</a>' + '<br><a href="' + feature.properties.pdflink + '" target="_blank">Site Specific Access Rules</a>', {'autoPan': false});
 				
 				//hoverPopup(layer, '<u><b>FWP Upland Game Bird Enhancement</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/" target="_blank">Access Guide</a>');
 			}
@@ -2105,8 +2096,17 @@
 
 		//Refresh layer data on move
 		map.on('moveend overlayadd', function() {
-			var ugbepLayer = {name: "fwpUGBEP", object: fwpUGBEP, source: "/data/pgugbep", zoom: 9};
+			//var ugbepLayer = {name: "fwpUGBEP", object: fwpUGBEP, source: "/data/pgugbephd", zoom: 9};
 			//refreshLayer2(ugbepLayer);
+
+			if ( (L.Browser.mobile) && (map.getZoom() < 12) ) {
+				var ugbepLayer = {name: "fwpUGBEP", object: fwpUGBEP, source: "/data/pgugbephd", zoom: 9};
+				refreshLayer2(ugbepLayer);
+			}
+			else if ( (!(L.Browser.mobile)) && (map.getZoom() < 12) ) {
+				var ugbepLayer = {name: "fwpUGBEP", object: fwpUGBEP, source: "/data/pgugbephd", zoom: 9};
+				refreshLayer2(ugbepLayer);
+			}
 		});
 		
 
@@ -2118,7 +2118,7 @@
 				"opacity": 0.65
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u><b>FWP Block Management Areas</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">FWP Access Info</a>', {'autoPan': false});
+				layer.bindPopup('<u><b>FWP Block Management Areas</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">FWP Block Management Access Guide</a>' + '<br><a href="' + feature.properties.pdflink + '" target="_blank">Site Specific Access Rules</a>', {'autoPan': false});
 				
 				//hoverPopup(layer, '<u><b>FWP Block Management Areas</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">FWP Access Info</a>');
 			}
@@ -2126,10 +2126,24 @@
 
 		//Refresh layer data on move
 		map.on('moveend overlayadd', function() {
-			var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbma", zoom: 9};
+			//var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbma", zoom: 9};
 			//refreshLayer2(bmaLayer);
+
+			if ( (L.Browser.mobile) && (map.getZoom() < 12) ) {
+				var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbma", zoom: 9};
+				refreshLayer2(bmaLayer);
+			}
+			else if ( (!(L.Browser.mobile)) && (map.getZoom() < 12) ) {
+				var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbma", zoom: 9};
+				refreshLayer2(bmaLayer);
+			}
+			else if (map.getZoom() >= 12) {
+				var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbmahd", zoom: 11};
+				refreshLayer2(bmaLayer);
+			}
+
+
 		});
-*/
 
 /*
 		//Create the Turkey Habitat layer
@@ -2225,42 +2239,12 @@
 
 
 
-/*
-		var baseOverlays = {
-			"<span id='pgRecsites' name='Recreation Sites'><i>Recreation Sites (zoom in)</i></span>": pgRecsites,
-			"<span id='pgSummerTrails' name='Summer Trails'><i>Summer Trails (zoom in)</i></span>": pgSummerTrails,
-			//"<span id='pgWinterTrails' name='Winter Trails'><i>Winter Trails (zoom in)</i></span>": pgWinterTrails,
-			//"<span id='openSnowMap' name='Downhill Ski Trails'>Ski Trails</span>": openSnowMap,
-			"<span id='pgPubLands' name='Public Lands'><i>Public Lands (zoom in)</i></span>": pgPubLands,
-			"<span id='fwpLicenseProviders' name='FWP License Providers'><i>FWP License Providers (zoom in)</i></span>": fwpLicenseProviders,			
-			"<span id='fwpBMA' name='FWP Block Management Areas'><i>FWP Block Management Areas (zoom in)</i></span>": fwpBMA,
-			"<span id='fwpTurkeySpring' name='FWP Spring Turkey Districts'><i>FWP Spring Turkey Districts (zoom in)</i></span>": fwpTurkeySpring,
-			"<span id='fwpTurkeyHabitat' name='FWP Turkey Habitat'><i>FWP Turkey Habitat (zoom in)</i></span>": fwpTurkeyHabitat,
-			"<span id='fwpUGBEP' name='FWP Upland Game Bird Enhancement'><i>FWP Upland Game Bird Enhancement (zoom in)</i></span>": fwpUGBEP,
-			"<span id='fwpWMA' name='FWP Wildlife Management Areas'><i>FWP Wildlife Management Areas (zoom in)</i></span>": fwpWMA,
-			
-			//"FWP Antelope Districts": fwpAntelopeDistricts,
-			//"FWP Bighorn Sheep Districts": fwpBighornSheepDistricts,
-			//"FWP Black Bear Districts": fwpBlackBearDistricts,
-			//"FWP Deer and Elk Districts": fwpDeerElkDistricts,
-			//"FWP Furbearer Trapping Districts": fwpFurbearerTrappingDistricts,
-			//"FWP Moose Districts": fwpMooseDistricts,
-			//"FWP Mountain Goat Districts": fwpMountainGoatDistricts,
-			//"FWP Upland Bird Hunting": fwpUplandBirdRegions
-			
-			"<span id='pgCounties' name='Counties'>Counties</span>": pgCounties
-			};
-			
-		//Add the selected baselayers and vector layers to the control and onto the map
-		var baseLayersControl = L.control.layers(baseLayers, baseOverlays, {position: 'topleft'}).addTo(map);
-*/
-
 		//Set layer ordering for Polygons -- 0-100
 		pgState.setZIndex(0);
 		pgCounties.setZIndex(1);
 		pgPubLands.setZIndex(2);
-		//fwpBMA.setZIndex(3);
-		//fwpUGBEP.setZIndex(4);
+		fwpBMA.setZIndex(3);
+		fwpUGBEP.setZIndex(4);
 		
 		//Set layer ordering for Lines -- 100-199
 		//pgWinterTrails.setZIndex(100);
@@ -2292,9 +2276,10 @@
 */
 			"MT Fish, Wildlife, and Parks": {
 				"<span id='fwpLicenseProviders' name='FWP License Providers'><i>FWP License Providers (zoom in)</i></span>": fwpLicenseProviders,
-				"<span id='fwpWMA' name='FWP Wildlife Management Areas'><i>FWP Wildlife Management Areas (zoom in)</i></span>": fwpWMA,
-				//"<span id='fwpBMA' name='FWP Block Management Areas'><i>2016 FWP Block Management Areas (zoom in)</i></span>": fwpBMA,
-				//"<span id='fwpUGBEP' name='FWP Upland Game Bird Enhancement'><i>2016 FWP Upland Game Bird Enhancement (zoom in)</i></span>": fwpUGBEP
+				"<span id='fwpUGBEP' name='FWP Upland Game Bird Enhancement'><i>FWP Upland Game Bird Enhancement (zoom in)</i></span>": fwpUGBEP,
+				"<span id='fwpBMA' name='FWP Block Management Areas'><i>FWP Block Management Areas (zoom in)</i></span>": fwpBMA,
+				"<span id='fwpWMA' name='FWP Wildlife Management Areas'><i>FWP Wildlife Management Areas (zoom in)</i></span>": fwpWMA
+
 			},
 			//"MT FWP Hunting Layers: {
 				//"FWP Antelope Districts": fwpAntelopeDistricts,

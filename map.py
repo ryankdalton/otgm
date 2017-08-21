@@ -308,6 +308,9 @@ def index():
         return render_template('404.html')
 
 
+
+# ---------------- Other endpoint URLS --------------
+
 @app.route('/bootstrap', methods=['GET'])
 def bootstrap():
 
@@ -328,6 +331,24 @@ def montanafishingmaps():
         return render_template('404.html')
 
 
+@app.route('/montanahuntingmaps', methods=['GET'])
+def montanahuntingmaps():
+
+    try:
+        return render_template('montanahuntingmaps.html')
+
+    except:
+        return render_template('404.html')
+
+
+@app.route('/montanahikingmaps', methods=['GET'])
+def montanahikingmaps():
+
+    try:
+        return render_template('montanahikingmaps.html')
+
+    except:
+        return render_template('404.html')
 
 # ---------------- Partner URLS --------------
 
@@ -404,8 +425,42 @@ def glaciergundogclub():
 
 
 
-@app.route('/grizzlyhackle', methods=['GET', 'POST'])
-def grizzlyhackle():
+##@app.route('/grizzlyhackle', methods=['GET', 'POST'])
+##def grizzlyhackle():
+##
+##    try:
+##        if request.method == 'POST':
+##            orderstatus = postOrder(request)
+##            return render_template('index.html', orderstatus=orderstatus)
+##
+##        else:
+##            emailaddress = 'info@grizzlyhackle.com'
+##            partner, partnerMaps = getMapProjects(emailaddress)
+##            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
+##
+##    except:
+##        return render_template('404.html')
+
+
+##@app.route('/glaciercyclery', methods=['GET', 'POST'])
+##def glaciercyclery():
+##
+##    try:
+##        if request.method == 'POST':
+##            orderstatus = postOrder(request)
+##            return render_template('index.html', orderstatus=orderstatus)
+##
+##        else:
+##            emailaddress = 'info@glaciercyclery.com'
+##            partner, partnerMaps = getMapProjects(emailaddress)
+##            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
+##
+##    except:
+##        return render_template('404.html')
+
+
+@app.route('/bigforkanglers', methods=['GET', 'POST'])
+def bigforkanglers():
 
     try:
         if request.method == 'POST':
@@ -413,30 +468,12 @@ def grizzlyhackle():
             return render_template('index.html', orderstatus=orderstatus)
 
         else:
-            emailaddress = 'info@grizzlyhackle.com'
+            emailaddress = 'bigforkanglers@yahoo.com'
             partner, partnerMaps = getMapProjects(emailaddress)
             return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
 
     except:
         return render_template('404.html')
-
-
-@app.route('/glaciercyclery', methods=['GET', 'POST'])
-def glaciercyclery():
-
-    try:
-        if request.method == 'POST':
-            orderstatus = postOrder(request)
-            return render_template('index.html', orderstatus=orderstatus)
-
-        else:
-            emailaddress = 'info@glaciercyclery.com'
-            partner, partnerMaps = getMapProjects(emailaddress)
-            return render_template('index.html', partner=partner, partnerMaps=partnerMaps)
-
-    except:
-        return render_template('404.html')
-
 # ---------------- Sample map URLS --------------
 
 ##@app.route('/samples', methods=['GET', 'POST'])
@@ -691,13 +728,25 @@ def pgcountieshd():
 def pgbma():
 
     try:
+        bboxString = str( request.args.get('bbox') )
         tablename = "webdata.fwp_bma"
-        fields = "labelname, permission, accessinfo"
-        return pgToGeoJSON(tablename, fields, 2500)
+        fields = "labelname, permission, accessinfo, pdflink"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 1000)
 
     except:
         return "ERROR: Could not return valid bma.geojson"
 
+@app.route("/data/pgbmahd")
+def pgbmahd():
+
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.fwp_bmahd"
+        fields = "labelname, permission, accessinfo, pdflink"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 1000)
+
+    except:
+        return "ERROR: Could not return valid bma.geojson"
 
 #return all FWP Upland Bird Game Enhancement Program:
 @app.route("/data/pgugbep")
@@ -706,12 +755,24 @@ def pgugbep():
     try:
         bboxString = str( request.args.get('bbox') )
         tablename = "webdata.fwp_ugbep"
-        fields = "labelname, permission"
+        fields = "labelname, permission, cooperator, contact, pdflink"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
 
     except:
         return "ERROR: Could not return valid ugbep.geojson"
 
+#return all FWP Upland Bird Game Enhancement Program:
+@app.route("/data/pgugbephd")
+def pgugbephd():
+
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.fwp_ugbephd"
+        fields = "labelname, permission, cooperator, contact, pdflink"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
+
+    except:
+        return "ERROR: Could not return valid ugbephd.geojson"
 
 #return all FWP Wildlife Management Areas:
 @app.route("/data/pgwma")
@@ -748,10 +809,11 @@ def pgpublands():
     try:
         bboxString = str( request.args.get('bbox') )
         tablename = "webdata.mnhp_publiclands"
-        fields = "ownername"
+        fields = "ownername, ownertype"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 2000)
     except:
         return "ERROR: Could not return valid publiclands.geojson"
+
 
 #return Public Lands as singlepart features:
 @app.route("/data/pgpublandshd")
@@ -759,7 +821,7 @@ def pgpublandshd():
     try:
         bboxString = str( request.args.get('bbox') )
         tablename = "webdata.mnhp_publiclandshd"
-        fields = "ownername"
+        fields = "ownername,ownertype"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 1000)
     except:
         return "ERROR: Could not return valid publiclands.geojson"
@@ -872,10 +934,10 @@ def pgwinter():
     except:
         return "ERROR: Could not return valid winter.geojson"
 
+
 #return Spring Turkey districts:
 @app.route("/data/pgturkeyspring")
 def pgturkeyspring():
-
     try:
         bboxString = str( request.args.get('bbox') )
         tablename = "webdata.fwp_turkeyspring"
@@ -889,7 +951,6 @@ def pgturkeyspring():
 #return Fall Turkey districts:
 @app.route("/data/pgturkeyfall")
 def pgturkeyfall():
-
     try:
         bboxString = str( request.args.get('bbox') )
         tablename = "webdata.fwp_turkeyfall"
@@ -903,7 +964,6 @@ def pgturkeyfall():
 #return Turkey habitat:
 @app.route("/data/pgturkeyhabitat")
 def pgturkeyhabitat():
-
     try:
         bboxString = str( request.args.get('bbox') )
         tablename = "webdata.fwp_turkeyhabitat"
@@ -914,6 +974,30 @@ def pgturkeyhabitat():
         return "ERROR: Could not return valid turkeyhabitat.geojson"
 
 
+#return Spring Turkey districts:
+@app.route("/data/pgdeerelk")
+def pgdeerelk():
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.fwp_deerelk"
+        fields = "reg, district, labelname, area_mi, deerwebpag, elkwebpage"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
+
+    except:
+        return "ERROR: Could not return valid deerelk.geojson"
+
+
+#return Spring Turkey districts:
+@app.route("/data/pgdeerelkhd")
+def pgdeerelkhd():
+    try:
+        bboxString = str( request.args.get('bbox') )
+        tablename = "webdata.fwp_deerelkhd"
+        fields = "reg, district, labelname, area_mi, deerwebpag, elkwebpage"
+        return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
+
+    except:
+        return "ERROR: Could not return valid deerelk.geojson"
 
 # ---------------- Application pages --------------
 
