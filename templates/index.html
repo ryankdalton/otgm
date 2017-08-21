@@ -322,16 +322,16 @@
 
 
 				<h3 class="sidebar-text">How does it work?</h3>
-				<p class="sidebar-text">It's easy and FREE for personal use! All in <a href="javascript:void(0);" onclick="sidebar.open('help');">three easy steps</a>:</p>
+				<p class="sidebar-text">It takes just <a href="javascript:void(0);" onclick="sidebar.open('help');">three easy steps</a>, and it's FREE for personal use!</p>
 					<ol class="sidebar-text">
 						<li>Zoom to the area you are interested in.</li>
 						<li>Draw a box around your map boundary.</li>
-						<li>Place your order. That's all there is to it.</li>
+						<li>Place your order. That's it!</li>
 					</ol>
 				
 
 				<h3 class="sidebar-text">Why choose OffTheGridMaps?</h3>
-				<p class="sidebar-text">Our innovative 2-in-1 maps are tailored to <i>your activity and area of interest</i>. You get:</p>
+				<p class="sidebar-text">Our innovative 2-in-1 maps are tailored to <i>your activity and area of interest</i>. You get both:</p>
 				<ul class="sidebar-text">
 				<li>A <a href="javascript:void(0);" onclick="sidebar.open('samples');">high-resolution</a>, 11x17 PDF map that you can print and take with you.</li>
 				<li>A <a href="javascript:void(0);" onclick="sidebar.open('gps');">GPS-enabled</a> companion map for your smart-phone. <i>No cell service needed</i>!</li>
@@ -357,10 +357,13 @@
 				</ul>
 -->
 					
-				<h3 class="sidebar-text">Sound good?</h3>
-				<p class="sidebar-text">Design your first map <i>in under 5 minutes</i> by following our <a href="javascript:void(0);" onclick="sidebar.open('help');">simple tutorial</a>.</p>
+				<h3 class="sidebar-text">Are you ready to map?</h3>
+				<p class="sidebar-text">In <i>under 5 minutes</i> you can design your next map.  Just follow our <a href="javascript:void(0);" onclick="sidebar.open('help');">simple tutorial</a>.</p>
 				
-				<p class="sidebar-text">You also might like to take a look at our <a href="javascript:void(0);" onclick="sidebar.open('samples');">sample maps</a> to see the level of detail we put into each map.</p>
+				<p class="sidebar-text">To see the level of detail we put into each map, please take a look at our <a href="javascript:void(0);" onclick="sidebar.open('samples');">sample maps</a>.</p>
+				
+				<p class="sidebar-text"><b>Follow us on social media</b></p>
+				<p class="sidebar-text">To get the latest news and updates, we're on <a href="https://www.facebook.com/offthegridmaps/" target="_blank">Facebook</a> and <a href="https://twitter.com/offthegridmaps" target="_blank">Twitter</a>.</p>
 			</div>
 
 
@@ -369,14 +372,8 @@
 
 				<p align="right"><a href="javascript:void(0);" onclick="sidebar.open('welcome');">Home</a> | <a href="javascript:void(0);" onclick="sidebar.open('help');">Help</a> | <a href="javascript:void(0);" onclick="sidebar.close();">Show Map</a></p>
 
-				<p class="sidebar-text"><i><b>NOTE:</b> the web map is just meant to help you decide where to create your map. To see what our print maps look like, please head on over to our <a href="javascript:void(0);" onclick="sidebar.open('samples');">sample maps</a></i>.</p>
+				<p class="sidebar-text"><i><b>NOTE:</b> Use the web map to help find your map location. To see the level of detail we put into each map, please take a look at our <a href="javascript:void(0);" onclick="sidebar.open('samples');">sample maps</a></i>.</p>
 
-				<h3 class="sidebar-text">How to decide where to make a map:</h3>
-					<ul>
-						<li class="sidebar-text">Search for geographic locations (cities, parks, lakes, etc) by typing into the <i>search box</i>.</li>
-						<li class="sidebar-text">Change map backgrounds, view satellite imagery, or add map overlays using the layer tools (<img src="static/icons/Layers.jpg" style="width:25px;height:25px;">).</li> 
-					</ul>
-					
 				<h3 class="sidebar-text">How to place an order:</h3>
 					<ol>
 						<li class="sidebar-text">See more/less <b>map detail</b> by clicking the zoom in (<b>+</b>) or zoom out (<b>-</b>) tools.</li>
@@ -392,7 +389,14 @@
 						<li class="sidebar-text"><b>Delete</b> your current map boundary using the "Delete layers" tool (<img src="static/icons/Trash.jpg" style="width:20px;height:20px;">).  Click anywhere on the box to delete it.</li>
 						<li class="sidebar-text">Press <i><b>save</b></i> or <i><b>cancel</b></i> (next to the <i>edit icons</i>) after modifying or deleting your map boundary.</li>
 					</ul>
-            </div>
+
+				<h3 class="sidebar-text">How to find Points of Interest:</h3>
+					<ul>
+						<li class="sidebar-text">Search for geographic locations (cities, parks, lakes, etc) by typing into the <i>search box</i>.</li>
+						<li class="sidebar-text">Change map backgrounds, view satellite imagery, or add map overlays using the layer tools (<img src="static/icons/Layers.jpg" style="width:25px;height:25px;">).</li> 
+					</ul>
+					
+				</div>
 
 
 			<div class="sidebar-pane" id="samples">
@@ -2088,7 +2092,7 @@
 				"opacity": 0.65
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u><b>FWP Upland Game Bird Enhancement Program</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/" target="_blank">UGBEP Projects Access Guide</a>' + '<br><a href="' + feature.properties.pdflink + '" target="_blank">Site Specific Access Rules</a>', {'autoPan': false});
+				layer.bindPopup('<u><b>FWP Upland Game Bird Enhancement Program</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/accessGuide.html" target="_blank">Access Guide</a>' + '<br><a href="' + feature.properties.pdflink + '" target="_blank">Site Specific Details</a>', {'autoPan': false});
 				
 				//hoverPopup(layer, '<u><b>FWP Upland Game Bird Enhancement</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/" target="_blank">Access Guide</a>');
 			}
@@ -2118,7 +2122,7 @@
 				"opacity": 0.65
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u><b>FWP Block Management Areas</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">FWP Block Management Access Guide</a>' + '<br><a href="' + feature.properties.pdflink + '" target="_blank">Site Specific Access Rules</a>', {'autoPan': false});
+				layer.bindPopup('<u><b>FWP Block Management Areas</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">Access Guide</a>' + '<br><a href="' + feature.properties.pdflink + '" target="_blank">Site Specific Details</a>', {'autoPan': false});
 				
 				//hoverPopup(layer, '<u><b>FWP Block Management Areas</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">FWP Access Info</a>');
 			}
