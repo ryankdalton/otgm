@@ -2092,7 +2092,7 @@
 				"opacity": 0.65
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u><b>FWP Upland Game Bird Enhancement Program</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/accessGuide.html" target="_blank">Access Guide</a>', {'autoPan': false});
+				layer.bindPopup('<u><b>FWP Upland Game Bird Enhancement Program</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br>Cooperator: ' + feature.properties.cooperator + '<br>Contact: ' + feature.properties.contact + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/accessGuide.html" target="_blank">Access Guide</a>', {'autoPan': false});
 				
 				//hoverPopup(layer, '<u><b>FWP Upland Game Bird Enhancement</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/" target="_blank">Access Guide</a>');
 			}
@@ -2122,7 +2122,7 @@
 				"opacity": 0.65
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u><b>FWP Block Management Areas</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">Access Guide</a>' + '<br><a href="' + feature.properties.pdflink + '" target="_blank">Site Specific Details</a>', {'autoPan': false});
+				layer.bindPopup('<u><b>FWP Block Management Areas</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="' + feature.properties.pdflink + '" target="_blank">Site Specific Details</a>' + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">Access Guide</a>', {'autoPan': false});
 				
 				//hoverPopup(layer, '<u><b>FWP Block Management Areas</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">FWP Access Info</a>');
 			}
