@@ -732,7 +732,6 @@ def pgbma():
         tablename = "webdata.fwp_bma"
         fields = "labelname, permission, accessinfo, pdflink"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 1000)
-
     except:
         return "ERROR: Could not return valid bma.geojson"
 
@@ -744,7 +743,6 @@ def pgbmahd():
         tablename = "webdata.fwp_bmahd"
         fields = "labelname, permission, accessinfo, pdflink"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 1000)
-
     except:
         return "ERROR: Could not return valid bma.geojson"
 
@@ -757,7 +755,6 @@ def pgugbep():
         tablename = "webdata.fwp_ugbep"
         fields = "labelname, permission, cooperator, contact, pdflink"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
-
     except:
         return "ERROR: Could not return valid ugbep.geojson"
 
@@ -770,7 +767,6 @@ def pgugbephd():
         tablename = "webdata.fwp_ugbephd"
         fields = "labelname, permission, cooperator, contact, pdflink"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
-
     except:
         return "ERROR: Could not return valid ugbephd.geojson"
 
@@ -783,7 +779,6 @@ def pgwma():
         tablename = "webdata.fwp_wma"
         fields = "name, region, web_page"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
-
     except:
         return "ERROR: Could not return valid wma.geojson"
 
@@ -837,7 +832,6 @@ def pgtrails():
         tablename = "webdata.msdi_trails"
         fields = "labelname, miles, season"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 1000, whereClause)
-
     except:
         return "ERROR: Could not return valid trails.geojson"
 
@@ -852,7 +846,6 @@ def pgtrailshd():
         tablename = "webdata.msdi_trailshd"
         fields = "labelname, miles, season"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 500, whereClause)
-
     except:
         return "ERROR: Could not return valid trailshd.geojson"
 
@@ -866,7 +859,6 @@ def pgrecsites():
         tablename = "webdata.mvw_recsites"
         fields = "labelname, sitetype, source"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 500)
-
     except:
         return "ERROR: Could not return valid recsites.geojson"
 
@@ -943,7 +935,6 @@ def pgturkeyspring():
         tablename = "webdata.fwp_turkeyspring"
         fields = "reg, name, harvtype_s, webpage"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
-
     except:
         return "ERROR: Could not return valid turkeyspring.geojson"
 
@@ -956,7 +947,6 @@ def pgturkeyfall():
         tablename = "webdata.fwp_turkeyfall"
         fields = "reg, name, harvtype_f, webpage"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
-
     except:
         return "ERROR: Could not return valid turkeyfall.geojson"
 
@@ -969,12 +959,11 @@ def pgturkeyhabitat():
         tablename = "webdata.fwp_turkeyhabitat"
         fields = "region, species, habqual"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
-
     except:
         return "ERROR: Could not return valid turkeyhabitat.geojson"
 
 
-#return Spring Turkey districts:
+#return Deer and Elk districts:
 @app.route("/data/pgdeerelk")
 def pgdeerelk():
     try:
@@ -982,12 +971,11 @@ def pgdeerelk():
         tablename = "webdata.fwp_deerelk"
         fields = "reg, district, labelname, area_mi, deerwebpag, elkwebpage"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
-
     except:
         return "ERROR: Could not return valid deerelk.geojson"
 
 
-#return Spring Turkey districts:
+#return Deer and Elk districts in HD:
 @app.route("/data/pgdeerelkhd")
 def pgdeerelkhd():
     try:
@@ -995,7 +983,6 @@ def pgdeerelkhd():
         tablename = "webdata.fwp_deerelkhd"
         fields = "reg, district, labelname, area_mi, deerwebpag, elkwebpage"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
-
     except:
         return "ERROR: Could not return valid deerelk.geojson"
 

@@ -2092,7 +2092,7 @@
 				"opacity": 0.65
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u><b>FWP Upland Game Bird Enhancement Program</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/accessGuide.html" target="_blank">Access Guide</a>' + '<br><a href="' + feature.properties.pdflink + '" target="_blank">Site Specific Details</a>', {'autoPan': false});
+				layer.bindPopup('<u><b>FWP Upland Game Bird Enhancement Program</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/accessGuide.html" target="_blank">Access Guide</a>', {'autoPan': false});
 				
 				//hoverPopup(layer, '<u><b>FWP Upland Game Bird Enhancement</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/" target="_blank">Access Guide</a>');
 			}
@@ -2142,13 +2142,58 @@
 				refreshLayer2(bmaLayer);
 			}
 			else if (map.getZoom() >= 12) {
-				var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbmahd", zoom: 11};
+				var bmaLayer = {name: "fwpBMA", object: fwpBMA, source: "/data/pgbmahd", zoom: 12};
 				refreshLayer2(bmaLayer);
 			}
-
-
 		});
 
+		
+		
+		// Add FWP Deer & Elk districts -- "http://data.mtfwp.opendata.arcgis.com/datasets/24ce083cfd6b47988523576fbc0219f6_0.geojson"
+/*
+		var fwpDeerElkDistricts = new L.GeoJSON.AJAX("/data/pgdeerelk", {
+			filter: function(feature, layer) {
+				return (feature.properties.REG !== null);
+			},
+			style: {
+				"color": "#0000ff",
+				"weight": 2,
+				"opacity": 0.65
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>FWP Deer and Elk Districts</u><br>Region: ' + feature.properties.REG + '<br>District: ' + feature.properties.DISTRICT + '<br>Name: ' + feature.properties.EMU_NAME);
+			}
+		});
+*/
+
+		//Add FWP Deer & Elk Districts
+		var fwpDeerElkDistricts = new L.GeoJSON.AJAX(null, {
+			style: {
+				"color": "#0000ff",
+				"weight": 2,
+				"opacity": 0.65
+			},
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup('<u>FWP Deer and Elk Districts</u><br>District-Name: ' + feature.properties.labelname + '<br><a href=' + feature.properties.deerwebpag + ' target="_blank">Deer Regulations</a>' + '<br><a href=' + feature.properties.elkwebpage + ' target="_blank">Elk Regulations</a>', {'autoPan': false});
+			}
+		});
+
+		//Refresh layer data on move
+		map.on('moveend overlayadd', function() {
+
+			if ( (L.Browser.mobile) && (map.getZoom() < 10) ) {
+				var deerelkLayer = {name: "fwpDeerElkDistricts", object: fwpDeerElkDistricts, source: "/data/pgdeerelk", zoom: 7};
+				refreshLayer2(deerelkLayer);
+			}
+			else if ( (!(L.Browser.mobile)) && (map.getZoom() < 10) ) {
+				var deerelkLayer = {name: "fwpDeerElkDistricts", object: fwpDeerElkDistricts, source: "/data/pgdeerelk", zoom: 8};
+				refreshLayer2(deerelkLayer);
+			}
+			else if (map.getZoom() >= 10) {
+				var deerelkLayer = {name: "fwpDeerElkDistricts", object: fwpDeerElkDistricts, source: "/data/pgdeerelkhd", zoom: 10};
+				refreshLayer2(deerelkLayer);
+			}
+		});
 /*
 		//Create the Turkey Habitat layer
 		var fwpTurkeyHabitat = new L.GeoJSON.AJAX(null, {
@@ -2208,22 +2253,6 @@
 */
 
 
-/*
-		// Add FWP Deer & Elk districts -- "http://data.mtfwp.opendata.arcgis.com/datasets/24ce083cfd6b47988523576fbc0219f6_0.geojson"
-		var fwpDeerElkDistricts = new L.GeoJSON.AJAX("/data/pgdeerelk", {
-			filter: function(feature, layer) {
-				return (feature.properties.REG !== null);
-			},
-			style: {
-				"color": "#0000ff",
-				"weight": 2,
-				"opacity": 0.65
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>FWP Deer and Elk Districts</u><br>Region: ' + feature.properties.REG + '<br>District: ' + feature.properties.DISTRICT + '<br>Name: ' + feature.properties.EMU_NAME);
-			}
-		});
-*/
 		
 /*
 		var fwpMooseDistricts = new L.GeoJSON.AJAX("http://data.mtfwp.opendata.arcgis.com/datasets/8a0803c2bd694d0b9188ac8649291819_0.geojson", {
@@ -2280,9 +2309,7 @@
 */
 			"MT Fish, Wildlife, and Parks": {
 				"<span id='fwpLicenseProviders' name='FWP License Providers'><i>FWP License Providers (zoom in)</i></span>": fwpLicenseProviders,
-				"<span id='fwpUGBEP' name='FWP Upland Game Bird Enhancement'><i>FWP Upland Game Bird Enhancement (zoom in)</i></span>": fwpUGBEP,
-				"<span id='fwpBMA' name='FWP Block Management Areas'><i>FWP Block Management Areas (zoom in)</i></span>": fwpBMA,
-				"<span id='fwpWMA' name='FWP Wildlife Management Areas'><i>FWP Wildlife Management Areas (zoom in)</i></span>": fwpWMA
+				"<span id='fwpDeerElkDistricts' name='FWP Deer and Elk Districts'><i>FWP Deer and Elk Districts (zoom in)</i></span>": fwpDeerElkDistricts
 
 			},
 			//"MT FWP Hunting Layers: {
@@ -2297,8 +2324,14 @@
 				//"<span id='fwpTurkeySpring' name='FWP Spring Turkey Districts'><i>FWP Spring Turkey Districts (zoom in)</i></span>": fwpTurkeySpring
 				//"FWP Upland Bird Hunting": fwpUplandBirdRegions
 			//},
-			"Other Areas": {
-				"<span id='pgPubLands' name='Public Lands'><i>Public Lands (zoom in)</i></span>": pgPubLands,
+			"Hunter Access": {
+				"<span id='fwpUGBEP' name='FWP Upland Game Bird Enhancement'><i>FWP Upland Game Bird Enhancement (zoom in)</i></span>": fwpUGBEP,
+				"<span id='fwpBMA' name='FWP Block Management Areas'><i>FWP Block Management Areas (zoom in)</i></span>": fwpBMA,
+				"<span id='fwpWMA' name='FWP Wildlife Management Areas'><i>FWP Wildlife Management Areas (zoom in)</i></span>": fwpWMA,
+				"<span id='pgPubLands' name='Public Lands'><i>Public Lands (zoom in)</i></span>": pgPubLands
+			},
+			"Reference": {
+				//"<span id='pgPubLands' name='Public Lands'><i>Public Lands (zoom in)</i></span>": pgPubLands,
 				"<span id='pgCounties' name='Counties'>Counties</span>": pgCounties
 			}
 		};
