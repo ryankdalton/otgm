@@ -1210,12 +1210,12 @@
 			sidebar.open("welcome");
 		}
 
-		
+/*
 		//Close sidebar when click on map
 		map.on('click', function() {
 			sidebar.close();
 		});
-		
+*/
 		
 		//Set a variable for the start and end map scale on move
 		map.on('movestart', function() {
@@ -2528,7 +2528,8 @@
 
 					if (drawnItems.getLayers().length === 1) {
 						//Open the order form in the sidebar
-						sidebar.open("order");
+						//console.log("save button clicked");
+						sidebar.open('order');
 					} else {
 						//alert the user they need to create a map boundary
 						var r = alert("Hold on! You must draw a map boundary before placing an order.");							
