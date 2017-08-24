@@ -1393,6 +1393,7 @@
 		//load tile layers from TileProvider
 		//var esriWorldStreetMap = L.tileLayer.provider('Esri.WorldStreetMap');
 		var esriWorldTopo = L.tileLayer.provider('Esri.WorldTopoMap');
+		var esriNatGeoWorldMap = L.tileLayer.provider('Esri.NatGeoWorldMap');
 		//var esriWorldImagery = L.tileLayer.provider('Esri.WorldImagery');
 		
 		//var stamenTerrain = L.tileLayer.provider('Stamen.Terrain');
@@ -1432,10 +1433,10 @@
 		});	
 
 		//Add the initial basemap
-		mapboxOutdoors.addTo(map);
+		esriNatGeoWorldMap.addTo(map);
 		
 		//Add the base layers to a single managed variable
-		var baseLayers = {"Terrain 1": mapboxOutdoors, "Terrain 2": esriWorldTopo, "Streets": mapboxStreets, "Hybrid Satellite": mapboxHybrid};
+		var baseLayers = {"Terrain 1": esriNatGeoWorldMap, "Terrain 2": esriWorldTopo, "Terrain 3": mapboxOutdoors, "Streets": mapboxStreets, "Satellite Imagery": mapboxHybrid};
 
 
 
@@ -2071,7 +2072,7 @@
 				"opacity": 0.65
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u><b>FWP Wildlife Management Areas</b></u><br>Name: ' + feature.properties.name + '<br>Region: ' + feature.properties.region + '<br><a href=' + feature.properties.web_page + ' target="_blank">Site Detail</a>', {'autoPan': false});
+				layer.bindPopup('<u><b>Wildlife Management Areas</b></u><br>Name: ' + feature.properties.name + '<br>Region: ' + feature.properties.region + '<br><a href=' + feature.properties.web_page + ' target="_blank">FWP Site Details</a>', {'autoPan': false});
 				
 				//hoverPopup(layer, '<u><b>FWP Wildlife Management Areas</b></u><br>Name: ' + feature.properties.name + '<br>Region: ' + feature.properties.region + '<br><a href=' + feature.properties.web_page + ' target="_blank">Site Detail</a>');
 			}
@@ -2092,7 +2093,7 @@
 				"opacity": 0.65
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u><b>FWP Upland Game Bird Enhancement Program</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br>Cooperator: ' + feature.properties.cooperator + '<br>Contact: ' + feature.properties.contact + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/accessGuide.html" target="_blank">Access Guide</a>', {'autoPan': false});
+				layer.bindPopup('<u><b>Upland Game Bird Enhancement Program</b></u><br>' + feature.properties.labelname + '<br>Region: ' + feature.properties.region + '<br>Permission: ' + feature.properties.permission + '<br>Cooperator: ' + feature.properties.cooperator + '<br>Contact: ' + feature.properties.contact + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/accessGuide.html" target="_blank">FWP Access Guide</a>', {'autoPan': false});
 				
 				//hoverPopup(layer, '<u><b>FWP Upland Game Bird Enhancement</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="http://fwp.mt.gov/hunting/hunterAccess/uplandgamebird/" target="_blank">Access Guide</a>');
 			}
@@ -2122,7 +2123,7 @@
 				"opacity": 0.65
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u><b>FWP Block Management Areas</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href="' + feature.properties.pdflink + '" target="_blank">Site Specific Details</a>' + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">Access Guide</a>', {'autoPan': false});
+				layer.bindPopup('<u><b>Block Management Areas</b></u><br>' + feature.properties.labelname + '<br>Region: ' + feature.properties.region + '<br>Permission: ' + feature.properties.permission + '<br><a href="' + feature.properties.pdflink + '" target="_blank">FWP Site Details</a>' + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">FWP Access Guide</a>', {'autoPan': false});
 				
 				//hoverPopup(layer, '<u><b>FWP Block Management Areas</b></u><br>' + feature.properties.labelname + '<br>Permission: ' + feature.properties.permission + '<br><a href=' + feature.properties.accessinfo + ' target="_blank">FWP Access Info</a>');
 			}
@@ -2174,7 +2175,7 @@
 				"opacity": 0.65
 			},
 			onEachFeature: function (feature, layer) {
-				layer.bindPopup('<u>FWP Deer and Elk Districts</u><br>District-Name: ' + feature.properties.labelname + '<br><a href=' + feature.properties.deerwebpag + ' target="_blank">Deer Regulations</a>' + '<br><a href=' + feature.properties.elkwebpage + ' target="_blank">Elk Regulations</a>', {'autoPan': false});
+				layer.bindPopup('<u>Deer and Elk Districts</u><br>District-Name: ' + feature.properties.labelname + '<br><a href=' + feature.properties.deerwebpag + ' target="_blank">FWP Deer Regulations</a>' + '<br><a href=' + feature.properties.elkwebpage + ' target="_blank">FWP Elk Regulations</a>', {'autoPan': false});
 			}
 		});
 

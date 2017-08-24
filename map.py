@@ -730,7 +730,7 @@ def pgbma():
     try:
         bboxString = str( request.args.get('bbox') )
         tablename = "webdata.fwp_bma"
-        fields = "labelname, permission, accessinfo, pdflink"
+        fields = "labelname, region, permission, accessinfo, pdflink"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 1000)
     except:
         return "ERROR: Could not return valid bma.geojson"
@@ -741,7 +741,7 @@ def pgbmahd():
     try:
         bboxString = str( request.args.get('bbox') )
         tablename = "webdata.fwp_bmahd"
-        fields = "labelname, permission, accessinfo, pdflink"
+        fields = "labelname, region, permission, accessinfo, pdflink"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 1000)
     except:
         return "ERROR: Could not return valid bma.geojson"
@@ -753,7 +753,7 @@ def pgugbep():
     try:
         bboxString = str( request.args.get('bbox') )
         tablename = "webdata.fwp_ugbep"
-        fields = "labelname, permission, cooperator, contact, pdflink"
+        fields = "labelname, region, permission, cooperator, contact, pdflink"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
     except:
         return "ERROR: Could not return valid ugbep.geojson"
@@ -765,7 +765,7 @@ def pgugbephd():
     try:
         bboxString = str( request.args.get('bbox') )
         tablename = "webdata.fwp_ugbephd"
-        fields = "labelname, permission, cooperator, contact, pdflink"
+        fields = "labelname, region, permission, cooperator, contact, pdflink"
         return pgToGeoJsonBBox(tablename, fields, bboxString, 200)
     except:
         return "ERROR: Could not return valid ugbephd.geojson"
