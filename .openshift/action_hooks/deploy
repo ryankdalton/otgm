@@ -1,4 +1,0 @@
-#!/bin/bash
-pushd $OPENSHIFT_REPO_DIR
-python bootstrap.py
-popd
