@@ -14,7 +14,7 @@ virtenv = os.path.join(os.environ.get('OPENSHIFT_PYTHON_DIR','.'), 'virtenv')
 python_version = "python"+str(sys.version_info[0])+"."+str(sys.version_info[1])
 os.environ['PYTHON_EGG_CACHE'] = os.path.join(virtenv, 'lib', python_version, 'site-packages')
 virtualenv = os.path.join(virtenv, 'bin','activate_this.py')
-execfile(virtualenv, dict(__file__=virtualenv))
+##execfile(virtualenv, dict(__file__=virtualenv))
 
 
 #
