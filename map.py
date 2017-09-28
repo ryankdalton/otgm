@@ -13,11 +13,11 @@ print dir(app.config)
 
 
 db = pg.connect(app.config['APP_NAME'], \
-     app.config['PROD_SERVICE_HOST'], \
-     app.config['PROD_SERVICE_PORT'], \
+     app.config['PG_DB_HOST'], \
+     app.config['PG_DB_PORT'], \
      None, None, \
-     app.config['POSTGRESQL_USER'], \
-     app.config['POSTGRESQL_PASSWORD'] )
+     app.config['PG_DB_USERNAME'], \
+     app.config['PG_DB_PASSWORD'] )
 
 
 
