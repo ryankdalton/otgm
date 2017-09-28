@@ -5,4 +5,3 @@ Flask-Mail
 gevent==1.1
 gunicorn
 PyGreSQL
-json
