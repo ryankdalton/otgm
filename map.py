@@ -15,7 +15,7 @@ print dir(app.config)
 db = pg.connect(app.config['APP_NAME'], \
      app.config['PG_DB_HOST'], \
      app.config['PG_DB_PORT'], \
-     None, None, \
+     None, \
      app.config['PG_DB_USERNAME'], \
      app.config['PG_DB_PASSWORD'] )
 
