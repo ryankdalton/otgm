@@ -16,8 +16,8 @@ db = pg.connect(app.config['APP_NAME'], \
      app.config['PG_DB_HOST'], \
      app.config['PG_DB_PORT'], \
      None, \
-     app.config['PG_DB_USERNAME'], \
-     app.config['PG_DB_PASSWORD'] )
+     app.config['POSTGRESQL_USER'], \
+     app.config['POSTGRESQL_PASSWORD'] )
 
 
 
